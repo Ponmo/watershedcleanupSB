@@ -5,8 +5,12 @@ import pprint
 import os
 import sys
 from datetime import datetime, timedelta
+import gspread
 
 app = Flask(__name__)
+
+connection = os.environ['private_key']
+gc = gspread.service_account()
 
 @app.route('/')
 def render_layout():
