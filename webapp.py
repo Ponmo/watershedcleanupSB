@@ -6,11 +6,12 @@ import os
 import sys
 from datetime import datetime, timedelta
 import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import pandas as pd
 
 app = Flask(__name__)
 
-connection = os.environ['private_key']
-gc = gspread.service_account()
+gp = gspread.service_account(filename='watershedlittersb-eb911cf106c1.json')
 
 @app.route('/')
 def render_layout():
