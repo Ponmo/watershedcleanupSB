@@ -14,7 +14,7 @@ app = Flask(__name__)
 #put on render page with map
 gp = gspread.service_account(filename='watershedlittersb-eb911cf106c1.json')
 gsheet = gp.open('Watershed Brigade Clean-up and Point Request Form (Responses)')
-wsheet = gsheet.worksheet("Sheet1")
+wsheet = gsheet.worksheet("Form Responses 1")
 
 @app.route('/')
 def render_layout():
