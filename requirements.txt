@@ -25,3 +25,5 @@ Flask-PyMongo
 pymongo
 dnspython
 gspread
+oauth2client
+pandas as pd
