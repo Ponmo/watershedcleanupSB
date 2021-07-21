@@ -24,9 +24,9 @@ credentials = {
     "auth_provider_x509_cert_url": os.environ['auth_provider_x509_cert_url'],
     "client_x509_cert_url": os.environ['client_x509_cert_url']
 }
-#gp = gspread.service_account_from_dict(credentials)
-#gsheet = gp.open('Watershed Brigade Clean-up and Point Request Form (Responses)')
-#wsheet = gsheet.worksheet('Form Responses 1')
+gp = gspread.service_account_from_dict(credentials)
+gsheet = gp.open('Watershed Brigade Clean-up and Point Request Form (Responses)')
+wsheet = gsheet.worksheet('Form Responses 1')
 
 @app.route('/')
 def render_layout():
