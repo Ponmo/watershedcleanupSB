@@ -30,4 +30,4 @@ wsheet = gsheet.worksheet('Form Responses 1')
 
 @app.route('/')
 def render_layout():
-    return render_template('layout.html', data = wsheet.get_all_values())
+    return render_template('layout.html', data = wsheet.get_all_records())
