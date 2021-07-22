@@ -27,9 +27,8 @@ try:
     gp = gspread.service_account_from_dict(credentials)
     gsheet = gp.open('Copy of Watershed Brigade')
     wsheet = gsheet.worksheet('2021 Wba Tracking')
-except Exception as inst:
-    print(inst)
-    return render_template('error.html')
+except:
+    sys.exit("Unable to Render Resource")
 
 @app.route('/') #change start route later?
 def render_map():
