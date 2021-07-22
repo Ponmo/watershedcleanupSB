@@ -36,9 +36,16 @@ def render_map():
     data_old = wsheet.get_all_values()
     data_intermediate = []
     for row in data_new:
-        if row[1] != '' and any(char.isdigit() for char in row[2]) and row[3] != '' and row[4] != '' and any(char.isdigit() for char in row[5]) and any(char.isdigit() for char in row[7]) and any(char.isdigit() for char in row[8]):
+        if row[1] != '' and is_number(row[2]) and row[3] != '' and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
     if data_intermediate != data_old:
         gsheet.del_worksheet(wsheet)
         gsheet.add_worksheet(title="Sheet1", rows="100", cols="20")
     return render_template('map.html', data = data_intermediate)
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
