@@ -24,7 +24,7 @@ credentials = {
     'auth_provider_x509_cert_url': os.environ['auth_provider_x509_cert_url'],
     'client_x509_cert_url': os.environ['client_x509_cert_url']
 }
-utc_year = datetime.now().strftime('%Y'))
+utc_year = datetime.now().strftime('%Y')
 gp = gspread.service_account_from_dict(credentials)
 gsheet = gp.open('Copy of Watershed Brigade')
 wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
