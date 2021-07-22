@@ -32,7 +32,7 @@ def render_map():
     wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
     data_new = wsheet.get_all_values()
     gsheet = gp.open('Watershed Brigade Information')
-    wsheet = gsheet.worksheet('Sheet1')
+    wsheet = gsheet.get_worksheet(1)
     data_old = wsheet.get_all_values()
     data_intermediate = []
     for row in data_new:
@@ -40,6 +40,5 @@ def render_map():
             data_intermediate.append(row)
     if data_intermediate != data_old:
         gsheet.del_worksheet(wsheet)
-        #gsheet = gp.open('Watershed Brigade Information')
-        #gsheet.add_worksheet(title="Sheet1", rows="100", cols="20")
+        gsheet.add_worksheet(title="Sheet1", rows="100", cols="20")
     return render_template('map.html', data = data_intermediate)
