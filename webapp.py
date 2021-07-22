@@ -42,10 +42,10 @@ def render_map():
         gsheet.del_worksheet(wsheet)
         gsheet.add_worksheet(title='Information', rows='10000', cols='20')
         wsheet = gsheet.get_worksheet(1)
-        counter = 1
+        data_update = []
         for row in data_intermediate:
-            wsheet.update('A' + str(counter) + ':H' + str(counter), [[row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15]]])
-            counter += 1
+            data_update.append([row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15])
+        wsheet.update('A1:H' + str(len(data_intermediate)), data_update)
     return render_template('map.html', data = data_intermediate)
 
 def is_number(s):
