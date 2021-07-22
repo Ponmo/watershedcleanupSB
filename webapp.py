@@ -38,8 +38,8 @@ for row in data_new:
         data_intermediate.append(row)
 if data_intermediate != data_old:
     gsheet.del_worksheet(wsheet)
-    gsheet = gp.open('Watershed Brigade Information')
-    gsheet.add_worksheet(title="Sheet1", rows="100", cols="20")
+    #gsheet = gp.open('Watershed Brigade Information')
+    #gsheet.add_worksheet(title="Sheet1", rows="100", cols="20")
 
 @app.route('/') #change start route later?
 def render_map():
