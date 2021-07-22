@@ -30,4 +30,4 @@ wsheet = gsheet.worksheet('2021 WB Tracking')
 
 @app.route('/')
 def render_layout():
-    return render_template('layout.html', data = wsheet.get_all_records())
+    return render_template('layout.html', data = wsheet.get_all_values())
