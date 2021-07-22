@@ -38,13 +38,13 @@ def render_map():
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
-    if data_intermediate != data_old:
+    data_update = []
+    for row in data_intermediate:
+        data_update.append([row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15]])
+    if data_update != data_old:
         gsheet.del_worksheet(wsheet)
         gsheet.add_worksheet(title='Information', rows='10000', cols='20')
         wsheet = gsheet.get_worksheet(1)
-        data_update = []
-        for row in data_intermediate:
-            data_update.append([row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15]])
         wsheet.update('A1:H' + str(len(data_intermediate)), data_update)
     return render_template('map.html', data = data_intermediate)
 
