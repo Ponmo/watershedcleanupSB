@@ -44,7 +44,7 @@ def render_map():
         wsheet = gsheet.get_worksheet(1)
         data_update = []
         for row in data_intermediate:
-            data_update.append([row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15])
+            data_update.append([row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15]])
         wsheet.update('A1:H' + str(len(data_intermediate)), data_update)
     return render_template('map.html', data = data_intermediate)
 
