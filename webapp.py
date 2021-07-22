@@ -35,8 +35,8 @@ def render_map():
     wsheet = gsheet.worksheet('Sheet1')
     data_old = wsheet.get_all_values()
     data_intermediate = []
-    for row in data_new:
-        if row[1] != '' and row[2].isnumeric() and row[3] != '' and row[4] != '' and row[5].isnumeric() and row[7].isnumeric() and row[8].isnumeric() and row[15].isnumeric():
+    for row in data_new: any(char.isdigit() for char in row[2])
+        if row[1] != '' and any(char.isdigit() for char in row[2]) and row[3] != '' and row[4] != '' and any(char.isdigit() for char in row[5]) and any(char.isdigit() for char in row[7]) and row[8].isnumeric() and any(char.isdigit() for char in row[15]):
             data_intermediate.append(row)
     if data_intermediate != data_old:
         gsheet.del_worksheet(wsheet)
