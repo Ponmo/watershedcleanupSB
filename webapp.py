@@ -28,7 +28,6 @@ try:
     gsheet = gp.open('Copy of Watershed Brigade')
     wsheet = gsheet.worksheet('2021 Wba Tracking')
 except:
-    sys.exit("Unable to Render Resource")
 
 @app.route('/') #change start route later?
 def render_map():
