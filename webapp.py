@@ -40,7 +40,12 @@ def render_map():
             data_intermediate.append(row)
     if data_intermediate != data_old:
         gsheet.del_worksheet(wsheet)
-        gsheet.add_worksheet(title='Sheet1', rows='100', cols='20')
+        gsheet.add_worksheet(title='Information', rows='10000', cols='20')
+        wsheet = gsheet.get_worksheet(1)
+        counter = 1
+        for row in data_intermediate:
+            worksheet.update('A' + str(counter) + ':H' + str(counter), [row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15]])
+            counter += 1
     return render_template('map.html', data = data_intermediate)
 
 def is_number(s):
