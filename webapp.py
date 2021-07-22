@@ -46,7 +46,7 @@ def render_map():
         gsheet.add_worksheet(title='Information', rows='10000', cols='20')
         wsheet = gsheet.get_worksheet(1)
         wsheet.update('A1:H' + str(len(data_intermediate)), data_update)
-    return render_template('map.html', data = data_intermediate)
+    return render_template('map.html', data = data_update)
 
 def is_number(s):
     try:
