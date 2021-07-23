@@ -48,7 +48,6 @@ def render_map():
     data_new = []
     for row in data_intermediate:
         month = row[3].split("/")[0]
-        month = int(month)
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     counter = len(data_old) - len(data_update)
