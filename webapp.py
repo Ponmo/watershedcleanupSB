@@ -38,6 +38,7 @@ def render_map():
     while counter > 0:
         while len(data_old[counter]) > 8:
             data_old[counter].pop(len(data_old[counter]) - 1)
+        counter -= 1
     data_intermediate = []
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
