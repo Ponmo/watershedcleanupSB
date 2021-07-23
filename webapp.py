@@ -43,11 +43,14 @@ def render_map():
         month = row[3].split("/")[0]
         month = int(month)
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
+    counter = len(data_old) - len(data_update)
+    for counter > 0:
+        data_update.append(['', '', '', '', '', '', '', '', ''])
     if data_update != data_old:
-        wsheet.update('A1:I' + str(len(data_old)), '')
+        #wsheet.update('A1:I' + str(len(data_old)), '')
         #gsheet.del_worksheet(wsheet)
         #gsheet.add_worksheet(title='This Year', rows='10000', cols='20')
-        #wsheet.update('A1:I' + str(len(data_update)), data_update)
+        wsheet.update('A1:I' + str(len(data_update)), data_update)
     return render_template('map.html', data = data_update)
 
 def is_number(s):
