@@ -38,7 +38,7 @@ def render_map():
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
-    data_update = [['Name', '# of People', 'Date', 'Month', 'Location', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
+    data_update = [['Name', '# of People', 'Date', 'Month', 'Where', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
     for row in data_intermediate:
         month = row[3].split("/")[0]
         month = int(month)
