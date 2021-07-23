@@ -45,9 +45,8 @@ def render_map():
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     if data_update != data_old:
         wsheet.update('A1:I' + str(len(data_old)), '')
-        gsheet.del_worksheet(wsheet)
-        gsheet.add_worksheet(title='This Year', rows='10000', cols='20')
-        wsheet = gsheet.get_worksheet(1)
+        #gsheet.del_worksheet(wsheet)
+        #gsheet.add_worksheet(title='This Year', rows='10000', cols='20')
         wsheet.update('A1:I' + str(len(data_update)), data_update)
     return render_template('map.html', data = data_update)
 
@@ -55,11 +54,5 @@ def is_number(s):
     try:
         float(s)
         return True
-    except ValueError:
-        return False
-    
-def get_month(date):
-    try:
-        date.split("/")[0]
     except ValueError:
         return False
