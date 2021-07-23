@@ -46,6 +46,7 @@ def render_map():
     counter = len(data_old) - len(data_update)
     for counter > 0:
         data_update.append(['', '', '', '', '', '', '', '', ''])
+        counter -= 1
     if data_update != data_old:
         #wsheet.update('A1:I' + str(len(data_old)), '')
         #gsheet.del_worksheet(wsheet)
