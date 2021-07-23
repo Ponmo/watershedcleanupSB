@@ -44,7 +44,7 @@ def render_map():
         month = int(month)
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     counter = len(data_old) - len(data_update)
-    for counter > 0:
+    while counter > 0:
         data_update.append(['', '', '', '', '', '', '', '', ''])
         counter -= 1
     if data_update != data_old:
