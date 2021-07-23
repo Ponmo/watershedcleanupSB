@@ -35,7 +35,7 @@ def render_map():
     wsheet = gsheet.get_worksheet(1)
     data_old = wsheet.get_all_values()
     counter = len(data_old) - 1
-    while counter > 0:
+    while counter >= 0:
         while len(data_old[counter]) > 8:
             data_old[counter].pop(len(data_old[counter]) - 1)
         counter -= 1
