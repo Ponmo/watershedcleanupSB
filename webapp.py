@@ -38,9 +38,11 @@ def render_map():
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
-    data_update = [['Name', '# of People', 'Date', 'Location', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
+    data_update = [['Name', '# of People', 'Date', 'Month', 'Location', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
     for row in data_intermediate:
-        data_update.append([row[1], row[2], row[3], row[4], row[5], row[7], row[8], row[15]])
+        month = row[3].split("/")[0]
+        month = int(month)
+        data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     if data_update != data_old:
         gsheet.del_worksheet(wsheet)
         gsheet.add_worksheet(title='This Year', rows='10000', cols='20')
@@ -52,5 +54,11 @@ def is_number(s):
     try:
         float(s)
         return True
+    except ValueError:
+        return False
+    
+def get_month(date):
+    try:
+        date.split("/")[0]
     except ValueError:
         return False
