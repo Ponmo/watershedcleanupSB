@@ -57,7 +57,7 @@ def render_map():
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:H' + str(len(data_update)), data_update)
-    return render_template('map.html', data = data_update + data_new + data_old)
+    return render_template('map.html', data = data_old, data2 = data_update, data3 = data_new)
 
 def is_number(s):
     try:
