@@ -38,21 +38,21 @@ def render_map():
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
-    data_update = [['Name', '# of People', 'Date', 'Month', 'Where', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
+    data_update = [['Name', '# of People', 'Date', 'Month', 'Where', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)']]
+    #data_new = [['Name', '# of People', 'Date', 'Month', 'Where', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
+    data_new = []
     for row in data_intermediate:
         month = row[3].split("/")[0]
         month = int(month)
-        data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
+        data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
+        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     counter = len(data_old) - len(data_update)
     while counter > 0:
-        data_update.append(['', '', '', '', '', '', '', '', ''])
+        data_update.append(['', '', '', '', '', '', '', ''])
         counter -= 1
     if data_update != data_old:
-        #wsheet.update('A1:I' + str(len(data_old)), '')
-        #gsheet.del_worksheet(wsheet)
-        #gsheet.add_worksheet(title='This Year', rows='10000', cols='20')
-        wsheet.update('A1:I' + str(len(data_update)), data_update)
-    return render_template('map.html', data = data_update)
+        wsheet.update('A1:H' + str(len(data_update)), data_update)
+    return render_template('map.html', data = data_update + "BLANK BLANK BLANK" + data_new)
 
 def is_number(s):
     try:
