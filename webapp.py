@@ -44,6 +44,7 @@ def render_map():
         month = int(month)
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     if data_update != data_old:
+        wsheet.update('A1:I' + str(len(data_old)), '')
         gsheet.del_worksheet(wsheet)
         gsheet.add_worksheet(title='This Year', rows='10000', cols='20')
         wsheet = gsheet.get_worksheet(1)
