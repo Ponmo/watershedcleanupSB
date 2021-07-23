@@ -34,6 +34,13 @@ def render_map():
     gsheet = gp.open('Watershed Brigade Information')
     wsheet = gsheet.get_worksheet(1)
     data_old = wsheet.get_all_values()
+    counter = len(data_old) - 1
+    while counter > 0:
+        data_old[counter].pop(8)
+        data_old[counter].pop(9)
+        data_old[counter].pop(10)
+        data_old[counter].pop(11)
+        data_old[counter].pop(12)
     data_intermediate = []
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
@@ -52,7 +59,7 @@ def render_map():
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:H' + str(len(data_update)), data_update)
-    return render_template('map.html', data = data_update + data_new)
+    return render_template('map.html', data = data_update + data_new + data_old)
 
 def is_number(s):
     try:
