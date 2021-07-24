@@ -43,7 +43,7 @@ def render_map():
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
-    data_update = [['Name', '# of People', 'Date', 'Color', 'Where', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)']]
+    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)']]
     #data_new = [['Name', '# of People', 'Date', 'Month', 'Where', 'Bags of Trash', 'Weight (lbs)', 'Time (hrs)', 'Points']]
     data_new = []
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
