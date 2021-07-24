@@ -48,7 +48,7 @@ def render_map():
     data_new = []
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
     for row in data_intermediate:
-        month = str(int(row[3].split("/")[0]))
+        month = int(row[3].split("/")[0])
         month = colors[month - 1]
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
