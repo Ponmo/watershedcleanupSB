@@ -69,6 +69,3 @@ def is_number(s):
     except ValueError:
         return False
 
-def assign_color(m):
-    if m == 1:
-        
