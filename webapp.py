@@ -39,28 +39,28 @@ def get_data():
     data_old = wsheet.get_all_values()
     counter = len(data_old) - 1
     while counter >= 0:
-        while len(data_old[counter]) > 8:
+        while len(data_old[counter]) > 9:
             data_old[counter].pop(len(data_old[counter]) - 1)
         counter -= 1
     data_intermediate = []
     for row in data_new:
-        if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
+        if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]) and row[16] != '':
             data_intermediate.append(row)
-    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', '=GEO_MAP(A1:H' + str(len(data_intermediate) + 1) + ', "cleanups", "Location")']]
+    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location']] #'=GEO_MAP(A1:H' + str(len(data_intermediate) + 1) + ', "cleanups", "Location")']]
     counter = 1
     for row in data_intermediate:
         if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
             counter += 1
-    data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', '=GEO_MAP(A1:H' + str(counter) + ', "cleanups-month", "Location")']]
+    data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location']] #'=GEO_MAP(A1:H' + str(counter) + ', "cleanups-month", "Location")']]
     data_new = []
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
     for row in data_intermediate:
         month = int(row[3].split("/")[0])
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
         month = colors[month - 1]
-        data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], ''])
+        data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[16]])
         if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
-            data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], ''])
+            data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[16]])
     counter = len(data_old) - len(data_update)
     while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
         data_update.append(['', '', '', '', '', '', '', '', ''])
