@@ -1,3 +1,7 @@
+#handle exceptions to gspread calls
+#handle colors
+#change geosheet calls
+
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask import render_template
 
@@ -42,8 +46,12 @@ def get_data():
     for row in data_new:
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
-    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)']]
-    data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)']]
+    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', '=GEO_MAP(A1:I' + str(len(data_intermediate)) + ', "cleanups-month", "Location")']]
+    counter = 1
+    for row in data_intermediate:
+        if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
+            counter += 1
+    data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', '=GEO_MAP(A1:I' + str(counter) + ', "cleanups-month", "Location")']]
     data_new = []
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
     for row in data_intermediate:
