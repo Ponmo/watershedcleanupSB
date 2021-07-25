@@ -61,7 +61,7 @@ def get_data():
 @app.route('/') #change start route later?
 def render_map():
     data = get_data()
-    return render_template('map.html', data = data_old)
+    return render_template('map.html', data = data)
 
 def is_number(s):
     try:
