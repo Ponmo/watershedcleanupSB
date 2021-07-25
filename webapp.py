@@ -12,8 +12,7 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-@app.route('/') #change start route later?
-def render_map():
+def get_data():
     credentials = {
         'type': 'service_account',
         'project_id': os.environ['project_id'],
@@ -57,9 +56,12 @@ def render_map():
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:H' + str(len(data_update)), data_update)
-    else:
-        return render_template('map.html', data = 'worked', data2 = 'worked', data3 = 'worked')
-    return render_template('map.html', data = data_old, data2 = data_update, data3 = data_new)
+    return data_new
+
+@app.route('/') #change start route later?
+def render_map():
+    data = get_data()
+    return render_template('map.html', data = data_old)
 
 def is_number(s):
     try:
