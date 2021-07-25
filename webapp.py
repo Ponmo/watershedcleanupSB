@@ -31,7 +31,7 @@ def get_data():
     wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
     data_new = wsheet.get_all_values()
     gsheet = gp.open('Watershed Brigade Information')
-    wsheet = gsheet.get_worksheet(1)
+    wsheet = gsheet.get_worksheet('This Year')
     data_old = wsheet.get_all_values()
     counter = len(data_old) - 1
     while counter >= 0:
@@ -56,6 +56,12 @@ def get_data():
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:H' + str(len(data_update)), data_update)
+        wsheet = gsheet.get_worksheet('This Month')
+        data_month = []
+        for row in data_new:
+            if row[3] == datetime.now().strftime('%m')
+                data_month.append(row)
+        wsheet.update('A1:H' + str(len(data_month)), data_month)
     return data_new
 
 @app.route('/') #change start route later?
