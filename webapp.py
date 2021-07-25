@@ -42,34 +42,39 @@ def get_data():
         while len(data_old[counter]) > 9:
             data_old[counter].pop(len(data_old[counter]) - 1)
         counter -= 1
-    data_intermediate = []
+    data_map = []
+    data_stat = []
     for row in data_new:
-        if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '': #and is_number(row[5]) and is_number(row[7]) and is_number(row[8]) and row[16] != '':
-            data_intermediate.append(row)
-    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', '=GEO_MAP(A1:H' + str(len(data_intermediate) + 1) + ', "cleanups", "Location")']] 
-    counter = 1
-    for row in data_intermediate:
-        if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
-            counter += 1
-    data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', '=GEO_MAP(A1:H' + str(counter) + ', "cleanups-month", "Location")']]
+        if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and row[16] != '': #and is_number(row[5]) and is_number(row[7]) and is_number(row[8]) and row[16] != '':
+            data_map.append(row)
+        elif row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '':
+            data_stat.append(row)
+    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', '=GEO_MAP(A1:H' + str(len(data_map) + 1) + ', "cleanups", "Location")']] 
+    #counter = 1
+    #for row in data_map:
+    #    if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
+    #        counter += 1
+    #data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', '=GEO_MAP(A1:H' + str(counter) + ', "cleanups-month", "Location")']]
     data_new = []
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
-    for row in data_intermediate:
+    for row in data_stat:
         month = int(row[3].split("/")[0])
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
+    for row in data_map:
+        month = int(row[3].split("/")[0])
         month = colors[month - 1]
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[16], ''])
-        if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
-            data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[16], ''])
+        #if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
+        #    data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[16], ''])
     counter = len(data_old) - len(data_update)
     while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
         data_update.append(['', '', '', '', '', '', '', '', '', ''])
-        data_month.append(['', '', '', '', '', '', '', '', '', ''])
+        #data_month.append(['', '', '', '', '', '', '', '', '', ''])
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:J' + str(len(data_update)), data_update)
-        wsheet = gsheet.worksheet('This Month')
-        wsheet.update('A1:J' + str(len(data_month)), data_month)
+        #wsheet = gsheet.worksheet('This Month')
+        #wsheet.update('A1:J' + str(len(data_month)), data_month)
     return data_new
 
 @app.route('/') #change start route later?
