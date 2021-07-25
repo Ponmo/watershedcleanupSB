@@ -47,9 +47,9 @@ def get_data():
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
     for row in data_intermediate:
         month = int(row[3].split("/")[0])
+        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
         month = colors[month - 1]
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
-        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
     counter = len(data_old) - len(data_update)
     while counter > 0:
         data_update.append(['', '', '', '', '', '', '', ''])
@@ -61,7 +61,6 @@ def get_data():
         for row in data_new:
             if row[3] == datetime.now().strftime('%m'):
                 data_month.append(row)
-        return render_template('map.html', data = datetime.now().strftime('%m'))
         wsheet.update('A1:H' + str(len(data_month)), data_month)
     return data_new
 
