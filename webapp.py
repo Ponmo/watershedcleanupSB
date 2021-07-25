@@ -43,6 +43,7 @@ def get_data():
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and is_number(row[5]) and is_number(row[7]) and is_number(row[8]):
             data_intermediate.append(row)
     data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)']]
+    data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)']]
     data_new = []
     colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
     for row in data_intermediate:
@@ -57,10 +58,8 @@ def get_data():
     if data_update != data_old:
         wsheet.update('A1:H' + str(len(data_update)), data_update)
         wsheet = gsheet.worksheet ('This Month')
-        data_month = []
-        for row in data_new:
+        for row in data_update:
             if int(row[3]) == int(datetime.now().strftime('%m')):
-                row.pop(8)
                 data_month.append(row)
         wsheet.update('A1:H' + str(len(data_month)), data_month)
     return data_new
