@@ -60,7 +60,7 @@ def get_data():
         data_month = []
         for row in data_new:
             if int(row[3]) == int(datetime.now().strftime('%m')):
-                data_month.append(row)
+                data_month.append(row.pop(8))
         wsheet.update('A1:H' + str(len(data_month)), data_month)
     return data_new
 
