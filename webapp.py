@@ -75,7 +75,7 @@ def get_data():
         wsheet.update('A1:J' + str(len(data_update)), data_update)
         #wsheet = gsheet.worksheet('This Month')
         #wsheet.update('A1:J' + str(len(data_month)), data_month)
-    return data_new
+    return len(data_new)
 
 @app.route('/') #change start route later?
 def render_map():
