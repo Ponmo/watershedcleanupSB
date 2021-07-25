@@ -59,7 +59,7 @@ def get_data():
         wsheet = gsheet.get_worksheet('This Month')
         data_month = []
         for row in data_new:
-            if row[3] == datetime.now().strftime('%m')
+            if row[3] == datetime.now().strftime('%m'):
                 data_month.append(row)
         wsheet.update('A1:H' + str(len(data_month)), data_month)
     return data_new
