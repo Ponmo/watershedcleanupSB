@@ -51,8 +51,8 @@ def get_data():
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
         month = colors[month - 1]
         data_update.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
-            if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
-                data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
+        if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
+            data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8]])
     counter = len(data_old) - len(data_update)
     while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
         data_update.append(['', '', '', '', '', '', '', ''])
