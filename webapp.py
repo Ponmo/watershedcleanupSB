@@ -61,6 +61,7 @@ def get_data():
         for row in data_new:
             if row[3] == datetime.now().strftime('%m'):
                 data_month.append(row)
+        return render_template('map.html', data = datetime.now().strftime('%m'))
         wsheet.update('A1:H' + str(len(data_month)), data_month)
     return data_new
 
