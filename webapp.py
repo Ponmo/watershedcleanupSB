@@ -54,6 +54,7 @@ def get_data():
     while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
         data_update.append(['', '', '', '', '', '', '', ''])
         counter -= 1
+    return datetime.now().strftime('%m')
     if data_update != data_old:
         wsheet.update('A1:H' + str(len(data_update)), data_update)
         wsheet = gsheet.worksheet ('This Month')
