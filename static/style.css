@@ -1,101 +1,82 @@
 body {
-   display:flex;
-   flex-direction:column;
-   align-items:center;
-   justify-content:center;
-   
-   background-color:#CCCCCC;
-   span.switcher {
-      position: relative;
-      
-      width:200px;
-      height:50px;
-      border-radius:25px;
-      margin:20px 0;
-      input {
-         appearance: none;
-         
-         position: relative;
-
-         width:200px;
-         height:50px;
-         border-radius:25px;
-
-         background-color:#1E1E1E;
-         outline:none;
-
-         font-family: 'Oswald', sans-serif;
-         &:before, &:after {
-            z-index:2;
-
-            position: absolute;
-            top:50%;
-            transform:translateY(-50%);
-
-            color:#FFFFFF;
-         }
-         &:before {
-            content: '2021 Map';
-            left:20px;
-         }
-         &:after {
-            content: 'Report';
-            right:40px;
-         }
-      }
-      label {
-         z-index:1;
-         position: absolute;
-         top:10px;
-         bottom:10px;
-         
-         border-radius:20px;
-      }
-      &.switcher-1 {
-         input {
-            transition:.25s -.1s;
-            &:checked {
-               background-color:#FFFFFF;
-               &:before {
-                  color:#FFFFFF;
-                  transition: color .5s .2s;
-               }
-               &:after {
-                  color:#CCCCCC;
-                  transition: color .5s;
-               }
-               &+label {
-                  left:10px;
-                  right:100px;
-
-                  background:#1E1E1E;
-                  
-                  transition: left .5s, right .4s .2s;
-               }
-            }
-            &:not(:checked) {
-               background:#1E1E1E;
-               transition: background .5s -.1s;
-               &:before {
-                  color:#CCCCCC;
-                  transition: color .5s;
-               }
-               &:after {
-                  color:#1E1E1E;
-                  transition: color .5s .2s;
-               }
-               &+label {
-                  left:100px;
-                  right:10px;
-                  
-                  background:#FFFFFF;
-                  
-                  transition: left .4s .2s, right .5s, background .35s -.1s;
-               }
-            }
-         }
-      }
-   }
+  display: flex;
+}
+body span.switcher {
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 20px 0;
+}
+body span.switcher input {
+  appearance: none;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: #1e1e1e;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+}
+body span.switcher input:before, body span.switcher input:after {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+body span.switcher input:before {
+  content: 'ON';
+  left: 20px;
+}
+body span.switcher input:after {
+  content: 'OFF';
+  right: 20px;
+}
+body span.switcher label {
+  z-index: 1;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  border-radius: 20px;
+}
+body span.switcher.switcher-1 input {
+  transition: 0.25s -0.1s;
+}
+body span.switcher.switcher-1 input:checked {
+  background-color: #fff;
+}
+body span.switcher.switcher-1 input:checked:before {
+  color: #fff;
+  transition: color 0.5s 0.2s;
+}
+body span.switcher.switcher-1 input:checked:after {
+  color: #ccc;
+  transition: color 0.5s;
+}
+body span.switcher.switcher-1 input:checked + label {
+  left: 10px;
+  right: 100px;
+  background: #1e1e1e;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+body span.switcher.switcher-1 input:not(:checked) {
+  background: #1e1e1e;
+  transition: background 0.5s -0.1s;
+}
+body span.switcher.switcher-1 input:not(:checked):before {
+  color: #ccc;
+  transition: color 0.5s;
+}
+body span.switcher.switcher-1 input:not(:checked):after {
+  color: #1e1e1e;
+  transition: color 0.5s 0.2s;
+}
+body span.switcher.switcher-1 input:not(:checked) + label {
+  left: 100px;
+  right: 10px;
+  background: #fff;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
 }
 #header {
   padding: 15px; 
