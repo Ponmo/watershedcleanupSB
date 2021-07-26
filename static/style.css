@@ -1,14 +1,18 @@
 #header {
-  padding: 10px;
-  background-color: black;
+  padding: 10px; 
+  width: 100%; 
 }
 #title {
   display: inline-block;
+  margin-left: 15px;
+  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold;
 }
 #globeIcon {
   display: inline-block;
   width: 80px;
-  height: 85px;
+  height: 81px;
+  margin-left: 60px;
 }
 .map {
   border: none;
