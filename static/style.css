@@ -1,13 +1,10 @@
-$black:#1E1E1E;
-$grey:#CCCCCC;
-$white:#FFFFFF;
 body {
    display:flex;
    flex-direction:column;
    align-items:center;
    justify-content:center;
    
-   background-color:$grey;
+   background-color:#CCCCCC;
    span.switcher {
       position: relative;
       
@@ -24,7 +21,7 @@ body {
          height:50px;
          border-radius:25px;
 
-         background-color:$black;
+         background-color:#1E1E1E;
          outline:none;
 
          font-family: 'Oswald', sans-serif;
@@ -35,7 +32,7 @@ body {
             top:50%;
             transform:translateY(-50%);
 
-            color:$white;
+            color:#FFFFFF;
          }
          &:before {
             content: '2021 Map';
@@ -58,40 +55,40 @@ body {
          input {
             transition:.25s -.1s;
             &:checked {
-               background-color:$white;
+               background-color:#FFFFFF;
                &:before {
-                  color:$white;
+                  color:#FFFFFF;
                   transition: color .5s .2s;
                }
                &:after {
-                  color:$grey;
+                  color:#CCCCCC;
                   transition: color .5s;
                }
                &+label {
                   left:10px;
                   right:100px;
 
-                  background:$black;
+                  background:#1E1E1E;
                   
                   transition: left .5s, right .4s .2s;
                }
             }
             &:not(:checked) {
-               background:$black;
+               background:#1E1E1E;
                transition: background .5s -.1s;
                &:before {
-                  color:$grey;
+                  color:#CCCCCC;
                   transition: color .5s;
                }
                &:after {
-                  color:$black;
+                  color:#1E1E1E;
                   transition: color .5s .2s;
                }
                &+label {
                   left:100px;
                   right:10px;
                   
-                  background:$white;
+                  background:#FFFFFF;
                   
                   transition: left .4s .2s, right .5s, background .35s -.1s;
                }
