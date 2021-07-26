@@ -1,4 +1,12 @@
- body span.switcher {
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+body span.switcher {
 	 position: relative;
 	 width: 200px;
 	 height: 60px;
