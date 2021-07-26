@@ -8,6 +8,11 @@
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   font-weight: bold;
 }
+@media only screen and (max-width: 600px) {
+  #title {
+    font-size: 15px;
+  }
+}
 #globeIcon {
   display: inline-block;
   width: 80px;
@@ -17,5 +22,5 @@
 .map {
   border: none;
   width: 100%;
-  height: 500px;
+  height: 75vh;
 }
