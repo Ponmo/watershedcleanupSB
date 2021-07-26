@@ -12,6 +12,9 @@
   #title {
     font-size: 15px;
   }
+  #globeIcon {
+    margin-left: 30px; 
+  }
 }
 #globeIcon {
   display: inline-block;
