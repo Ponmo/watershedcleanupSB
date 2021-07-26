@@ -50,13 +50,8 @@ def get_data():
         if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '':
             data_stat.append(row)
     data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', 'Month']] 
-    #counter = 1
-    #for row in data_map:
-    #    if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
-    #        counter += 1
-    #data_month = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', '=GEO_MAP(A1:H' + str(counter) + ', "cleanups-month", "Location")']]
     data_new = []
-    colors = ['#ff0000', '#ff8800', '#ffdd00', '#0dff00', '#00ffc8', '#0080ff', '#0011ff', '#7700ff', '#ff00f2', '#ff0000', '#000000', '#ffffff']
+    colors = ['#000000', '#171717', '#2e2e2e', '#464646', '#5d5d5d', '#747474', '#8b8b8b', '#a2a2a2', '#b9b9b9', '#d1d1d1', '#e8e8e8', '#ffffff']
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     for row in data_stat:
         month = int(row[3].split("/")[0])
@@ -66,17 +61,12 @@ def get_data():
         color = colors[month - 1]
         month = months[month - 1]
         data_update.append([row[1], row[2], row[3], color, row[4], row[5], row[7], row[8], row[16], month])
-        #if int(row[3].split("/")[0]) == int(datetime.now().strftime('%m')):
-        #    data_month.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[16], ''])
     counter = len(data_old) - len(data_update)
     while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
         data_update.append(['', '', '', '', '', '', '', '', '', ''])
-        #data_month.append(['', '', '', '', '', '', '', '', '', ''])
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:J' + str(len(data_update)), data_update)
-        #wsheet = gsheet.worksheet('This Month')
-        #wsheet.update('A1:J' + str(len(data_month)), data_month)
     return len(data_new)
 
 @app.route('/') #change start route later?
