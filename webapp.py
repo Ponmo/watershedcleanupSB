@@ -56,11 +56,38 @@ def get_data():
     for row in data_stat:
         month = int(row[3].split("/")[0])
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
+    counter = 0
+    counter_two = int(len(data_map)/12)
     for row in data_map:
         month = int(row[3].split("/")[0])
-        color = colors[month - 1]
+        color = ''
+        if counter < counter_two:
+            color = colors[0] 
+        elif counter < 2 * counter_two:
+            color = colors[1] 
+        elif counter < 3 * counter_two:
+            color = colors[2] 
+        elif counter < 4 * counter_two:
+            color = colors[3] 
+        elif counter < 5 * counter_two:
+            color = colors[4] 
+        elif counter < 6 * counter_two:
+            color = colors[5] 
+        elif counter < 7 * counter_two:
+            color = colors[6] 
+        elif counter < 8 * counter_two:
+            color = colors[7] 
+        elif counter < 9 * counter_two:
+            color = colors[8] 
+        elif counter < 10 * counter_two:
+            color = colors[9] 
+        elif counter < 11 * counter_two:
+            color = colors[10] 
+        else:
+            color = colors[11] 
         month = months[month - 1]
         data_update.append([row[1], row[2], row[3], color, row[4], row[5], row[7], row[8], row[16], month])
+        counter += 1
     counter = len(data_old) - len(data_update)
     while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
         data_update.append(['', '', '', '', '', '', '', '', '', ''])
