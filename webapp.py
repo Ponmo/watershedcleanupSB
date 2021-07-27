@@ -99,7 +99,15 @@ def get_data():
 @app.route('/') #change start route later?
 def render_map():
     data = get_data()
-    return render_template('main.html')
+    checkboxes = ""
+    month = []
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    for row in data:
+        if int(row[3].split("/")[0]) not in month:
+            month.append(row[3])
+    for item in month:
+        checkboxes += "<label class='checkbox-inline'><input type='checkbox' value='" + months[item - 1] + "' class='Month' id='" + months[item - 1] + " ' checked>" + months[item - 1] + "</label>"
+    return render_template('main.html', checkboxes = checkboxes)
 
 def is_number(s):
     try:
