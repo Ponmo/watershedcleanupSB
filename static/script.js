@@ -40,7 +40,7 @@ $(document).ready(function() {
           baseLink += "%2C%22April%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#May").is(":checked")) {
         if (first == true) {
           baseLink += "%22May%22"
           first = false;
@@ -49,7 +49,7 @@ $(document).ready(function() {
           baseLink += "%2C%22May%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#Jun").is(":checked")) {
         if (first == true) {
           baseLink += "%22June%22"
           first = false;
@@ -58,7 +58,7 @@ $(document).ready(function() {
           baseLink += "%2C%22June%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#Jul").is(":checked")) {
         if (first == true) {
           baseLink += "%22July%22"
           first = false;
@@ -67,7 +67,7 @@ $(document).ready(function() {
           baseLink += "%2C%22July%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#Sep").is(":checked")) {
         if (first == true) {
           baseLink += "%22August%22"
           first = false;
@@ -76,7 +76,7 @@ $(document).ready(function() {
           baseLink += "%2C%22August%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#Oct").is(":checked")) {
         if (first == true) {
           baseLink += "%22September%22"
           first = false;
@@ -85,7 +85,7 @@ $(document).ready(function() {
           baseLink += "%2C%22September%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#Nov").is(":checked")) {
         if (first == true) {
           baseLink += "%22October%22"
           first = false;
@@ -94,7 +94,7 @@ $(document).ready(function() {
           baseLink += "%2C%22October%22"
         }
       }
-      if ($("#Feb").is(":checked")) {
+      if ($("#Dec").is(":checked")) {
         if (first == true) {
           baseLink += "%22November%22"
           first = false;
