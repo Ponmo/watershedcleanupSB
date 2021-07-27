@@ -67,7 +67,7 @@
 }
 .switcher.switcher-1 input:checked + label {
 	 left: 40px;
-	 right: 140px;
+	 right: 150px;
 	 background: #1e1e1e;
 	 transition: left 0.5s, right 0.4s 0.2s;
 }
@@ -84,7 +84,7 @@
 	 transition: color 0.5s 0.2s;
 }
 .switcher.switcher-1 input:not(:checked) + label {
-	 left: 140px;
+	 left: 150px;
 	 right: 40px;
 	 background: #fff;
 	 transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
