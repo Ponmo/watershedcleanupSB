@@ -9,7 +9,6 @@
     -webkit-tap-highlight-color: transparent;
 }
 body span.switcher {
-	 position: relative;
 	 width: 200px;
 	 height: 60px;
 	 display: flex;
