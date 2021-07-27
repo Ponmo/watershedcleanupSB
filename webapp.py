@@ -106,7 +106,7 @@ def render_map():
         if row[3] not in month:
             month.append(row[3])
     for item in month:
-        checkboxes += "<label class='checkbox-inline'><input type='checkbox' value='" + months[item - 1] + "' class='Month' id='" + months[item - 1] + " ' checked>" + months[item - 1] + "</label>"
+        checkboxes += "<label class='checkbox-inline'><input type='checkbox' value='" + months[item - 1] + "' class='Month' id='" + months[item - 1] + "' checked>" + months[item - 1] + "</label>"
     return render_template('main.html', checkboxes = Markup(checkboxes))
 
 def is_number(s):
