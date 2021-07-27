@@ -8,5 +8,5 @@ $(document).ready(function(){
     if($("#Jan").is(":checked"))
     {
     }
-  }; 
+  }); 
 });
