@@ -1,9 +1,12 @@
 $(document).ready(function(){ 
   $("#monthSelection").click(function() {
-    $("#map").replaceWith("<p>Replaced</p>")
-    if($("input.abc").not(":checked").length === 0)
+    if($("input.Month").not(":checked").length === 0)
     {
-      var helloWorld = $('#map').html();
+      $("#map").replaceWith("<p>All Checked</p>")
+    }
+    else if($("input.Month").not(":checked").length === 12)
+    {
+      $("#map").replaceWith("<p>All Not Checked</p>")
     }
     if($("#Jan").is(":checked"))
     {
