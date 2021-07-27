@@ -32,7 +32,10 @@ def get_data():
     utc_year = datetime.now().strftime('%Y')
     gp = gspread.service_account_from_dict(credentials)
     gsheet = gp.open('Copy of Watershed Brigade')
-    wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
+    try:
+        wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
+    except:
+        wsheet = gsheet.worksheet(str(int(utc_year) - 1) + ' WB Tracking')
     data_new = wsheet.get_all_values()
     gsheet = gp.open('Watershed Brigade Information')
     wsheet = gsheet.worksheet('This Year')
