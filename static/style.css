@@ -123,3 +123,6 @@ body span.switcher {
   width: 100%;
   height: 65vh;
 }
+#greyBG {
+  background-color: #CCCCCC;
+}
