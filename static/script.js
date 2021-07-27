@@ -1,10 +1,10 @@
 $(document).ready(function() { 
   $(".Month").change(function() {
     if ($('.Month:checked').length == $('.Month').length) {
-      $("#map").replaceWith("<p>All Checked</p>")
+      $("#map").replaceWith("<p id='map'>All Checked</p>")
     }
     else if ($('.Month:checked').length === 0) {
-      $("#map").replaceWith("<p>All Not Checked</p>")
+      $("#map").replaceWith("<p id='map'>All Not Checked</p>")
     }
   });
   //$("#monthSelection").click(function() {
