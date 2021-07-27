@@ -8,82 +8,84 @@
     outline: none !important;
     -webkit-tap-highlight-color: transparent;
 }
-body span.switcher {
+.switcher {
 	 position: absolute;
-	 left: 20px;
-	 width: 200px;
-	 height: 60px;
+	 width: 320px;
+	 height: 63px;
 	 display: flex;
 	 border-radius: 25px;
-	 margin: 20px 0;
 }
- body span.switcher input {
+.switcher input {
 	 appearance: none;
+	 border-bottom: 1px solid grey;
+	 border-right: 1px solid grey;
 	 position: relative;
-	 width: 200px;
-	 height: 50px;
-	 border-radius: 25px;
+	 width: 320px;
+	 border-bottom-right-radius: 20px 20px;
+	 height: 79px;
+	 top: -3px;
 	 background-color: #1e1e1e;
 	 outline: none;
+	 font-weight: bold;
 	 font-family: 'Oswald', sans-serif;
 }
- body span.switcher input:before, body span.switcher input:after {
+.switcher input:before, .switcher input:after {
 	 z-index: 2;
 	 position: absolute;
 	 top: 50%;
 	 transform: translateY(-50%);
 	 color: #fff;
 }
- body span.switcher input:before {
-	 content: '2021';
-	 left: 20px;
+.switcher input:before {
+	 content: 'Cleanups';
+	 left: 60px;
 }
- body span.switcher input:after {
+.switcher input:after {
 	 content: 'Report';
-	 right: 20px;
+	 right: 60px;
 }
- body span.switcher label {
+.switcher label {
 	 z-index: 1;
 	 position: absolute;
-	 top: 10px;
-	 bottom: 10px;
+	 top: 20px;
+	 bottom: -5px;
 	 border-radius: 20px;
 }
- body span.switcher.switcher-1 input {
+.switcher.switcher-1 input {
 	 transition: 0.25s -0.1s;
 }
- body span.switcher.switcher-1 input:checked {
+.switcher.switcher-1 input:checked {
 	 background-color: #fff;
 }
- body span.switcher.switcher-1 input:checked:before {
+.switcher.switcher-1 input:checked:before {
 	 color: #fff;
 	 transition: color 0.5s 0.2s;
 }
- body span.switcher.switcher-1 input:checked:after {
+.switcher.switcher-1 input:checked:after {
 	 color: #ccc;
 	 transition: color 0.5s;
 }
- body span.switcher.switcher-1 input:checked + label {
-	 left: 10px;
-	 right: 100px;
+.switcher.switcher-1 input:checked + label {
+	 left: 40px;
+	 right: 140px;
 	 background: #1e1e1e;
 	 transition: left 0.5s, right 0.4s 0.2s;
 }
- body span.switcher.switcher-1 input:not(:checked) {
+.switcher.switcher-1 input:not(:checked) {
 	 background: #1e1e1e;
 	 transition: background 0.5s -0.1s;
 }
- body span.switcher.switcher-1 input:not(:checked):before {
+.switcher.switcher-1 input:not(:checked):before {
 	 color: #ccc;
 	 transition: color 0.5s;
 }
- body span.switcher.switcher-1 input:not(:checked):after {
+.switcher.switcher-1 input:not(:checked):after {
 	 color: #1e1e1e;
 	 transition: color 0.5s 0.2s;
 }
- body span.switcher.switcher-1 input:not(:checked) + label {
-	 left: 100px;
-	 right: 10px;
+.switcher.switcher-1 input:not(:checked) + label {
+	 left: 140px;
+	 right: 40px;
 	 background: #fff;
 	 transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
 }
@@ -122,7 +124,5 @@ body span.switcher {
 .map {
   width: 100%;
   height: 65vh;
-}
-#greyBG {
-  background-color: #CCCCCC;
+  border: 1px solid grey;
 }
