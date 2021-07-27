@@ -5,7 +5,7 @@ $(document).ready(function(){
       $("#map").replaceWith("<p>Replaced</p>")
       var helloWorld = $('#map').html();
     }
-    if($(#Jan).is(":checked"))
+    if($("#Jan").is(":checked"))
     {
     }
   }; 
