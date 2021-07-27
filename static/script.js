@@ -4,7 +4,7 @@ $(document).ready(function() {
       $("#map").replaceWith("<iframe id='map' src='https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed' class='map'></iframe>")
     }
     else if ($('.Month:checked').length === 0) {
-      alert("Please select at least one option");
+      $("#map").replaceWith("<div id='map' class='map'><p>Please select at least one option</p></div>")
     }
   });
   //$("#monthSelection").click(function() {
