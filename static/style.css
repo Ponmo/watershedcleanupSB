@@ -35,11 +35,11 @@ body span.switcher {
 	 color: #fff;
 }
  body span.switcher input:before {
-	 content: 'ON';
+	 content: '2021';
 	 left: 20px;
 }
  body span.switcher input:after {
-	 content: 'OFF';
+	 content: 'Report';
 	 right: 20px;
 }
  body span.switcher label {
