@@ -69,7 +69,7 @@
 }
 .switcher.switcher-1 input:checked + label {
 	 left: 40px;
-	 right: 180px;
+	 right: 175px;
 	 background: #1e1e1e;
 	 transition: left 0.5s, right 0.4s 0.2s;
 }
