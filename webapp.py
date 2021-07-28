@@ -98,10 +98,9 @@ def get_data():
     if data_update != data_old:
         wsheet.update('A1:J' + str(len(data_update)), data_update)
         #wsheet.update('K1', '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")')
-        cell_list = wsheet.range('K1:K1')
-        for cell in cell_list:
-            cell.value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
-        wsheet.update_cells(cell_list, 'USER_ENTERED')
+        cell = wsheet.range('K1')
+        cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
+        wsheet.update_cells(cell, 'USER_ENTERED')
     return data_new
 
 @app.route('/') #change start route later?
