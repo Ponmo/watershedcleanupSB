@@ -116,10 +116,12 @@ $(document).ready(function() {
       $("#map").replaceWith("<iframe id='map' src='" + baseLink + "' class='map'></iframe>")
     }
   });
-  if($("#switcher-1").is(':checked'))
+  if($("#switcher-1").is(':checked')) {
     $("#cleanups").show();  // checked
     $("#reports").hide();
-  else
+  }
+  else {
     $("#cleanups").hide();  // unchecked
     $("#reports").show();
+  }
 });
