@@ -142,4 +142,7 @@
   font-weight: bold;
   align-items: center;
 }
-
+#content {
+  margin: auto;
+  width: 100%;	
+}
