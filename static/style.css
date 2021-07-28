@@ -43,7 +43,7 @@
 	 left: 60px;
 }
 .switcher input:after {
-	 content: 'Report Trash';
+	 content: 'Trash Report';
 	 right: 60px;
 }
 .switcher label {
@@ -60,7 +60,7 @@
 	 background-color: #fff;
 }
 .switcher.switcher-1 input:checked:before {
-	 color: #fff;
+	 color: #baf6ff;
 	 transition: color 0.5s 0.2s;
 }
 .switcher.switcher-1 input:checked:after {
@@ -82,7 +82,7 @@
 	 transition: color 0.5s;
 }
 .switcher.switcher-1 input:not(:checked):after {
-	 color: #1e1e1e;
+	 color: #6b1515;
 	 transition: color 0.5s 0.2s;
 }
 .switcher.switcher-1 input:not(:checked) + label {
