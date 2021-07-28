@@ -98,7 +98,7 @@ def get_data():
     if data_update != data_old:
         wsheet.update('A1:J' + str(len(data_update)), data_update)
         #wsheet.update('K1', '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")')
-        cell = wsheet.range('K1')
+        cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
     return data_new
