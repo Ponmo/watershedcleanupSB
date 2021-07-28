@@ -16,6 +16,8 @@
 	 border-radius: 25px;
 }
 .switcher input {
+	 -webkit-appearance: none;
+     -moz-appearance:    none;
 	 appearance: none;
 	 border-bottom: 1px solid grey;
 	 border-right: 1px solid grey;
