@@ -40,7 +40,7 @@ def get_data():
     gsheet = gp.open('Watershed Brigade Information')
     wsheet = gsheet.worksheet('This Year')
     data_old = wsheet.get_all_values()
-    counter = len(data_old)
+    counter = len(data_old) - 1
     while counter >= 0:
         while len(data_old[counter]) > 10:
             data_old[counter].pop(len(data_old[counter]) - 1)
