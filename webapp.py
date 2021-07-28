@@ -98,12 +98,13 @@ def get_data():
     if data_update != data_old:
         wsheet.update('A1:J' + str(len(data_update)), data_update)
         wsheet.update('K1', "=GEO_MAP(A1:J" + str(len(data_update)) + ", 'cleanups', 'Location')")
-        return render_template('main.html', checkboxes = "Updated"))
+        return "updated"
     return data_new
 
 @app.route('/') #change start route later?
 def render_map():
     data = get_data()
+    return render_template('main.html', checkboxes = data)
     checkboxes = ""
     month = []
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
