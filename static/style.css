@@ -43,7 +43,7 @@
 	 left: 60px;
 }
 .switcher input:after {
-	 content: 'Report';
+	 content: 'Report Trash';
 	 right: 60px;
 }
 .switcher label {
