@@ -128,3 +128,13 @@
   height: 65vh;
   border: 1px solid grey;
 }
+#headingTwo {
+  background-color: black;
+  height: 50px;
+  width: 100%;
+}
+#headingTitle {
+  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
+  color: white;
+  font-weight: bold;
+}
