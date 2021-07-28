@@ -128,7 +128,7 @@
   height: 65vh;
   border: 1px solid grey;
 }
-#headingTwo {
+.headingTwo {
   background-color: black;
   height: 60px;
   display: flex;
@@ -136,13 +136,13 @@
   justify-content: center;
 
 }
-#headingTitle {
+.headingTitle {
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   color: white;
   font-weight: bold;
   align-items: center;
 }
-#content {
+.content {
   display: flex;
   justify-content: center;
   margin-top: 10px;
