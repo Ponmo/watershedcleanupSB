@@ -130,12 +130,16 @@
 }
 #headingTwo {
   background-color: black;
-  height: 50px;
+  height: 60px;
+  display: flex;
   width: 100%;
+  justify-content: center;
+
 }
 #headingTitle {
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   color: white;
   font-weight: bold;
-  text-align: center;
+  align-items: center;
 }
+
