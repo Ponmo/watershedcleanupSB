@@ -41,10 +41,12 @@
 .switcher input:before {
 	 content: 'Cleanups';
 	 left: 60px;
+	 text-decoration: underline;
 }
 .switcher input:after {
 	 content: 'Trash Report';
 	 right: 60px;
+	 text-decoration: underline;
 }
 .switcher label {
 	 z-index: 1;
@@ -62,6 +64,7 @@
 .switcher.switcher-1 input:checked:before {
 	 color: #baf6ff;
 	 transition: color 0.5s 0.2s;
+	 text-decoration: none;
 }
 .switcher.switcher-1 input:checked:after {
 	 color: #ccc;
@@ -84,6 +87,7 @@
 .switcher.switcher-1 input:not(:checked):after {
 	 color: #6b1515;
 	 transition: color 0.5s 0.2s;
+	 text-decoration: none;
 }
 .switcher.switcher-1 input:not(:checked) + label {
 	 left: 150px;
