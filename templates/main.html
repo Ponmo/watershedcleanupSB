@@ -24,10 +24,10 @@
       </span>
     </div>
     <div id="cleanups">
-      <div id="headingTwo">
-        <h3 id="headingTitle">Month Filter</h3>
+      <div class="headingTwo">
+        <h3 class="headingTitle">Month Filter</h3>
       </div>
-      <div id="content">
+      <div class="content">
         {{ checkboxes }}
     <!-- <label class="checkbox-inline"><input type="checkbox" value="Jan" class="Month" id="Jan" checked>January</label>
     <label class="checkbox-inline"><input type="checkbox" value="Feb" class="Month" id="Feb" checked>February</label>
@@ -45,6 +45,42 @@
       </div>
     </div>
     <div id="reports">
+      <div class="headingTwo">
+        <h3 class="headingTitle">Report Trash Location</h3>
+      </div>
+      <div class="content">
+        <form action="/action" class="form-horizontal">
+          <div class="form-group">
+            <label for="coords" class="control-label">Cooridinates:</label>
+            <input type="text" class="form-control" id="coords">
+          </div>
+          <div class="form-group">
+            <label for="trash" class="control-label">Amount/Type of Trash:</label>
+            <select class="form-control" id="trash">
+              <option>Very little trash, small litter (bottles, etc.)</option>
+              <option>Some trash, small litter</option>
+              <option>Abundant trash, small litter</option>
+              <option>Very little trash, large litter (sofas, lobster cages, etc.)</option>
+              <option>Some trash, large litter</option>
+              <option>Abundant trash, large litter</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="comment" class="control-label">Description:</label>
+            <input type="text" class="form-control" id="comment">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>
+<div class="form-group">
+  <label for="sel1">Select list:</label>
+  <select class="form-control" id="sel1">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+  </select>
+</div>
