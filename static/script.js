@@ -116,12 +116,14 @@ $(document).ready(function() {
       $("#map").replaceWith("<iframe id='map' src='" + baseLink + "' class='map'></iframe>")
     }
   });
-  if ($("#switcher-1").is(':checked')) {
-    $("#cleanups").show();  // checked
-    $("#reports").hide();
-  }
-  else {
-    $("#cleanups").hide();  // unchecked
-    $("#reports").show();
-  }
+  $("#switcher-1").change(function() {
+    if ($("#switcher-1").is(':checked')) {
+      $("#cleanups").show();  // checked
+      $("#reports").hide();
+    }
+    else {
+      $("#cleanups").hide();  // unchecked
+      $("#reports").show();
+    }
+  });
 });
