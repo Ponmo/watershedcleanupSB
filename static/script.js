@@ -116,6 +116,7 @@ $(document).ready(function() {
       $("#map").replaceWith("<iframe id='map' src='" + baseLink + "' class='map'></iframe>")
     }
   });
+  $("#reports").hide();
   $("#switcher-1").change(function() {
     if ($("#switcher-1").is(':checked')) {
       $("#cleanups").show();  // checked
