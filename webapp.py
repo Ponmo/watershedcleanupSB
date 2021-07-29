@@ -16,8 +16,7 @@ from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 
-def get_data():
-    credentials = {
+credentials = {
         'type': 'service_account',
         'project_id': os.environ['project_id'],
         'private_key_id': os.environ['private_key_id'],
@@ -29,8 +28,10 @@ def get_data():
         'auth_provider_x509_cert_url': os.environ['auth_provider_x509_cert_url'],
         'client_x509_cert_url': os.environ['client_x509_cert_url']
     }
+gp = gspread.service_account_from_dict(credentials)
+
+def get_data():
     utc_year = datetime.now().strftime('%Y')
-    gp = gspread.service_account_from_dict(credentials)
     gsheet = gp.open('Copy of Watershed Brigade')
     try:
         wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
@@ -84,7 +85,7 @@ def get_data():
             color = colors[8] 
         elif counter < 10 * counter_two:
             color = colors[9] 
-        elif counter < 11 * counter_two:
+        elif counter < 11 * counter_two: #first get variable equal to increment. Counter equal to how many. First color var equal to color[0] if counter = increment then color equal to color[+1]
             color = colors[10] 
         else:
             color = colors[11] 
@@ -100,6 +101,12 @@ def get_data():
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
+    #wsheet = gsheet.worksheet('Reports')
+    #data_report = wsheet.get_all_values()
+    #counter = 0
+    #for row in data_report:
+    #    if row[4] == datetime.now().strftime('%m/%d/%Y'):
+    #        counter += 1
     return data_new
 
 @app.route('/') #change start route later?
