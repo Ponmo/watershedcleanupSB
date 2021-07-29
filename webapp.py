@@ -152,7 +152,7 @@ def report():
             if '/' in row[4]:
                 date_report = row[4].partition("/")
                 date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
-                delta = date_report - date_now
+                delta = date_now - date_report
                 if delta.days > 30:
                     data_report.remove(row)
                     counter_two += 1
