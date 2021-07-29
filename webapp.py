@@ -149,7 +149,7 @@ def report():
                 counter += 1
                 if counter >= 10:
                     return
-            if row[4] has '/'
+            if row[4] in '/':
                 date_report = row[4].partition("/")
                 date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
                 delta = date_report - date_now
