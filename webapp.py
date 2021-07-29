@@ -160,7 +160,7 @@ def report():
         while counter_two > 0:
             data_report.append(['', '', '', '', ''])
             counter_two -= 1
-        wsheet.update('A1:E' + str(len(data_report)), data_report)
+        wsheet.update('A1:F' + str(len(data_report)), data_report)
         cell = wsheet.range('F1:F1')
         cell[0].value = '=GEO_MAP(A1:E' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
