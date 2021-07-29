@@ -144,19 +144,21 @@ def report():
                 if counter >= 10:
                     return render_map()
             if '/' in row[4]:
+                if row[3] != "Not resolved":
+                    data_report[counter_two][5] = "#4285F4"
                 date_report = row[4].partition("/")
                 date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
                 delta = date_now - date_report
                 if delta.days > 30:
                     data_report.remove(row)
                     counter_two += 1
-        data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', datetime.now().strftime('%m/%d/%Y')])
+        data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', datetime.now().strftime('%m/%d/%Y'), '#DB4437'])
         while counter_two > 0:
-            data_report.append(['', '', '', '', ''])
+            data_report.append(['', '', '', '', '', ''])
             counter_two -= 1
-        wsheet.update('A1:F' + str(len(data_report)), data_report)
-        cell = wsheet.range('F1:F1')
-        cell[0].value = '=GEO_MAP(A1:E' + str(len(data_report)) + ', "reports", "Location")'
+        wsheet.update('A1:G' + str(len(data_report)), data_report)
+        cell = wsheet.range('G1:G1')
+        cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
     return render_map()
             
