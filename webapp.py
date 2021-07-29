@@ -145,7 +145,7 @@ def report():
         counter_two = 0
         date_now = date.now()
         for row in data_report:
-            if row[4] == datetime.now().strftime('%m/%d/%Y')
+            if row[4] == datetime.now().strftime('%m/%d/%Y'):
                 counter += 1
                 if counter >= 10:
                     return
