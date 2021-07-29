@@ -121,7 +121,7 @@ def render_map():
     for row in data_report:
         if row[4] == datetime.now().strftime('%m/%d/%Y'):
             reports += 1
-        if reports == 10:
+        if reports >= 10:
             enabled = 'disabled'
     return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = reports, enabled = enabled)
 
