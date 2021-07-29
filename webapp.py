@@ -117,13 +117,13 @@ def render_map():
     wsheet = gsheet.worksheet('Reports')
     data_report = wsheet.get_all_values()
     reports = 0
-    enabled = ''
+    disable = ''
     for row in data_report:
         if row[4] == datetime.now().strftime('%m/%d/%Y'):
             reports += 1
         if reports >= 10:
-            enabled = 'disabled'
-    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = reports, enabled = enabled)
+            disable = 'disabled'
+    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
 
 def is_number(s):
     try:
