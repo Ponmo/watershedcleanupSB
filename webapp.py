@@ -152,9 +152,9 @@ def report():
             date_report = row[4].partition("/")
             date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
             delta = date_report - date_now
-                if delta.days > 30:
-                    data_report.remove(row)
-                    counter_two += 1
+            if delta.days > 30:
+                data_report.remove(row)
+                counter_two += 1
         data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', datetime.now().strftime('%m/%d/%Y')])
         while counter_two > 0:
             data_report.append('', '', '', '', '')
