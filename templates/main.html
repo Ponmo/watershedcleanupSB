@@ -52,7 +52,7 @@
         <form action="/report" class="form-inline">
           <div class="form-group">
             <label for="coords">Coordinates (i.e. 34.415209,-119.6776689):</label>
-            <input type="text" class="form-control" id="coords" required>
+            <input type="text" class="form-control" id="coords" maxlength="40" required>
           </div>
           <div class="form-group">
             <label for="trash">Amount of Trash/Size of Litter:</label>
@@ -67,7 +67,7 @@
           </div>
           <div class="form-group">
             <label for="comment">Description:</label>
-            <input type="text" class="form-control" id="comment" required>
+            <input type="text" class="form-control" id="comment" maxlength="1000" required>
           </div>
           <button type="submit" class="btn btn-default">Submit</button>
         </form>
