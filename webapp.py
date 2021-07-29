@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 
@@ -97,7 +97,6 @@ def get_data():
         counter -= 1
     if data_update != data_old:
         wsheet.update('A1:J' + str(len(data_update)), data_update)
-        #wsheet.update('K1', '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")')
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
@@ -123,3 +122,47 @@ def is_number(s):
     except ValueError:
         return False
 
+@app.route('/report', methods=['GET', 'POST'])
+def report():
+    if request.method == 'POST':
+        credentials = {
+            'type': 'service_account',
+            'project_id': os.environ['project_id'],
+            'private_key_id': os.environ['private_key_id'],
+            'private_key': os.environ['private_key'].replace('\\n', '\n'),
+            'client_email': os.environ['client_email'],
+            'client_id': os.environ['client_id'],
+            'auth_uri': os.environ['auth_uri'],
+            'token_uri': os.environ['token_uri'],
+            'auth_provider_x509_cert_url': os.environ['auth_provider_x509_cert_url'],
+            'client_x509_cert_url': os.environ['client_x509_cert_url']
+        }
+        gp = gspread.service_account_from_dict(credentials)
+        gsheet = gp.open('Watershed Brigade Information')
+        wsheet = gsheet.worksheet('Reports')
+        data_report = wsheet.get_all_values()
+        counter = 0
+        counter_two = 0
+        date_now = date.now()
+        for row in data_report:
+            if row[4] == datetime.now().strftime('%m/%d/%Y')
+                counter += 1
+                if counter >= 10:
+                    return
+            date_report = row[4].partition("/")
+            date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
+            delta = date_report - date_now
+                if delta.days > 30:
+                    data_report.remove(row)
+                    counter_two += 1
+        data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', datetime.now().strftime('%m/%d/%Y')])
+        while counter_two > 0:
+            data_report.append('', '', '', '', '')
+        wsheet.update('A1:E' + str(len(data_report)), data_report)
+        cell = wsheet.range('F1:F1')
+        cell[0].value = '=GEO_MAP(A1:E' + str(len(data_report)) + ', "reports", "Location")'
+        wsheet.update_cells(cell, 'USER_ENTERED')
+    return render_map()
+            
+            
+            
