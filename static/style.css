@@ -154,3 +154,6 @@
   justify-content: center;
   margin-top: 10px;
 }
+#report-limit {
+  color: red;	
+}
