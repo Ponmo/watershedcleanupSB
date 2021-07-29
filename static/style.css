@@ -67,7 +67,7 @@
 	 text-decoration: none;
 }
 .switcher.switcher-1 input:checked:after {
-	 color: #ccc;
+	 color: #828282;
 	 transition: color 0.5s;
 }
 .switcher.switcher-1 input:checked + label {
