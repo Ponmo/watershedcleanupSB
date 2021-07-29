@@ -29,16 +29,16 @@ credentials = {
         'client_x509_cert_url': os.environ['client_x509_cert_url']
     }
 gp = gspread.service_account_from_dict(credentials)
+gsheet_raw = gp.open('Copy of Watershed Brigade')
+gsheet = gp.open('Watershed Brigade Information')
 
 def get_data():
     utc_year = datetime.now().strftime('%Y')
-    gsheet = gp.open('Copy of Watershed Brigade')
     try:
-        wsheet = gsheet.worksheet(utc_year + ' WB Tracking')
+        wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking')
     except:
-        wsheet = gsheet.worksheet(str(int(utc_year) - 1) + ' WB Tracking')
+        wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking')
     data_new = wsheet.get_all_values()
-    gsheet = gp.open('Watershed Brigade Information')
     wsheet = gsheet.worksheet('This Year')
     data_old = wsheet.get_all_values()
     counter = len(data_old) - 1
@@ -101,12 +101,6 @@ def get_data():
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
-    #wsheet = gsheet.worksheet('Reports')
-    #data_report = wsheet.get_all_values()
-    #counter = 0
-    #for row in data_report:
-    #    if row[4] == datetime.now().strftime('%m/%d/%Y'):
-    #        counter += 1
     return data_new
 
 @app.route('/') #change start route later?
@@ -120,7 +114,13 @@ def render_map():
             month.append(row[3])
     for item in month:
         checkboxes += "<label class='checkbox-inline'><input type='checkbox' value='" + months[item - 1] + "' class='Month' id='" + months[item - 1] + "' checked>" + months[item - 1] + "</label>"
-    return render_template('main.html', checkboxes = Markup(checkboxes))
+    wsheet = gsheet.worksheet('Reports')
+    data_report = wsheet.get_all_values()
+    reports = 0
+    for row in data_report:
+        if row[4] == datetime.now().strftime('%m/%d/%Y'):
+            reports += 1
+    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = reports)
 
 def is_number(s):
     try:
@@ -132,19 +132,6 @@ def is_number(s):
 @app.route('/report', methods=['GET', 'POST'])
 def report():
     if request.method == 'POST':
-        credentials = {
-            'type': 'service_account',
-            'project_id': os.environ['project_id'],
-            'private_key_id': os.environ['private_key_id'],
-            'private_key': os.environ['private_key'].replace('\\n', '\n'),
-            'client_email': os.environ['client_email'],
-            'client_id': os.environ['client_id'],
-            'auth_uri': os.environ['auth_uri'],
-            'token_uri': os.environ['token_uri'],
-            'auth_provider_x509_cert_url': os.environ['auth_provider_x509_cert_url'],
-            'client_x509_cert_url': os.environ['client_x509_cert_url']
-        }
-        gp = gspread.service_account_from_dict(credentials)
         gsheet = gp.open('Watershed Brigade Information')
         wsheet = gsheet.worksheet('Reports')
         data_report = wsheet.get_all_values()
