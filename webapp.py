@@ -148,7 +148,7 @@ def report():
             if row[4] == datetime.now().strftime('%m/%d/%Y'):
                 counter += 1
                 if counter >= 10:
-                    return
+                    return render_map()
             if '/' in row[4]:
                 date_report = row[4].partition("/")
                 date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
