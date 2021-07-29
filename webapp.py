@@ -143,7 +143,7 @@ def report():
         data_report = wsheet.get_all_values()
         counter = 0
         counter_two = 0
-        date_now = date.now()
+        date_now = date.today()
         for row in data_report:
             if row[4] == datetime.now().strftime('%m/%d/%Y'):
                 counter += 1
