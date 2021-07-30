@@ -110,25 +110,28 @@ def get_data():
     counter = 0
     counter_two = 0
     counter_three = 0
+    change = False
     for row in data_report:
         if '/' in row[4]:
-            if row[3] != "Not resolved":
-                data_report[counter_three][5] = "#4285F4"
+            if row[3] != 'Not resolved' and row[5] != '#4285F4':
+                data_report[counter_three][5] = '#4285F4'
+                change = True
             date_report = row[4].partition("/")
             date_report = datetime(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]), 0, 0, 0, 0, tzinfo=pytz.utc)
             delta = date_now - date_report
             if delta.days > 30:
                 data_report.remove(row)
                 counter_two += 1
+                change = True
         counter_three += 1
     while counter_two > 0:
         data_report.append(['', '', '', '', '', ''])
         counter_two -= 1
-    wsheet.update('A1:G' + str(len(data_report)), data_report)
-    cell = wsheet.range('G1:G1')
-    cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
-    wsheet.update_cells(cell, 'USER_ENTERED')
-        
+    if change == True:
+        wsheet.update('A1:G' + str(len(data_report)), data_report)
+        cell = wsheet.range('G1:G1')
+        cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
+        wsheet.update_cells(cell, 'USER_ENTERED')
     return data_new
 
 @app.route('/') #change start route later?
