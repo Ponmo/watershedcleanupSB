@@ -103,6 +103,32 @@ def get_data():
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
+        
+    wsheet = gsheet.worksheet('Reports')
+    date_now = datetime.now(tz=pytz.utc)
+    date_now = date_now.astimezone(timezone('America/Los_Angeles'))
+    counter = 0
+    counter_two = 0
+    counter_three = 0
+    for row in data_report:
+        if '/' in row[4]:
+            if row[3] != "Not resolved":
+                data_report[counter_three][5] = "#4285F4"
+            date_report = row[4].partition("/")
+            date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
+            delta = date_now - date_report
+            if delta.days > 30:
+                data_report.remove(row)
+                counter_two += 1
+        counter_three += 1
+    while counter_two > 0:
+        data_report.append(['', '', '', '', '', ''])
+        counter_two -= 1
+    wsheet.update('A1:G' + str(len(data_report)), data_report)
+    cell = wsheet.range('G1:G1')
+    cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
+    wsheet.update_cells(cell, 'USER_ENTERED')
+        
     return data_new
 
 @app.route('/') #change start route later?
@@ -147,25 +173,7 @@ def report():
         counter_three = 0
         date_now = datetime.now(tz=pytz.utc)
         date_now = date_now.astimezone(timezone('America/Los_Angeles'))
-        for row in data_report:
-            if row[4] == date_now.strftime('%m/%d/%Y'):
-                counter += 1
-                if counter >= 10:
-                    return render_map()
-            if '/' in row[4]:
-                if row[3] != "Not resolved":
-                    data_report[counter_three][5] = "#4285F4"
-                date_report = row[4].partition("/")
-                date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
-                delta = date_now - date_report
-                if delta.days > 30:
-                    data_report.remove(row)
-                    counter_two += 1
-            counter_three += 1
         data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
-        while counter_two > 0:
-            data_report.append(['', '', '', '', '', ''])
-            counter_two -= 1
         wsheet.update('A1:G' + str(len(data_report)), data_report)
         cell = wsheet.range('G1:G1')
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
