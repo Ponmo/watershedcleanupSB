@@ -120,7 +120,7 @@ def render_map():
     data_report = wsheet.get_all_values()
     reports = 0
     disable = ''
-    date_now = date.today()
+    date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
     for row in data_report:
         if row[4] == date_now.strftime('%m/%d/%Y'):
@@ -145,7 +145,7 @@ def report():
         counter = 0
         counter_two = 0
         counter_three = 0
-        date_now = date.today()
+        date_now = datetime.now(tz=pytz.utc)
         date_now = date_now.astimezone(timezone('America/Los_Angeles'))
         for row in data_report:
             if row[4] == date_now.strftime('%m/%d/%Y'):
