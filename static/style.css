@@ -158,3 +158,20 @@
 #report-limit {
   color: red;	
 }
+#legend {
+  position: absolute;
+  top: 190px;
+  left: 20px;
+}
+#blue-square {
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  background-color: blue;
+}
+#red-square {
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  background-color: red;
+}
