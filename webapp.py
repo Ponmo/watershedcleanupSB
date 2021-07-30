@@ -127,7 +127,7 @@ def render_map():
             reports += 1
         if reports >= 10:
             disable = 'disabled'
-    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = , submit = disable)
+    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
 
 def is_number(s):
     try:
