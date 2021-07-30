@@ -13,6 +13,8 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import pandas as pd
 from datetime import datetime, date, timedelta
+from pytz import timezone
+import pytz
 
 app = Flask(__name__)
 
@@ -118,12 +120,14 @@ def render_map():
     data_report = wsheet.get_all_values()
     reports = 0
     disable = ''
+    date_now = date.today()
+    date_now = date_now.astimezone(timezone('America/Los_Angeles'))
     for row in data_report:
-        if row[4] == datetime.now().strftime('%m/%d/%Y'):
+        if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
         if reports >= 10:
             disable = 'disabled'
-    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = datetime.now().strftime('%m/%d/%Y'), submit = disable)
+    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = , submit = disable)
 
 def is_number(s):
     try:
@@ -142,8 +146,9 @@ def report():
         counter_two = 0
         counter_three = 0
         date_now = date.today()
+        date_now = date_now.astimezone(timezone('America/Los_Angeles'))
         for row in data_report:
-            if row[4] == datetime.now().strftime('%m/%d/%Y'):
+            if row[4] == date_now.strftime('%m/%d/%Y'):
                 counter += 1
                 if counter >= 10:
                     return render_map()
@@ -157,7 +162,7 @@ def report():
                     data_report.remove(row)
                     counter_two += 1
             counter_three += 1
-        data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', datetime.now().strftime('%m/%d/%Y'), '#DB4437'])
+        data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
         while counter_two > 0:
             data_report.append(['', '', '', '', '', ''])
             counter_two -= 1
