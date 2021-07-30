@@ -115,7 +115,7 @@ def get_data():
             if row[3] != "Not resolved":
                 data_report[counter_three][5] = "#4285F4"
             date_report = row[4].partition("/")
-            date_report = date(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
+            date_report = datetime(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]))
             delta = date_now - date_report
             if delta.days > 30:
                 data_report.remove(row)
