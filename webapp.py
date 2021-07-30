@@ -103,8 +103,8 @@ def get_data():
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
-        
     wsheet = gsheet.worksheet('Reports')
+    data_report = wsheet.get_all_values()
     date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
     counter = 0
