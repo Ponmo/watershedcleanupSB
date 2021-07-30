@@ -168,14 +168,14 @@
   height: 15px;
   width: 15px;
   display: inline-block;
-  background-color: blue;
+  background-color: #4285F4;
 }
 #red-square {
   border: 1px solid black;
   height: 15px;
   display: inline-block;
   width: 15px;
-  background-color: red;
+  background-color: #DB4437;
 }
 #blue-text {
   display: inline-block;
