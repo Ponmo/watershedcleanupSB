@@ -156,7 +156,11 @@ def render_map():
             reports += 1
         if reports >= 10:
             disable = 'disabled'
-    return render_template('main.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
+    return render_template('map.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
+
+@app.route('/statistics') #change start route later?
+def render_statistics():
+    return render_template('statistics.html')
 
 def is_number(s):
     try:
