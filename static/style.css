@@ -4,7 +4,7 @@
   font-size: 15px;  
   position: absolute;
   right: 100px;
-  margin-top: 45px;
+  top: 63px;
 }
 .noSelect {
     -webkit-touch-callout: none;
