@@ -1,3 +1,11 @@
+#navbar {
+  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 15px;  
+  position: absolute;
+  right: 100px;
+  margin-top: 45px;
+}
 .noSelect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
