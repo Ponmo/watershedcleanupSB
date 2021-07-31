@@ -57,7 +57,7 @@ def get_data():
             data_stat.append(row)
     data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', 'Month']] 
     data_new = []
-    colors = ['#000000', '#171717', '#2e2e2e', '#464646', '#5d5d5d', '#747474', '#8b8b8b', '#a2a2a2', '#b9b9b9', '#d1d1d1', '#e8e8e8', '#ffffff']
+    colors = ['#edff00', '#f4ef00', '#f9de00', '#fecd00', '#ffbb00', '#ffa900', '#ff9700', '#ff8300', '#ff6e00', '#ff5700', '#ff3a00', '#ff0000']
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     for row in data_stat:
         month = int(row[3].split("/")[0])
