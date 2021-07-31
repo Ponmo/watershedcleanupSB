@@ -1,73 +1,58 @@
+{% extends "layout.html" %}
+
+{% block content %}
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Watershed Brigade</title>
-  </head>
-  <body>
-    <div id="header">
-      <img src="/static/images/globe.png" alt="globe" id="globeIcon">
-      <h2 id="title">Watershed Cleanup</h2>
-    </div>
-    <div id="mapOverlay">
-      <iframe id="map_cleanups" src="https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed" class="map"></iframe>
-      <iframe id="map_reports" src="https://www.geosheets.com/map/s:KJV92kAM/reports/embed" class="map"></iframe>
-      <span class="switcher switcher-1 noSelect">
-        <input type="checkbox" id="switcher-1" class="noSelect" checked>
-        <label for="switcher-1" class="noSelect"></label>
-      </span>
-      <div id="legend">
-        <div id="red-square"></div>
-        <p id="red-text">&nbsp;&nbsp;Unresolved</p>
-        <br>
-        <div id="blue-square"></div>
-        <p id="blue-text">&nbsp;&nbsp;Resolved</p>
+<div id="mapOverlay">
+  <iframe id="map_cleanups" src="https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed" class="map"></iframe>
+  <iframe id="map_reports" src="https://www.geosheets.com/map/s:KJV92kAM/reports/embed" class="map"></iframe>
+  <span class="switcher switcher-1 noSelect">
+    <input type="checkbox" id="switcher-1" class="noSelect" checked>
+    <label for="switcher-1" class="noSelect"></label>
+  </span>
+  <div id="legend">
+    <div id="red-square"></div>
+    <p id="red-text">&nbsp;&nbsp;Unresolved</p>
+    <br>
+    <div id="blue-square"></div>
+    <p id="blue-text">&nbsp;&nbsp;Resolved</p>
+  </div>
+</div>
+<div id="cleanups">
+  <div class="headingTwo">
+    <h3 class="headingTitle">Month Filter</h3>
+  </div>
+ <div class="content">
+    {{ checkboxes }}
+  </div>
+</div> 
+<div id="reports">
+  <div class="headingTwo">
+    <h3 class="headingTitle">Report Trash</h3>
+  </div>
+  <div class="content">
+    <form action="/report" class="form-inline" method="POST">
+      <div class="form-group">
+        <label for="coords">Coordinates (i.e. 34.415209,-119.6776689):</label>
+        <input type="text" class="form-control" id="coords" maxlength="40" name="coords" required>
       </div>
-    </div>
-    <div id="cleanups">
-      <div class="headingTwo">
-        <h3 class="headingTitle">Month Filter</h3>
+      <div class="form-group">
+        <label for="trash">Amount of Trash/Size of Litter:</label>
+        <select class="form-control" id="trash" name="trash">
+          <option>Some trash/Small litter</option>
+          <option>Moderate trash/Small litter</option>
+          <option>Abundant trash/Small litter</option>
+          <option>Some trash/Large litter</option>
+          <option>Moderate trash/Large litter</option>
+          <option>Abundant trash/Large litter</option>
+        </select>
       </div>
-      <div class="content">
-        {{ checkboxes }}
+      <div class="form-group">
+        <label for="comment">Description:</label>
+        <input type="text" class="form-control" id="comment" maxlength="1000" name="comment" required>
       </div>
-    </div>
-    <div id="reports">
-      <div class="headingTwo">
-        <h3 class="headingTitle">Report Trash</h3>
-      </div>
-      <div class="content">
-        <form action="/report" class="form-inline" method="POST">
-          <div class="form-group">
-            <label for="coords">Coordinates (i.e. 34.415209,-119.6776689):</label>
-            <input type="text" class="form-control" id="coords" maxlength="40" name="coords" required>
-          </div>
-          <div class="form-group">
-            <label for="trash">Amount of Trash/Size of Litter:</label>
-            <select class="form-control" id="trash" name="trash">
-              <option>Some trash/Small litter</option>
-              <option>Moderate trash/Small litter</option>
-              <option>Abundant trash/Small litter</option>
-              <option>Some trash/Large litter</option>
-              <option>Moderate trash/Large litter</option>
-              <option>Abundant trash/Large litter</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="comment">Description:</label>
-            <input type="text" class="form-control" id="comment" maxlength="1000" name="comment" required>
-          </div>
-          <button type="submit" class="btn btn-default" {{ submit }}>Submit</button>
-        </form>
-        <p id="report-limit">{{ report_limit }} out of 10 maximum reports submitted today</p>
-      </div>
-    </div>
-  </body>
-</html>
+      <button type="submit" class="btn btn-default" {{ submit }}>Submit</button>
+    </form>
+    <p id="report-limit">{{ report_limit }} out of 10 maximum reports submitted today</p>
+  </div>
+</div>
+{% endblock %}
