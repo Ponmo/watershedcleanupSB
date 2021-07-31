@@ -33,7 +33,7 @@
 	 width: 320px;
 	 border-bottom-right-radius: 20px 20px;
 	 height: 79px;
-	 top: -3px;
+	 top: -4px;
 	 background-color: #1e1e1e;
 	 outline: none;
 	 font-weight: bold;
@@ -106,6 +106,7 @@
 #header {
   padding: 15px; 
   width: 100%; 
+  border-bottom: 1px solid grey;
 }
 #title {
   display: inline-block;
@@ -140,6 +141,7 @@
   height: 65vh;
   border: 1px solid grey;
   border-bottom: none;
+  border-top: none;
 }
 .headingTwo {
   background-color: black;
@@ -168,7 +170,7 @@
 }
 #legend {
   position: absolute;
-  top: 195px;
+  top: 194px;
   left: 20px;
 }
 #blue-square {
