@@ -44,7 +44,7 @@
 	 text-decoration: underline;
 }
 .switcher input:after {
-	 content: 'Trash Report';
+	 content: 'Report Trash';
 	 right: 60px;
 	 text-decoration: underline;
 }
