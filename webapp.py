@@ -135,7 +135,7 @@ def get_data():
     return data_new
 
 @app.route('/') #change start route later?
-def render_map():
+def render_maps():
     data = get_data()
     checkboxes = ""
     month = []
@@ -156,7 +156,7 @@ def render_map():
             reports += 1
         if reports >= 10:
             disable = 'disabled'
-    return render_template('map.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
+    return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
 
 @app.route('/statistics') #change start route later?
 def render_statistics():
