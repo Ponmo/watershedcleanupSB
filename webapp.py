@@ -149,16 +149,18 @@ def render_maps():
     data_report = wsheet.get_all_values()
     reports = 0
     disable = ''
+    report_limit = ''
     date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
     for row in data_report:
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
         if reports >= 10:
+            report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
             disable = 'disabled'
-    return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = reports, submit = disable)
+    return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
-@app.route('/statistics') #change start route later?
+@app.route('/statistics')
 def render_statistics():
     return render_template('statistics.html')
 
