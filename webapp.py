@@ -168,9 +168,9 @@ def render_statistics():
     for row in data:
         if int(row[2].partition('/')[0]) == month:
             if row[0] in participants:
-                participants[row[2]] += int([row[7]) 
+                participants[row[0]] += int(row[7])
             else:
-                participants[row[2]] = int(row[7])
+                participants[row[0]] = int(row[7])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
     return render_template('statistics.html', test = participants)
 
