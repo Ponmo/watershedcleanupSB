@@ -116,7 +116,7 @@ def get_data():
             if row[3] != 'Not resolved' and row[5] != '#4285F4':
                 data_report[counter_three][5] = '#4285F4'
                 change = True
-            date_report = row[4].partition("/")
+            date_report = row[4].partition('/')
             date_report = datetime(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]), 0, 0, 0, 0, tzinfo=pytz.utc)
             delta = date_now - date_report
             if delta.days > 30:
@@ -137,14 +137,14 @@ def get_data():
 @app.route('/') #change start route later?
 def render_maps():
     data = get_data()
-    checkboxes = ""
+    checkboxes = ''
     month = []
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     for row in data:
         if row[3] not in month:
             month.append(row[3])
     for item in month:
-        checkboxes += "<label class='checkbox-inline'><input type='checkbox' value='" + months[item - 1] + "' class='Month' id='" + months[item - 1] + "' checked>" + months[item - 1] + "</label>"
+        checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
     wsheet = gsheet.worksheet('Reports')
     data_report = wsheet.get_all_values()
     reports = 0
@@ -163,8 +163,16 @@ def render_maps():
 @app.route('/statistics')
 def render_statistics():
     data = get_data()
-    month = int(data[len(data) - 1][2].partition("/")[0])
-    return render_template('statistics.html', test = month)
+    month = int(data[len(data) - 1][2].partition('/')[0])
+    participants = {}
+    for row in data:
+        if int(row[2].partition('/')[0]) == month:
+            if row[0] in participants:
+                participants[row[2]] += int([row[7]) 
+            else:
+                participants[row[2]] = int(row[7])
+    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    return render_template('statistics.html', test = participants)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
