@@ -164,7 +164,7 @@ def render_maps():
 def render_statistics():
     data = get_data()
     month = int(data[len(data) - 1][4].partition("/")[0])
-    print month
+    print(month)
     return render_template('statistics.html')
 
 @app.route('/report', methods=['GET', 'POST'])
