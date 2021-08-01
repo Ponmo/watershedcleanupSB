@@ -1,8 +1,9 @@
 #top {
   margin: auto;
+  margin-top: 20px;
 }
 #gold, #silver, #bronze {
-  width: 90px
+  width: 90px;
 }
 #second, #first, #third {
  text-align: center;
@@ -15,9 +16,16 @@
 }
 .plate {
   border: 2px solid black;
+  background-color: purple;
+  color: white;
   padding: 8px;
-  width: 120px; 
+  padding-top: 0px;
+  width: 110px; 
+  min-height: 240px;
   padding-bottom: 0px;
+}
+.ranking {
+  margin-top: 5px;
 }
 #navbar {
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
