@@ -1,4 +1,4 @@
-.name {
+name {
   display: inline-block;
   text-align: left;
   width: 80%;
@@ -28,7 +28,7 @@
   text-align: center;
   z-index: -1;
   top: 250px;
-  background-color: orange;
+  background-color: darkorchid;
 }
 #top {
   margin: auto;
@@ -48,7 +48,7 @@
 }
 .plate {
   border: 2px solid black;
-  background-color: purple;
+  background-color: #6800ad;
   color: white;
   padding: 8px;
   padding-top: 0px;
