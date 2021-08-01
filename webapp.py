@@ -167,10 +167,11 @@ def render_statistics():
     participants = {}
     for row in data:
         if int(row[2].partition('/')[0]) == month:
-            if row[0] in participants:
-                participants[row[0]] += float(row[7])
-            else:
-                participants[row[0]] = float(row[7])
+            if is_number(row[7]):
+                if row[0] in participants:
+                    participants[row[0]] += float(row[7])
+                else:
+                    participants[row[0]] = float(row[7])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
     return render_template('statistics.html', test = participants)
 
