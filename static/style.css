@@ -1,3 +1,13 @@
+#first-row {
+  height: 175px;
+}
+.rankings-bottom {margin: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  height: 40px;
+  border-radius: 15px;
+  background-color: white;
+}
 #bottom {
   position: absolute;
   border: 2px solid black;
@@ -9,7 +19,7 @@
   text-align: center;
   z-index: -1;
   top: 250px;
-  height: 1000px
+  background-color: orange;
 }
 #top {
   margin: auto;
