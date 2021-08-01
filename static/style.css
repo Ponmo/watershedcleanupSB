@@ -1,4 +1,16 @@
-
+#bottom {
+  position: absolute;
+  border: 2px solid black;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: -1;
+  top: 250px;
+  height: 1000px
+}
 #top {
   margin: auto;
   margin-top: 20px;
