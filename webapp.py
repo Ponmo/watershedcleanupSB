@@ -168,7 +168,7 @@ def render_statistics():
     for row in data:
         if int(row[2].partition('/')[0]) == month:
             if is_number(row[7]):
-                if row[0] in participants:
+                if row[0].replace(' ', '') in participants.replace(' ', ''):
                     participants[row[0]] += float(row[7])
                 else:
                     participants[row[0]] = float(row[7])
