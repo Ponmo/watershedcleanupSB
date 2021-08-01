@@ -1,6 +1,6 @@
 #handle exceptions to gspread calls
-#handle colors
 #change geosheet calls
+#sanitize inputs
 
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask import render_template
@@ -162,14 +162,10 @@ def render_maps():
 
 @app.route('/statistics')
 def render_statistics():
+    data = get_data()
+    month = int(data[len(data) - 1][4].partition("/")[0])
+    print month
     return render_template('statistics.html')
-
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
@@ -188,6 +184,12 @@ def report():
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
     return render_map()
-            
+    
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
             
             
