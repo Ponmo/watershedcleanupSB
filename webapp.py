@@ -173,7 +173,34 @@ def render_statistics():
                 else:
                     participants[row[0]] = float(row[7])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
-    return render_template('statistics.html', test = participants)
+    first = ''
+    second = ''
+    third = ''
+    first_score = ''
+    second_score = ''
+    third_score = ''
+    if len(participants) >= 1:
+        first = list(participants)[0]
+        first_score = participants[0]
+    if len(participants) >= 2:
+        second = list(participants)[1]
+        second_score = participants[0]
+    if len(participants) >= 3:
+        third = list(participants)[2]
+        third_score = participants[0]
+    place = 4
+    counter = 0
+    rankings_bottom = ''
+    while counter < 7:
+        if counter < len(participants):
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + list(participants)[place - 1] +
+                                '</p></div><div class="points"><p>' + participants[place - 1] + '</p></div></div></td></tr>')
+        else:
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' +
+                                '</p></div><div class="points"><p></p></div></div></td></tr>')
+        counter += 1
+        place += 1
+    return render_template('statistics.html', rankings_bottom = rankings_bottom, first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = rankings_bottom)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
