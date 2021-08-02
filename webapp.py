@@ -194,7 +194,7 @@ def render_statistics():
     while counter < 7:
         if place < len(participants):
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
-                                '</p></div><div class="points"><p>' + str(participants[place - 1][1]) + '</p></div></div></td></tr>')
+                                '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         else:
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
                                 '.</p></div><div class="points"><p></p></div></div></td></tr>')
@@ -226,5 +226,4 @@ def is_number(s):
         return True
     except ValueError:
         return False
-            
             
