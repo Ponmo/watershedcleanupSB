@@ -193,14 +193,12 @@ def render_statistics():
     rankings_bottom = ''
     while counter < 7:
         if counter < len(participants):
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + list(participants)[place - 1] +
-                                '</p></div><div class="points"><p>' + participants[place - 1] + '</p></div></div></td></tr>')
+            rankings_bottom += '<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + list(participants)[place - 1] + '</p></div><div class="points"><p>' + participants[place - 1] + '</p></div></div></td></tr>'
         else:
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' +
-                                '</p></div><div class="points"><p></p></div></div></td></tr>')
+            rankings_bottom += '<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '.</p></div><div class="points"><p></p></div></div></td></tr>'
         counter += 1
         place += 1
-    return render_template('statistics.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = rankings_bottom)
+    return render_template('statistics.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
