@@ -172,34 +172,35 @@ def render_statistics():
                     participants[row[0]] += float(row[7])
                 else:
                     participants[row[0]] = float(row[7])
-    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    #participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    participants = {k: v for k, v in sorted(participants.items(), key=lambda item: item[1])}
     first = ''
     second = ''
     third = ''
     first_score = ''
     second_score = ''
     third_score = ''
-    #if len(participants) >= 1:
-    #    first = list(participants)[0]
-    #    first_score = str(participants[0])
-    #if len(participants) >= 2:
-    #    second = list(participants)[1]
-    #    second_score = str(participants[1])
-    #if len(participants) >= 3:
-    #    third = list(participants)[2]
-    #    third_score = str(participants[2])
-    #place = 4
-    #counter = 0
+    if len(participants) >= 1:
+        first = participants.keys()[0]
+        first_score = str(participants[0])
+    if len(participants) >= 2:
+        second = participants.keys()[1]
+        second_score = str(participants[1])
+    if len(participants) >= 3:
+        third = participants.keys()[2]
+        third_score = str(participants[2])
+    place = 4
+    counter = 0
     rankings_bottom = ''
-    #while counter < 7:
-    #    if place < len(participants):
-    #        rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants.keys()[place - 1] + 
-    #                            '</p></div><div class="points"><p>' + str(participants[place - 1]) + '</p></div></div></td></tr>')
-    #    else:
-    #        rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
-    #                            '.</p></div><div class="points"><p></p></div></div></td></tr>')
-    #    counter += 1
-    #    place += 1
+    while counter < 7:
+        if place < len(participants):
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants.keys()[place - 1] + 
+                                '</p></div><div class="points"><p>' + str(participants[place - 1]) + '</p></div></div></td></tr>')
+        else:
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
+                                '.</p></div><div class="points"><p></p></div></div></td></tr>')
+        counter += 1
+        place += 1
     return render_template('statistics.html', first = participants, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/report', methods=['GET', 'POST'])
