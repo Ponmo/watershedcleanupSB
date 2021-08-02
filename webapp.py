@@ -193,7 +193,7 @@ def render_statistics():
     rankings_bottom = ''
     while counter < 7:
         if place < len(participants):
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + list(participants)[place - 1] + 
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants.keys()[place - 1] + 
                                 '</p></div><div class="points"><p>' + str(participants[place - 1]) + '</p></div></div></td></tr>')
         else:
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
