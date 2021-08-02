@@ -172,8 +172,8 @@ def render_statistics():
                     participants[row[0]] += float(row[7])
                 else:
                     participants[row[0]] = float(row[7])
-    #participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
-    participants = {k: v for k, v in sorted(participants.items(), key=lambda item: item[1], reverse=True)}
+    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    #participants = {k: v for k, v in sorted(participants.items(), key=lambda item: item[1], reverse=True)}
     #return render_template('statistics.html', first = participants, second = '', third = '', first_score = '', second_score = '', third_score = '', rankings_bottom = '')
     first = ''
     second = ''
@@ -182,21 +182,21 @@ def render_statistics():
     second_score = ''
     third_score = ''
     if len(participants) >= 1:
-        first = list(participants)[0]
-        first_score = str(participants[0])
+        first = participants[0][0]
+        first_score = str(participants[0][1])
     if len(participants) >= 2:
-        second = list(participants)[1]
-        second_score = str(participants[1])
+        second = participants[1][0]
+        second_score = str(participants[1][1])
     if len(participants) >= 3:
-        third = list(participants)[2]
-        third_score = str(participants[2])
+        third = participants[2][0]
+        third_score = str(participants[2][1])
     place = 4
     counter = 0
     rankings_bottom = ''
     while counter < 7:
         if place < len(participants):
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + list(participants)[place - 1] + 
-                                '</p></div><div class="points"><p>' + str(participants[place - 1]) + '</p></div></div></td></tr>')
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
+                                '</p></div><div class="points"><p>' + str(participants[place - 1][1]) + '</p></div></div></td></tr>')
         else:
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
                                 '.</p></div><div class="points"><p></p></div></div></td></tr>')
