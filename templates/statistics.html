@@ -11,19 +11,19 @@ Statistics
     <td id="second">
       <div class="plate">
         <img src="/static/images/silver.png" alt="silver" id="silver">
-        <p class="ranking">Name Wang<br>1140</p>
+        <p class="ranking">{{ second }}<br>{{ second_score }}</p>
       </div>
     </td>
     <td id="first">
       <div class="plate">
         <img src="/static/images/gold.png" alt="gold" id="gold">
-        <p class="ranking">Robertson Jr. Huarez-Saa<br>1140</p>
+        <p class="ranking">{{ first }}<br>{{ first_score }}</p>
       </div>
     </td>
     <td id="third">
       <div class="plate">
         <img src="/static/images/bronze.png" alt="bronze" id="bronze">
-        <p class="ranking">Ji Yo<br>1140</p>
+        <p class="ranking">{{ third }}<br>{{ third_score }}</p>
       </div>
     </td>
   </tr>
@@ -33,6 +33,7 @@ Statistics
     <td>
     </td>
   </tr>
+  {{ rankings_bottom }}
   <tr>
     <td>
       <div class="rankings-bottom">
