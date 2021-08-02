@@ -202,7 +202,7 @@ def render_statistics():
                                 '.</p></div><div class="points"><p></p></div></div></td></tr>')
         counter += 1
         place += 1
-    return render_template('statistics.html', first = participants, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+    return render_template('statistics.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
