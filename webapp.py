@@ -174,6 +174,7 @@ def render_statistics():
                     participants[row[0]] = float(row[7])
     #participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
     participants = {k: v for k, v in sorted(participants.items(), key=lambda item: item[1])}
+    return render_template('statistics.html', first = participants, second = '', third = '', first_score = '', second_score = '', third_score = '', rankings_bottom = ''))
     first = ''
     second = ''
     third = ''
