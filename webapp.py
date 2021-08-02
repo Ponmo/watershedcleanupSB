@@ -166,7 +166,7 @@ def render_statistics():
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
     for row in data:
-        if int(row[2].partition('/')[0]) == 6: #month:
+        if int(row[2].partition('/')[0]) == 8: #month:
             if is_number(row[7]):
                 if row[0] in participants:
                     participants[row[0]] += float(row[7])
