@@ -172,7 +172,7 @@ def render_statistics():
                     participants[row[0]] += float(row[7])
                 else:
                     participants[row[0]] = float(row[7])
-    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    #participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
     first = ''
     second = ''
     third = ''
