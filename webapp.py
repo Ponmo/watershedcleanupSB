@@ -182,20 +182,20 @@ def render_statistics():
     second_score = ''
     third_score = ''
     if len(participants) >= 1:
-        first = participants.keys()[0]
+        first = list(participants)[0]
         first_score = str(participants[0])
     if len(participants) >= 2:
-        second = participants.keys()[1]
+        second = list(participants)[1]
         second_score = str(participants[1])
     if len(participants) >= 3:
-        third = participants.keys()[2]
+        third = list(participants)[2]
         third_score = str(participants[2])
     place = 4
     counter = 0
     rankings_bottom = ''
     while counter < 7:
         if place < len(participants):
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants.keys()[place - 1] + 
+            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + list(participants)[place - 1] + 
                                 '</p></div><div class="points"><p>' + str(participants[place - 1]) + '</p></div></div></td></tr>')
         else:
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
