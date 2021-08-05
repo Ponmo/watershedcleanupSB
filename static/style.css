@@ -201,6 +201,9 @@
     width: 60px;
     height: 60px;
   }
+  #navbar {
+    right: 10px;
+  }
 }
 #mapOverlay {
   display: flex;
