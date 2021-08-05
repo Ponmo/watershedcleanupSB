@@ -203,6 +203,7 @@ def render_leaderboard():
     return render_template('leaderboard.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/statistics')
+def render_statistics():
     return render_template('statistics.html')
 
 @app.route('/report', methods=['GET', 'POST'])
