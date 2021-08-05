@@ -160,8 +160,8 @@ def render_maps():
             disable = 'disabled'
     return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
-@app.route('/statistics')
-def render_statistics():
+@app.route('/leaderboard')
+def render_leaderboard():
     data = get_data()
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
@@ -200,7 +200,10 @@ def render_statistics():
                                 '.</p></div><div class="points"><p></p></div></div></td></tr>')
         counter += 1
         place += 1
-    return render_template('statistics.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+    return render_template('leaderboard.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+
+@app.route('/statistics')
+    return render_template('statistics.html')
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
