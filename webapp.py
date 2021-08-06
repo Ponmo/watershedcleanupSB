@@ -204,7 +204,12 @@ def render_ranks():
 
 @app.route('/stats')
 def render_stats():
-    return render_template('stats.html')
+    data = get_data()
+    total_trash = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    for row in data:
+        month = int(row[2].partition('/')[0])
+        total_trash[month - 1] += int(row[6])
+    return render_template('stats.html', test = total_trash)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
