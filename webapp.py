@@ -207,8 +207,9 @@ def render_stats():
     data = get_data()
     total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     for row in data:
-        month = int(row[2].partition('/')[0])
-        total_trash[month - 1] += float(row[6])
+        if is_number(row[6]):
+            month = int(row[2].partition('/')[0])
+            total_trash[month - 1] += float(row[6])
     return render_template('stats.html', test = total_trash)
 
 @app.route('/report', methods=['GET', 'POST'])
