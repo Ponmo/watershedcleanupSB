@@ -217,7 +217,7 @@ def render_stats():
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
-        if month != row[3]
+        if month != row[3]:
             month = row[3]
             coords = []
         try:
