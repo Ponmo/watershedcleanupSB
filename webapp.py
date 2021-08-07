@@ -210,12 +210,16 @@ def render_stats():
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     coords = []
     names = []
+    month = 0
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
+        if month != row[3]
+            month = row[3]
+            coords = []
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
