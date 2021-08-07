@@ -207,7 +207,8 @@ def render_stats():
     data = get_data()
     total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    
+    total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    coords = []
     names = []
     for row in data:
         if is_number(row[6]):
@@ -215,7 +216,24 @@ def render_stats():
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
-    return render_template('stats.html', test = total_trash)
+        try:
+            x_coord = float(row[9].partition(',')[0])
+            y_coord = float(row[9].partition(',')[2])
+            similar = False
+            if coords != []:
+                for item in coords:
+                    item_x = float(item.partition(',')[0])
+                    item_y = float(item.partition(',')[2])
+                    if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
+                        similar = True
+                        #total_sites[row[3] - 1] += 1
+            else:
+                coords.append(row[9])
+            if similar == True:
+                total_sites[row[3] - 1] += 1
+            else:
+                coords.append(row[9])
+    return render_template('stats.html', test = total_sites)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
