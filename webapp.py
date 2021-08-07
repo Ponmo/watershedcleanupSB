@@ -215,7 +215,7 @@ def render_stats():
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
-    return render_template('stats.html', test = total_volunteers)
+    return render_template('stats.html', test = total_trash)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
