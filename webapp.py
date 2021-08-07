@@ -51,9 +51,9 @@ def get_data():
     data_map = []
     data_stat = []
     for row in data_new:
-        if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '' and row[16] != '': #and is_number(row[5]) and is_number(row[7]) and is_number(row[8]) and row[16] != '':
+        if row[1] != '' and is_number(row[2]) and '/' in row[3] and row[4] != '' and row[16] != '': #and is_number(row[5]) and is_number(row[7]) and is_number(row[8]) and row[16] != '':
             data_map.append(row)
-        if row[1] != '' and is_number(row[2]) and row[3] != '' and '/' in row[3] and row[4] != '':
+        if row[1] != '' and is_number(row[2]) and '/' in row[3] and row[4] != '':
             data_stat.append(row)
     data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', 'Month']] 
     data_new = []
@@ -233,8 +233,8 @@ def render_stats():
                 total_sites[row[3] - 1] += 1
             else:
                 coords.append(row[9])
-        except:
-            pass
+        except Exception as e:
+            total_sites = e
     return render_template('stats.html', test = total_sites)
 
 @app.route('/report', methods=['GET', 'POST'])
