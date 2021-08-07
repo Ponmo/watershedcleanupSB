@@ -61,7 +61,7 @@ def get_data():
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     for row in data_stat:
         month = int(row[3].split("/")[0])
-        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15]])
+        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15], row[16]])
     counter = 0
     counter_two = int(len(data_map)/12)
     for row in data_map:
@@ -207,6 +207,7 @@ def render_stats():
     data = get_data()
     total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    
     names = []
     for row in data:
         if is_number(row[6]):
@@ -215,7 +216,7 @@ def render_stats():
             if row[0] not in names:
                 total_volunteers[month - 1] += 1
                 names.append(row[0])
-    return render_template('stats.html', test = total_volunteers)
+    return render_template('stats.html', test = get_data())
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
