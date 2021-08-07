@@ -224,7 +224,7 @@ def render_stats():
                 for item in coords:
                     item_x = float(item.partition(',')[0])
                     item_y = float(item.partition(',')[2])
-                    if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
+                    if item_x > x_coord - 0.00001 and item_x < x_coord + 0.00001 and item_y > y_coord - 0.00001 and item_y < y_coord + 0.00001:
                         similar = True
                         #total_sites[row[3] - 1] += 1
             else:
