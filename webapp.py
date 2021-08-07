@@ -210,13 +210,11 @@ def render_stats():
     
     names = []
     for row in data:
-        if is_number(row[6]):
-            month = int(row[2].partition('/')[0])
-            total_trash[month - 1] += float(row[6])
-            if row[0] not in names:
-                total_volunteers[month - 1] += 1
-                names.append(row[0])
-    return render_template('stats.html', test = get_data())
+        total_trash[row[3] - 1] += float(row[6])
+        if row[0] not in names:
+            total_volunteers[row[3] - 1] += 1
+            names.append(row[0])
+    return render_template('stats.html', test = total_volunteers)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
