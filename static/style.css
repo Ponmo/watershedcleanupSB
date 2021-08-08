@@ -1,4 +1,4 @@
-#background_image {
+body {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
@@ -180,6 +180,7 @@ footer {
   padding: 15px; 
   width: 100%; 
   border-bottom: 1px solid grey;
+  background-color: white;
 }
 #title {
   display: inline-block;
