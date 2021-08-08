@@ -31,7 +31,7 @@ credentials = {
         'client_x509_cert_url': os.environ['client_x509_cert_url']
     }
 gp = gspread.service_account_from_dict(credentials)
-gsheet_raw = gp.open('Copy of Watershed Brigade')
+gsheet_raw = gp.open('Watershed Brigade')
 gsheet = gp.open('Watershed Brigade Information')
 
 def get_data():
