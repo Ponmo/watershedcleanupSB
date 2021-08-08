@@ -247,7 +247,7 @@ def render_stats():
         else:
             table += '<tr><td>' + months[counter] + '</td><td></td><td></td><td></td></tr>' 
         counter += 1
-    return render_template('stats.html', table = table)
+    return render_template('stats.html', table = Markup(table))
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
