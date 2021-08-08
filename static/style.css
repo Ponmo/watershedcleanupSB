@@ -30,7 +30,6 @@ body {
 	background-color: #7bbfc8;
 }
 .chart_headings{
-	background-color: orange;
 	text-align: center;
 	padding: 5px;
 	border: 1px solid white;
@@ -38,6 +37,10 @@ body {
 }
 #month_heading {
 	background-color: #7bbfc8;
+}
+#heading_gradient {
+	background: rgb(243,120,34);
+    background: linear-gradient(90deg, rgba(243,120,34,1) 0%, rgba(252,180,44,1) 100%);rgba(255,206,153,1) 100%);
 }
 .cell {
 	padding: 5px 0px 10px 0px;
