@@ -1,3 +1,7 @@
+body {
+  background-image: src("/static/images/silver.png");
+  background-repeat: repeat;
+}
 footer {
   width: 100%;
   height: 10px;
