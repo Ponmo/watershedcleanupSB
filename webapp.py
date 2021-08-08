@@ -190,13 +190,9 @@ def render_ranks():
         third_score = str(participants[2][1])
     place = 4
     rankings_bottom = ''
-    for i in participants:
-        if place < len(participants):
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
-                                '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
-        else:
-            rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
-                                '.</p></div><div class="points"><p></p></div></div></td></tr>')
+    while place < len(participants):
+        rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
+                            '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
     return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
