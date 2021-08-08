@@ -17,14 +17,17 @@ body {
 	padding: 15px;
 	background-color: aliceblue;
 }
-#chart_headings{
+.chart_headings{
 	background-color: orange;
-
 }
 #month_heading {
 	background-color: aliceblue;
 }
-
+.cell {
+	padding: 5px 0px 10px 0px;
+	text-align: center;
+	border: 1px solid grey;
+}
 footer {
   width: 100%;
   height: 10px;
