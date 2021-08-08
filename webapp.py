@@ -223,19 +223,16 @@ def render_stats():
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
-            total_sites.append(x_coord)
-            total_sites.append(y_coord)
             similar = False
             if coords != []:
                 for item in coords:
                     item_x = float(item.partition(',')[0])
                     item_y = float(item.partition(',')[2])
-                    if item_x > x_coord - 0.000002 and item_x < x_coord + 0.000002 and item_y > y_coord - 0.000002 and item_y < y_coord + 0.000002:
+                    if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
                         similar = True
-                        #total_sites[row[3] - 1] += 1
             else:
                 coords.append(row[9])
-            if similar == True:
+            if similar == False:
                 total_sites[row[3] - 1] += 1
             else:
                 coords.append(row[9])
