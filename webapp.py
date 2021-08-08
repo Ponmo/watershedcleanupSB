@@ -239,7 +239,7 @@ def render_stats():
                 coords.append(row[9])
         except Exception as e:
             total_sites.append(e)
-    return render_template('stats.html', test = total_sites)
+    return render_template('stats.html', test = data)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
