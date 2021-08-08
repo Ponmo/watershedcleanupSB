@@ -1,4 +1,4 @@
-body {
+#background_image {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
