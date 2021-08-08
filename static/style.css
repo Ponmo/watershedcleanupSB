@@ -5,9 +5,10 @@ body {
 #chart {
   width: 50%;
   margin: auto;
+  color: white;
   margin-top: 25px;
   border: 1px solid grey;
-  background-color: aliceblue;
+  background-color: #7bbfc8;
 }
 #caption {
 	text-align: center;
@@ -15,18 +16,24 @@ body {
 	border: 1px solid grey;
 	border-bottom: none;
 	padding: 15px;
-	background-color: aliceblue;
+	color: white;
+	font-weight:bold;
+	background-color: #7bbfc8;
 }
 .chart_headings{
 	background-color: orange;
+	border: 1px solid grey;
+	text-align: center;
+	font-weight: normal;
 }
 #month_heading {
-	background-color: aliceblue;
+	background-color: #7bbfc8;
 }
 .cell {
 	padding: 5px 0px 10px 0px;
 	text-align: center;
 	border: 1px solid grey;
+	font-weight: bold;
 }
 footer {
   width: 100%;
