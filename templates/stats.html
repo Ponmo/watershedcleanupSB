@@ -5,14 +5,16 @@ Statistics
 {% endblock %}
 
 {% block content %}
-<table id="chart">
-  <caption id="caption">WATERSHED BRIGADE CUMALATIVE CLEAN-UP CHART 2021</caption>
-  <tr>
-    <th id="month_heading" class="chart_headings">MONTH</th>
-    <th class="chart_headings"># OF SITES CLEANED</th>
-    <th class="chart_headings"># OF VOLUNTEERS</th>
-    <th class="chart_headings">TOTAL LBS OF TRASH</th>
-  </tr>
-  {{ table }}
-</table>
+<div id="blue-bg">
+  <table id="chart">
+    <caption id="caption">WATERSHED BRIGADE CUMALATIVE CLEAN-UP CHART 2021</caption>
+    <tr>
+      <th id="month_heading" class="chart_headings">MONTH</th>
+      <th class="chart_headings"># OF SITES CLEANED</th>
+      <th class="chart_headings"># OF VOLUNTEERS</th>
+      <th class="chart_headings">TOTAL LBS OF TRASH</th>
+    </tr>
+    {{ table }}
+  </table>
+</div>
 {% endblock %}
