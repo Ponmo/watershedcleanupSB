@@ -189,9 +189,8 @@ def render_ranks():
         third = participants[2][0]
         third_score = str(participants[2][1])
     place = 4
-    counter = 0
     rankings_bottom = ''
-    while counter < 7:
+    for i in participants
         if place < len(participants):
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
                                 '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
