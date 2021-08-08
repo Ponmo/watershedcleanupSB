@@ -197,7 +197,6 @@ def render_ranks():
         else:
             rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + 
                                 '.</p></div><div class="points"><p></p></div></div></td></tr>')
-        counter += 1
         place += 1
     return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
