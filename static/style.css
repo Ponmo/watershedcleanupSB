@@ -2,18 +2,27 @@ body {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
-#chart {
+#blue-bg {
+  border: 20px solid #7bbfc8;
   width: 50%;
   margin: auto;
-  color: white;
   margin-top: 25px;
-  border: 1px solid grey;
+  min-width: 360px;
+}
+#chart {
+  width: 100%;
+  color: white;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  word-wrap: break-word;
+  table-layout:fixed;
+  border: 1px solid white;
   background-color: #7bbfc8;
 }
 #caption {
 	text-align: center;
 	font-size: 18px;
-	border: 1px solid grey;
+	border: 1px solid white;
 	border-bottom: none;
 	padding: 15px;
 	color: white;
@@ -22,8 +31,9 @@ body {
 }
 .chart_headings{
 	background-color: orange;
-	border: 1px solid grey;
 	text-align: center;
+	padding: 5px;
+	border: 1px solid white;
 	font-weight: normal;
 }
 #month_heading {
@@ -32,11 +42,14 @@ body {
 .cell {
 	padding: 5px 0px 10px 0px;
 	text-align: center;
-	border: 1px solid grey;
+    border: 1px solid white;
 	font-weight: bold;
 }
 .no-bold {
   font-weight: normal;
+  text-align: left;
+  padding-left: 8px;
+  padding-right: 5px;
 }
 footer {
   width: 100%;
