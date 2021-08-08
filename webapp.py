@@ -238,7 +238,15 @@ def render_stats():
                 coords.append(row[9])
         except:
             pass
-    return render_template('stats.html', test = total_sites)
+    counter = 0
+    months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
+    table = '' 
+    while counter < 12:
+        if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
+            table += '<tr><td>' + months[counter] + '</td><td>' + str(total_sites[counter]) + '</td><td>' + str(total_volunteers[counter]) + '</td><td>' + str(total_trash[counter]) + '</td></tr>' 
+        else:
+            table += '<tr><td>' + months[counter] + '</td><td></td><td></td><td></td></tr>' 
+    return render_template('stats.html', table = table)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
