@@ -223,6 +223,8 @@ def render_stats():
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
+            total_sites.append(x_coord)
+            total_sites.append(y_coord)
             similar = False
             if coords != []:
                 for item in coords:
@@ -239,7 +241,7 @@ def render_stats():
                 coords.append(row[9])
         except Exception as e:
             total_sites.append(e)
-    return render_template('stats.html', test = data)
+    return render_template('stats.html', test = total_sites)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
