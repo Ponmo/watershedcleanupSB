@@ -1,5 +1,5 @@
 body {
-  background-image: src("/static/images/silver.png");
+  background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
 footer {
