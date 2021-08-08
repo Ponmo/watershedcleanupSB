@@ -259,7 +259,7 @@ def report():
         cell = wsheet.range('G1:G1')
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
-    return render_map()
+    return render_maps()
     
 def is_number(s):
     try:
