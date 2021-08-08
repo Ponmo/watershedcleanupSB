@@ -236,8 +236,8 @@ def render_stats():
                 total_sites[row[3] - 1] += 1
             else:
                 coords.append(row[9])
-        except Exception as e:
-            total_sites.append(e)
+        except:
+            pass
     return render_template('stats.html', test = total_sites)
 
 @app.route('/report', methods=['GET', 'POST'])
