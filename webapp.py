@@ -246,6 +246,7 @@ def render_stats():
             table += '<tr><td>' + months[counter] + '</td><td>' + str(total_sites[counter]) + '</td><td>' + str(total_volunteers[counter]) + '</td><td>' + str(total_trash[counter]) + '</td></tr>' 
         else:
             table += '<tr><td>' + months[counter] + '</td><td></td><td></td><td></td></tr>' 
+        counter += 1
     return render_template('stats.html', table = table)
 
 @app.route('/report', methods=['GET', 'POST'])
