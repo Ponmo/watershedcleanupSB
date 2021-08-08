@@ -237,9 +237,9 @@ def render_stats():
     table = '' 
     while counter < 12:
         if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
-            table += '<tr><td class="cell">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(total_trash[counter]) + '</td></tr>' 
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(total_trash[counter]) + '</td></tr>' 
         else:
-            table += '<tr><td class="cell">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
     return render_template('stats.html', table = Markup(table))
 
