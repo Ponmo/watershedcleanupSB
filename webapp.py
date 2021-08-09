@@ -214,6 +214,7 @@ def render_stats():
         if month != row[3]:
             month = row[3]
             coords = []
+            names = []
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
@@ -236,10 +237,10 @@ def render_stats():
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = '' 
     while counter < 12:
-        #if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
-        table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
-        #else:
-        #    table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
+        if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
+        else:
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
     return render_template('stats.html', table = Markup(table))
 
