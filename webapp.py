@@ -169,9 +169,9 @@ def render_ranks():
         if int(row[2].partition('/')[0]) == month:
             if is_number(row[7]):
                 if row[0] in participants:
-                    participants[row[0]] += float(row[7])
+                    participants[row[0]] += float(row[8])
                 else:
-                    participants[row[0]] = float(row[7])
+                    participants[row[0]] = float(row[8])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
     first = ''
     second = ''
@@ -190,7 +190,7 @@ def render_ranks():
         third_score = str(participants[2][1])
     place = 4
     rankings_bottom = ''
-    while place < len(participants):
+    while place <= len(participants):
         rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
