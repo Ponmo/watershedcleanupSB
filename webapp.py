@@ -207,7 +207,7 @@ def render_stats():
     month = 0
     for row in data:
         if is_number(row[6]):
-            total_trash[row[3] - 1] += round(float(row[6]), 2)
+            total_trash[row[3] - 1] += float(row[6])
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
@@ -237,7 +237,7 @@ def render_stats():
     table = '' 
     while counter < 12:
         if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
-            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(total_trash[counter]) + '</td></tr>' 
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
