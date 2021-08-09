@@ -207,7 +207,7 @@ def render_stats():
     month = 0
     for row in data:
         if is_number(row[6]):
-            total_trash[row[3] - 1] += float(row[6])
+            total_trash[row[3] - 1] += round(float(row[6]), 2)
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
