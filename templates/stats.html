@@ -5,7 +5,7 @@
 window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
-	height: 1000,
+	height: 500,
 	animationEnabled: true,
 	zoomEnabled: true,
 	title:{
@@ -14,14 +14,14 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	axisX: {
 		title:"Time (hrs)",
-		titleFontSize: 35,
-		labelFontSize: 20,
+		titleFontSize: 20,
+		labelFontSize: 16,
 		minimum: 0
 	},
 	axisY:{
 		title: "Weight of Trash (lbs)",
-		titleFontSize: 35,
-		labelFontSize: 20
+		titleFontSize: 20,
+		labelFontSize: 16
 		<!--valueFormatString: "$#,##0k" -->
 	},
 	data: [{
