@@ -5,11 +5,11 @@
 window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
-	height: 500,
 	animationEnabled: true,
+	height: 500,
 	zoomEnabled: true,
 	title:{
-		text: "Weight of Trash Cleaned Up vs. Total Hours Spent",
+		text: "Weight of Trash Clean Up vs, Total Hours Spent",
 		fontSize: 30
 	},
 	axisX: {
@@ -20,16 +20,42 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	},
 	axisY:{
 		title: "Weight of Trash (lbs)",
+		includeZero: true,
 		titleFontSize: 20,
 		labelFontSize: 16
 		<!--valueFormatString: "$#,##0k" -->
 	},
 	data: [{
 		type: "scatter",
+		toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",
+		name: "1 Person",
 		indexLabelFontSize: 16,
-		toolTipContent: "<b>Time: </b>{x} hrs<br/><b>Weight: </b>{y} lbs",
+		showInLegend: true,
 		dataPoints: [
 			{{ chart_data }}
+		]
+	},
+	{
+		type: "scatter",
+		name: "2 People",
+		showInLegend: true, 
+		indexLabelFontSize: 16,
+		toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",
+		dataPoints: [
+			{ x: 19, y: 200 },
+			{ x: 27, y: 300 },
+			{ x: 35, y: 330 },
+			{ x: 32, y: 190 },
+			{ x: 29, y: 189 },
+			{ x: 22, y: 150 },
+			{ x: 27, y: 200 },
+			{ x: 26, y: 190 },
+			{ x: 24, y: 225 },
+			{ x: 33, y: 330 },
+			{ x: 34, y: 250 },
+			{ x: 30, y: 120 },
+			{ x: 37, y: 153 },
+			{ x: 24, y: 196 }
 		]
 	}]
 });
