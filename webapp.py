@@ -61,7 +61,7 @@ def get_data():
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     for row in data_stat:
         month = int(row[3].split("/")[0])
-        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[15], row[16]])
+        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[9], row[15], row[16]])
     counter = 0
     counter_two = int(len(data_map)/12)
     for row in data_map:
