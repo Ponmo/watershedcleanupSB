@@ -9,18 +9,24 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	zoomEnabled: true,
 	title:{
-		text: "Weight of Trash Cleaned Up vs. Number of Total Hours Spent"
+		text: "Weight of Trash Cleaned Up vs. Number of Total Hours Spent",
+		fontSize: 30
 	},
 	axisX: {
 		title:"Time (hrs)",
+		titleFontSize: 35,
+		labelFontSize: 20,
 		minimum: 0
 	},
 	axisY:{
 		title: "Weight of Trash (lbs)",
+		titleFontSize: 35,
+		labelFontSize: 20
 		<!--valueFormatString: "$#,##0k" -->
 	},
 	data: [{
 		type: "scatter",
+		indexLabelFontSize: 16,
 		toolTipContent: "<b>Time: </b>{x} hrs<br/><b>Weight: </b>{y} lbs",
 		dataPoints: [
 			{{ chart_data }}
