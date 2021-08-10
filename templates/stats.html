@@ -62,10 +62,25 @@ var chart = new CanvasJS.Chart("chartContainer", {
 chart.render();
 calculateTrendLine(chart);
     function calculateTrendLine(chart){
+            
         var a, b, c, d, e, slope, yIntercept;
-        var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = chart.data[0].dataPoints.length;
+        var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = (chart.data[0].dataPoints.length) + (chart.data[1].dataPoints.length);
+	
+	var totalPoints = Object.assign({}, chart.data[0].dataPoints, chart.data[1].dataPoints);
+	console.log(totalPoints);
+    }
+	/*var dpsLength0 = chart.data[0].dataPoints.length;
+	var dpsLength1 = chart.data[0].dataPoints.length;
+	
+	var dataPointsTotal = [];
+	for(var i = 0; i < dpsLength0; i++)
+	    dataPointsTotal += chart.data[0].dataPoints[i]
+	for(var i = 0; i < dpsLength1; i++)
+            dataPointsTotal =
+		
+		
         for(var i = 0; i < dpsLength; i++)
-            xySum += (chart.data[0].dataPoints[i].x * chart.data[0].dataPoints[i].y)
+            xySum += ((chart.data[0].dataPoints[i].x + chart.data[1].dataPoints[i].x) * (chart.data[0].dataPoints[i].y + chart.data[1].dataPoints[i].y))
         a = xySum * dpsLength;
 
         for(var i = 0; i < dpsLength; i++){
@@ -95,7 +110,7 @@ calculateTrendLine(chart);
 
     function getTrendLinePoint(x, slope, intercept){
         return {x: x, y: ((slope * x) + intercept)};
-    }
+    } */
 }
 </script>
 {% endblock %}
