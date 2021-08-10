@@ -65,28 +65,35 @@ calculateTrendLine(chart);
         var a, b, c, d, e, slope, yIntercept;
         var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = totalPoints.length;
 		
+	console.log(totalPoints);
+	console.log(dpsLength);
         for(var i = 0; i < dpsLength; i++)
             xySum += (totalPoints[i].x * totalPoints[i].y)
         a = xySum * dpsLength;
 
+	console.log(a);
         for(var i = 0; i < dpsLength; i++){
             xSum += totalPoints[i].x;
             ySum += totalPoints[i].y;
         }
         b = xSum * ySum;
-
+        console.log(b);
         for(var i = 0; i < dpsLength; i++)
             xSquare += Math.pow(totalPoints[i].x, 2);
         c = dpsLength * xSquare;
-
+        console.log(c);
         d = Math.pow(xSum, 2);
+	console.log(d);
         slope = (a-b)/(c-d);
+	console.log(slope);
         e = slope * xSum;
+	console.log(e);
         yIntercept = (ySum - e) / dpsLength;
-
+        console.log(yIntercept);
         var startPoint = getTrendLinePoint(totalPoints[0].x, slope, yIntercept);
+	console.log(startPoint);
         var endPoint = getTrendLinePoint(totalPoints[dpsLength-1].x, slope, yIntercept);
-
+        console.log(endPoint);
         chart.addTo("data",{
             type: "line", //Line series showing trend
             markerSize: 0,
