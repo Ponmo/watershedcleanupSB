@@ -235,7 +235,7 @@ def render_stats():
         except:
             pass
         if is_number(row[6]) and is_number(row[7]):
-            chart_data += '{' + float(row[6]) + ',' + float(row[7]) + '},'
+            chart_data += '{ x: ' + float(row[6]) + ', y:' + float(row[7]) + '},'
     chart_data = chart_data[:-1]
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
@@ -246,10 +246,7 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
-        
-    
-        
-    return render_template('stats.html', table = Markup(table), chart_data = chart_data)
+    return render_template('stats.html', table = Markup(table), chart_data = Markup(chart_data))
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
