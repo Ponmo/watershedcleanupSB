@@ -235,7 +235,7 @@ def render_stats():
         except:
             pass
         if is_number(row[6]) and is_number(row[7]):
-            chart_data += '{ x: ' + float(row[6]) + ', y:' + float(row[7]) + '},'
+            chart_data += '{ x: ' + str(row[6]) + ', y:' + str(row[7]) + '},'
     chart_data = chart_data[:-1]
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
