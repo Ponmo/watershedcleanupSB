@@ -61,7 +61,7 @@ def get_data():
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     for row in data_stat:
         month = int(row[3].split("/")[0])
-        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[9], row[15], row[16]])
+        data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[9], row[15], row[16]])
     counter = 0
     index = 0
     increment = int(len(data_map)/12)
@@ -147,11 +147,11 @@ def render_ranks():
     participants = {}
     for row in data:
         if int(row[2].partition('/')[0]) == month:
-            if is_number(row[7]):
+            if is_number(row[8]):
                 if row[0] in participants:
-                    participants[row[0]] += float(row[8])
+                    participants[row[0]] += float(row[9])
                 else:
-                    participants[row[0]] = float(row[8])
+                    participants[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
     first = ''
     second = ''
@@ -182,6 +182,9 @@ def render_stats():
     total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_cleanups = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_persons = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_time = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     coords = []
     names = []
     month = 1
@@ -192,6 +195,7 @@ def render_stats():
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
+        total_cleanups[row[3] - 1] += 1
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
@@ -200,6 +204,7 @@ def render_stats():
             coords = []
             names = []
         if is_number(row[1]):
+            total_persons[row[3] - 1] += float(row[1])
             if float(row[1]) <= 1:
                 index = 0
             elif float(row[1]) <= 5:
@@ -210,16 +215,16 @@ def render_stats():
                 index = 3
             else:
                 index = 4
-            if is_number(row[6]) and is_number(row[7]):
+            if is_number(row[6]) and is_number(row[8]):
                 if str(row[1]) in chart_data:
-                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
                 else:
-                    chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
-                if float(row[7]) > end_point:
-                    end_point = float(row[7])
+                    chart_data[str(row[1])] = '{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                if float(row[8]) > end_point:
+                    end_point = float(row[8])
         try:
-            x_coord = float(row[9].partition(',')[0])
-            y_coord = float(row[9].partition(',')[2])
+            x_coord = float(row[10].partition(',')[0])
+            y_coord = float(row[10].partition(',')[2])
             similar = False
             if coords != []:
                 for item in coords:
@@ -228,11 +233,11 @@ def render_stats():
                     if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
                         similar = True
             else:
-                coords.append(row[9])
+                coords.append(row[10])
             if similar == False:
                 total_sites[row[3] - 1] += 1
             else:
-                coords.append(row[9])
+                coords.append(row[10])
         except:
             pass
     counter = 1
@@ -262,7 +267,7 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
-    return render_template('stats.html', table = Markup(table), chart = Markup(chart), test = chart, trend_line = trend_line, end_point = end_point)
+    return render_template('stats.html', table = Markup(table), chart = Markup(chart), trend_line = trend_line, end_point = end_point)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
