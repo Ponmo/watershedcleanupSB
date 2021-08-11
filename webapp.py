@@ -70,7 +70,7 @@ def get_data():
         month = int(row[3].split("/")[0])
         color = ''
         color = colors[index]
-        if counter == increment and index < 12:
+        if counter == increment and index < 11:
             counter = 0
             index += 1
         #if counter < counter_two:
