@@ -1,6 +1,7 @@
 #handle exceptions to gspread calls
 #change geosheet calls
 #sanitize inputs
+#while loop that goes through 12 times. Three long strings generated with list of months[cpuntweer] calculate each statistic at the cac
 
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask import render_template
@@ -183,7 +184,7 @@ def render_stats():
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_cleanups = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    total_persons = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_time = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     coords = []
     names = []
@@ -195,6 +196,8 @@ def render_stats():
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
+        if is_number(row[7]):
+            total_time[row[3] - 1] += float(row[7])
         total_cleanups[row[3] - 1] += 1
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
@@ -260,14 +263,24 @@ def render_stats():
     trend_line = trend_line[:-1]
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
-    table = '' 
+    table = ''
+    histogram_weight = ''
+    histogram_persons = ''
+    histogram_time = ''
     while counter < 12:
         if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
+        if total_trash[counter] != 0.0 and total_cleanups[counter] != 0 and total_persons[counter] != 0.0 and total_time[counter] != 0.0
+            histogram_weight += '{ label: "' + months[counter] + '", y: ' + str(total_trash[counter]/total_cleanups[counter]) + ' },'
+            histogram_persons += '{ label: "' + months[counter] + '", y: ' + str(total_persons[counter]/total_cleanups[counter]) + ' },'
+            histogram_time += '{ label: "' + months[counter] + '", y: ' + str(total_time[counter]/total_cleanups[counter]) + ' },'
         counter += 1
-    return render_template('stats.html', table = Markup(table), chart = Markup(chart), trend_line = trend_line, end_point = end_point)
+    histogram_weight = histogram_weight[:-1]
+    histogram_persons = histogram_persons[:-1]
+    histogram_time = histogram_time[:-1]
+    return render_template('stats.html', table = Markup(table), chart = chart, trend_line = trend_line, end_point = end_point, histogram_weight = histogram_weight, histogram_persons = histogram_persons, histogram_time = histogram_time)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
