@@ -25,7 +25,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		labelFontSize: 16,
 		minimum: 0
 	},
-        data: [{
+        data: [ {{ chart }}/*{
 		type: "scatter",
 		toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",
 		name: "1 Person",
@@ -57,7 +57,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 			{ x: 37, y: 153 },
 			{ x: 24, y: 196 }
 		]
-	}]
+	} */]
 });
 chart.render();
 /*calculateTrendLine(chart);
