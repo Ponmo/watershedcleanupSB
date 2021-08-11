@@ -205,14 +205,14 @@ def render_stats():
     coords = []
     names = []
     month = 1
-    num_people = 0.123456789
-    chart_data = ('data: [{' +
-                  'type: "scatter",' +
-	          'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-	 	  'name: "1 Person",' +
-		  'indexLabelFontSize: 16,' +
-		  'showInLegend: true,' +
-		  'dataPoints: [')
+    chart = ('data: [{' +
+             'type: "scatter",' +
+	     'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+	     'name: "1 Person",' +
+	     'indexLabelFontSize: 16,' +
+	     'showInLegend: true,' +
+	     'dataPoints: [')
+    chart_data = {}
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
@@ -224,22 +224,27 @@ def render_stats():
             coords = []
             names = []
         if is_number(row[1]):
-            if num_people == float(row[1]) or num_people == 0.123456789:
-                if is_number(row[6]) and is_number(row[7]):
-                    chart_data += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
-                    num_people = float(row[1])
-            else:
-                chart_data = chart_data[:-1]
-                chart_data += (']' +
-                               '},' +
-                               '{' +
-                               'type: "scatter",' +
-                               'name: "' + row[1] + 'People",' +
-                               'showInLegend: true,' +
-                               'indexLabelFontSize: 16,' +
-                               'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-                               'dataPoints: [')
-                num_people = float(row[1])
+	    if is_number(row[6]) and is_number(row[7]):
+            	if str(row[1]) in chart_data:
+		    chart_data[str(row[1])] += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
+            	else:
+		    chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
+            #if num_people == float(row[1]) or num_people == 0.123456789:
+            #if is_number(row[6]) and is_number(row[7]):
+            #    chart += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
+            #    num_people = float(row[1])
+            #else:
+            #    chart = chart[:-1]
+            #    chart += (']' +
+            #                   '},' +
+            #                   '{' +
+            #                   'type: "scatter",' +
+            #                   'name: "' + row[1] + 'People",' +
+            #                   'showInLegend: true,' +
+            #                   'indexLabelFontSize: 16,' +
+            #                   'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+            #                   'dataPoints: [')
+            #    num_people = float(row[1])
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
@@ -258,7 +263,22 @@ def render_stats():
                 coords.append(row[9])
         except:
             pass
-    chart_data = chart_data[:-1] + ']}]'
+    counter = 1
+    for key in chart_data:
+        chart_data[key] = chart_data[key][:-1]
+	if counter < len(chart_data):
+	    chart += (']' +
+                      '},' +
+                      '{' +
+                      'type: "scatter",' +
+                      'name: "' + key + 'People",' +
+                      'showInLegend: true,' +
+                      'indexLabelFontSize: 16,' +
+                      'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+                      'dataPoints: [')
+	chart += chart_data[key]
+	counter += 1
+    chart += ']}]'
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = '' 
@@ -268,7 +288,7 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
-    return render_template('stats.html', table = Markup(table), chart_data = Markup(chart_data))
+    return render_template('stats.html', table = Markup(table), chart = Markup(chart))
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
