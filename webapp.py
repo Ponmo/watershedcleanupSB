@@ -242,7 +242,7 @@ def render_stats():
             pass
     counter = 1
     chart = ''
-    trend_line = 'chart.data[0].dataPoints'
+    trend_line = ''
     for key in chart_data:
         chart_data[key] = chart_data.get(key)[:-1]
         chart += ('{' +
