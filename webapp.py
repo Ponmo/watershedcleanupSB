@@ -276,8 +276,8 @@ def render_stats():
                       'indexLabelFontSize: 16,' +
                       'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
                       'dataPoints: [')
-    chart += chart_data[key]
-    counter += 1
+        chart += chart_data[key]
+        counter += 1
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = '' 
