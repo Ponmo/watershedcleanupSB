@@ -242,11 +242,12 @@ def render_stats():
             pass
     counter = 1
     chart = ''
+    trend_line = 'chart.data[0].dataPoints'
     for key in chart_data:
         chart_data[key] = chart_data.get(key)[:-1]
         chart += ('{' +
                   'type: "scatter",' +
-                  'name: "' + key + ' People",' +
+                  'name: "' + key + ' Person(s)",' +
                   'showInLegend: true,' +
                   'indexLabelFontSize: 16,' +
                   'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
@@ -255,6 +256,7 @@ def render_stats():
         chart += ']}'
         if counter < len(chart_data):
             chart += ','
+            trend_line += '.concat(chart.data[' + str(counter) + '].dataPoints)'
         counter += 1
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
@@ -265,7 +267,7 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
-    return render_template('stats.html', table = Markup(table), chart = Markup(chart), test = chart)
+    return render_template('stats.html', table = Markup(table), chart = Markup(chart), test = chart, trend_line = trend_line)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
@@ -284,7 +286,7 @@ def report():
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
     return render_maps()
-    
+
 def is_number(s):
     try:
         float(s)
