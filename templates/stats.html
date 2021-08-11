@@ -135,12 +135,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 		legendText: "Time (hrs)",
 		showInLegend: true, 
 		dataPoints:[
-			{ label: "Saudi", y: 266.21 },
-			{ label: "Venezuela", y: 302.25 },
-			{ label: "Iran", y: 157.20 },
-			{ label: "Iraq", y: 148.77 },
-			{ label: "Kuwait", y: 101.50 },
-			{ label: "UAE", y: 97.8 }
+			{{ histogram_time }}
 		]
 	},
 	{
@@ -150,12 +145,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 		legendText: "Person(s)",
 		showInLegend: true,
 		dataPoints:[
-			{ label: "Saudi", y: 10.46 },
-			{ label: "Venezuela", y: 2.27 },
-			{ label: "Iran", y: 3.99 },
-			{ label: "Iraq", y: 4.45 },
-			{ label: "Kuwait", y: 2.92 },
-			{ label: "UAE", y: 3.1 }
+			{{ histogram_persons }}
 		]
 	},
 	{
@@ -165,12 +155,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 		legendText: "Weight (lbs)",
 		showInLegend: true, 
 		dataPoints:[
-			{ label: "Saudi", y: 266.21 },
-			{ label: "Venezuela", y: 302.25 },
-			{ label: "Iran", y: 157.20 },
-			{ label: "Iraq", y: 148.77 },
-			{ label: "Kuwait", y: 101.50 },
-			{ label: "UAE", y: 97.8 }
+			{{ histogram_weight }}
 		]
 	}]
 });
