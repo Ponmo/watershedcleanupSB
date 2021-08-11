@@ -102,6 +102,91 @@ calculateTrendLine(chart);
     function getTrendLinePoint(x, slope, intercept){
         return {x: x, y: ((slope * x) + intercept)};
     }
+
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+	height: 800,
+	title:{
+		text: "Average Time, Person(s), and Weight per Cleanup per Month",
+		fontSize: 30
+	},	
+	axisY: {
+		title: "Number",
+		titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC",
+		includeZero: true,
+		titleFontSize: 20,
+		labelFontSize: 16,
+		minimum: 0
+	},
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		itemclick: toggleDataSeries
+	},
+	data: [{
+		type: "column",
+		name: "Time (hrs)",
+		indexLabelFontSize: 16,
+		legendText: "Time (hrs)",
+		showInLegend: true, 
+		dataPoints:[
+			{ label: "Saudi", y: 266.21 },
+			{ label: "Venezuela", y: 302.25 },
+			{ label: "Iran", y: 157.20 },
+			{ label: "Iraq", y: 148.77 },
+			{ label: "Kuwait", y: 101.50 },
+			{ label: "UAE", y: 97.8 }
+		]
+	},
+	{
+		type: "column",	
+		name: "Person(s)",
+		indexLabelFontSize: 16,
+		legendText: "Person(s)",
+		axisYType: "secondary",
+		showInLegend: true,
+		dataPoints:[
+			{ label: "Saudi", y: 10.46 },
+			{ label: "Venezuela", y: 2.27 },
+			{ label: "Iran", y: 3.99 },
+			{ label: "Iraq", y: 4.45 },
+			{ label: "Kuwait", y: 2.92 },
+			{ label: "UAE", y: 3.1 }
+		]
+	},
+	{
+		type: "column",
+		name: "Weight (lbs)",
+		indexLabelFontSize: 16,
+		legendText: "Weight (lbs)",
+		showInLegend: true, 
+		dataPoints:[
+			{ label: "Saudi", y: 266.21 },
+			{ label: "Venezuela", y: 302.25 },
+			{ label: "Iran", y: 157.20 },
+			{ label: "Iraq", y: 148.77 },
+			{ label: "Kuwait", y: 101.50 },
+			{ label: "UAE", y: 97.8 }
+		]
+	}]
+});
+chart2.render();
+
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart2.render();
+}
+
 }
 </script>
 {% endblock %}
