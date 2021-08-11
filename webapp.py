@@ -264,6 +264,7 @@ def render_stats():
         except:
             pass
     counter = 1
+    console.log(chart_data)
     for key in chart_data:
         chart_data[key] = chart_data[key][:-1]
         if counter < len(chart_data):
@@ -278,7 +279,6 @@ def render_stats():
                       'dataPoints: [')
     chart += chart_data[key]
     counter += 1
-    chart += ']}]'
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = '' 
