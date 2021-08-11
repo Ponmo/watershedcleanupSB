@@ -207,11 +207,11 @@ def render_stats():
     month = 1
     chart = ('data: [{' +
              'type: "scatter",' +
-	     'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-	     'name: "1 Person",' +
-	     'indexLabelFontSize: 16,' +
-	     'showInLegend: true,' +
-	     'dataPoints: [')
+			 'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+			 'name: "1 Person",' +
+	     	 'indexLabelFontSize: 16,' +
+	     	 'showInLegend: true,' +
+	     	 'dataPoints: [')
     chart_data = {}
     for row in data:
         if is_number(row[6]):
@@ -224,9 +224,9 @@ def render_stats():
             coords = []
             names = []
         if is_number(row[1]):
-	    if is_number(row[6]) and is_number(row[7]):
+	         if is_number(row[6]) and is_number(row[7]):
                 if str(row[1]) in chart_data:
-	            chart_data[str(row[1])] += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
+	            	chart_data[str(row[1])] += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
                 else:
                     chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
             #if num_people == float(row[1]) or num_people == 0.123456789:
@@ -268,14 +268,14 @@ def render_stats():
         chart_data[key] = chart_data[key][:-1]
 	if counter < len(chart_data):
 	    chart += (']' +
-                      '},' +
-                      '{' +
-                      'type: "scatter",' +
-                      'name: "' + key + 'People",' +
-                      'showInLegend: true,' +
-                      'indexLabelFontSize: 16,' +
-                      'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-                      'dataPoints: [')
+                  '},' +
+                  '{' +
+                  'type: "scatter",' +
+                  'name: "' + key + 'People",' +
+                  'showInLegend: true,' +
+                  'indexLabelFontSize: 16,' +
+                  'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+                  'dataPoints: [')
 	chart += chart_data[key]
 	counter += 1
     chart += ']}]'
