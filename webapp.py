@@ -225,10 +225,10 @@ def render_stats():
             names = []
         if is_number(row[1]):
 	    if is_number(row[6]) and is_number(row[7]):
-            	if str(row[1]) in chart_data:
-		    chart_data[str(row[1])] += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
-            	else:
-		    chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
+                if str(row[1]) in chart_data:
+	            chart_data[str(row[1])] += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
+                else:
+                    chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
             #if num_people == float(row[1]) or num_people == 0.123456789:
             #if is_number(row[6]) and is_number(row[7]):
             #    chart += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
