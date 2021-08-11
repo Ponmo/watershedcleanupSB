@@ -249,7 +249,7 @@ def render_stats():
                   'name: "' + key + ' People",' +
                   'showInLegend: true,' +
                   'indexLabelFontSize: 16,' +
-                  'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+                  'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
                   'dataPoints: [')
         chart += chart_data.get(key)
         chart += ']}'
