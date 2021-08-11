@@ -244,14 +244,13 @@ def render_stats():
     counter = 1
     for key in chart_data:
         chart_data[key] = chart_data.get(key)[:-1]
-        if counter < len(chart_data):
-            chart += ('{' +
-                      'type: "scatter",' +
-                      'name: "' + key + ' People",' +
-                      'showInLegend: true,' +
-                      'indexLabelFontSize: 16,' +
-                      'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-                      'dataPoints: [')
+        chart += ('{' +
+                  'type: "scatter",' +
+                  'name: "' + key + ' People",' +
+                  'showInLegend: true,' +
+                  'indexLabelFontSize: 16,' +
+                  'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+                  'dataPoints: [')
         chart += chart_data.get(key)
         chart += ']}'
         if counter < len(chart_data):
