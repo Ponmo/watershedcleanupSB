@@ -187,10 +187,8 @@ def render_stats():
     month = 1
     chart_data = {}
     end_point = 0.0
-    colors = ['#edff00', '#f4ef00', '#f9de00', '#fecd00', '#ffbb00', '#ffa900', '#ff9700', '#ff8300', '#ff6e00', '#ff5700', '#ff3a00', '#ff0000']
-    counter = 0
+    colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
-    increment = int(len(data)/12)
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
@@ -201,18 +199,23 @@ def render_stats():
             month = row[3]
             coords = []
             names = []
-        color = colors[index]
-        if counter == increment and index < 11:
-            counter = 0
-            index += 1
-        counter += 1
         if is_number(row[1]):
+            if float(row[1]) <= 1:
+                index = 0
+            elif float(row[1]) <= 5:
+                index = 1
+            elif float(row[1]) <= 10:
+                index = 2
+            elif float(row[1]) <= 20:
+                index = 3
+            else:
+                index = 4
             if is_number(row[6]) and is_number(row[7]):
                 if str(row[1]) in chart_data:
                     chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
                 else:
                     chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
-                if float(row[7]) > 0.0:
+                if float(row[7]) > end_point:
                     end_point = float(row[7])
         try:
             x_coord = float(row[9].partition(',')[0])
