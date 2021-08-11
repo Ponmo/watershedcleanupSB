@@ -205,14 +205,8 @@ def render_stats():
     coords = []
     names = []
     month = 1
-    chart = ('data: [{' +
-             'type: "scatter",' +
-             'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-             'name: "1 Person",' +
-             'indexLabelFontSize: 16,' +
-             'showInLegend: true,' +
-             'dataPoints: [')
-    chart_data = {'1': ''}
+    chart = 'data: ['
+    chart_data = {}
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
@@ -266,10 +260,8 @@ def render_stats():
     counter = 1
     for key in chart_data:
         chart_data[key] = chart_data.get(key)[:-1]
-        if counter < len(chart_data) and key != '1':
-            chart += (']' +
-                      '},' +
-                      '{' +
+        if counter < len(chart_data):
+            chart += ('{' +
                       'type: "scatter",' +
                       'name: "' + key + ' People",' +
                       'showInLegend: true,' +
@@ -277,6 +269,9 @@ def render_stats():
                       'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
                       'dataPoints: [')
         chart += chart_data.get(key)
+        chart += ']}'
+        if counter < len(chart_data):
+            chart += ','
         counter += 1
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
