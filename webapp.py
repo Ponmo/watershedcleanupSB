@@ -256,8 +256,9 @@ def render_stats():
         chart += ']}'
         if counter < len(chart_data):
             chart += ','
-            trend_line += '.concat(chart.data[' + str(counter) + '].dataPoints)'
+            trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
         counter += 1
+    trend_line = trend_line[:-1]
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = '' 
