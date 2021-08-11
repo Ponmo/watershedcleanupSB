@@ -63,40 +63,14 @@ def get_data():
         month = int(row[3].split("/")[0])
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[9], row[15], row[16]])
     counter = 0
-    #counter_two = int(len(data_map)/12)
     index = 0
     increment = int(len(data_map)/12)
     for row in data_map:
         month = int(row[3].split("/")[0])
-        color = ''
         color = colors[index]
         if counter == increment and index < 11:
             counter = 0
             index += 1
-        #if counter < counter_two:
-        #    color = colors[0] 
-        #elif counter < 2 * counter_two:
-        #    color = colors[1] 
-        #elif counter < 3 * counter_two:
-        #    color = colors[2] 
-        #elif counter < 4 * counter_two:
-        #    color = colors[3] 
-        #elif counter < 5 * counter_two:
-        #    color = colors[4] 
-        #elif counter < 6 * counter_two:
-        #    color = colors[5] 
-        #elif counter < 7 * counter_two:
-        #    color = colors[6] 
-        #elif counter < 8 * counter_two:
-        #    color = colors[7] 
-        #elif counter < 9 * counter_two:
-        #    color = colors[8] 
-        #elif counter < 10 * counter_two:
-        #    color = colors[9] 
-        #elif counter < 11 * counter_two: #first get variable equal to increment. Counter equal to how many. First color var equal to color[0] if counter = increment then color equal to color[+1]
-        #    color = colors[10] 
-        #else:
-        #    color = colors[11] 
         month = months[month - 1]
         data_update.append([row[1], row[2], row[3], color, row[4], row[5], row[7], row[8], row[16], month])
         counter += 1
@@ -213,6 +187,10 @@ def render_stats():
     month = 1
     chart_data = {}
     end_point = 0.0
+    colors = ['#edff00', '#f4ef00', '#f9de00', '#fecd00', '#ffbb00', '#ffa900', '#ff9700', '#ff8300', '#ff6e00', '#ff5700', '#ff3a00', '#ff0000']
+    counter = 0
+    index = 0
+    increment = int(len(data)/12)
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
@@ -223,13 +201,17 @@ def render_stats():
             month = row[3]
             coords = []
             names = []
+        color = colors[index]
+        if counter == increment and index < 11:
+            counter = 0
+            index += 1
         if is_number(row[1]):
             if is_number(row[6]) and is_number(row[7]):
                 if str(row[1]) in chart_data:
-                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
+                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
                 else:
-                    chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
-                if float(row[7]) > end_point or end_point == 0.0:
+                    chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                if float(row[7]) > 0.0:
                     end_point = float(row[7])
         try:
             x_coord = float(row[9].partition(',')[0])
