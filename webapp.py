@@ -206,7 +206,7 @@ def render_stats():
     names = []
     month = 1
     num_people = 0.123456789
-    chart_data = ('data: [{ +
+    chart_data = ('data: [{' +
                   'type: "scatter",' +
 	          'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
 	 	  'name: "1 Person",' +
