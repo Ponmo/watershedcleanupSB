@@ -62,7 +62,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	]
 });
 chart.render();
-calculateTrendLine(chart);
+/*calculateTrendLine(chart);
     function calculateTrendLine(chart){
         const totalPoints = chart.data[0].dataPoints.concat(chart.data[1].dataPoints) 
         var a, b, c, d, e, slope, yIntercept;
@@ -104,7 +104,7 @@ calculateTrendLine(chart);
     function getTrendLinePoint(x, slope, intercept){
         return {x: x, y: ((slope * x) + intercept)};
     }
-}
+}*/
 </script>
 {% endblock %}
 
