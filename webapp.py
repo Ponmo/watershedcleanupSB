@@ -206,7 +206,6 @@ def render_stats():
     names = []
     month = 1
     chart_data = {}
-    start_point = 0.0
     end_point = 0.0
     for row in data:
         if is_number(row[6]):
@@ -226,8 +225,6 @@ def render_stats():
                     chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
                 if float(row[7]) > end_point or end_point == 0.0:
                     end_point = float(row[7])
-                if float(row[7]) < end_point or start_point == 0.0:
-                    start_point = float(row[7])
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
@@ -274,7 +271,7 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
-    return render_template('stats.html', table = Markup(table), chart = Markup(chart), test = chart, trend_line = trend_line, end_point = end_point, start_point = start_point)
+    return render_template('stats.html', table = Markup(table), chart = Markup(chart), test = chart, trend_line = trend_line, end_point = end_point)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
