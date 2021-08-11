@@ -242,7 +242,7 @@ def render_stats():
         chart_data[key] = chart_data.get(key)[:-1]
         chart += ('{' +
                   'type: "scatter",' +
-                  'name: "' + key + ' Person(s)",' +
+                  'name: "' + key + ' Person Group",' +
                   'indexLabelFontSize: 16,' +
                   'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
                   'dataPoints: [')
