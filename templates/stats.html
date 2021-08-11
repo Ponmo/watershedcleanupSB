@@ -25,39 +25,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		labelFontSize: 16,
 		minimum: 0
 	},
-        data: [ {{ chart }}/*{
-		type: "scatter",
-		toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",
-		name: "1 Person",
-		indexLabelFontSize: 16,
-		showInLegend: true,
-		dataPoints: [
-			{ x: 19, y: 200 }
-		]
-	},
-	{
-		type: "scatter",
-		name: "2 People",
-		showInLegend: true, 
-		indexLabelFontSize: 16,
-		toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",
-		dataPoints: [
-			{ x: 19, y: 200 },
-			{ x: 1000, y: 11000 },
-			{ x: 35, y: 330 },
-			{ x: 32, y: 190 },
-			{ x: 29, y: 189 },
-			{ x: 22, y: 150 },
-			{ x: 27, y: 200 },
-			{ x: 26, y: 190 },
-			{ x: 24, y: 225 },
-			{ x: 33, y: 330 },
-			{ x: 34, y: 250 },
-			{ x: 30, y: 120 },
-			{ x: 37, y: 153 },
-			{ x: 24, y: 196 }
-		]
-	} */]
+        data: [ {{ chart }} ]
 });
 chart.render();
 calculateTrendLine(chart);
@@ -103,7 +71,7 @@ calculateTrendLine(chart);
         return {x: x, y: ((slope * x) + intercept)};
     }
 
-var chart2 = new CanvasJS.Chart("chartContainer2", {
+/*var chart2 = new CanvasJS.Chart("chartContainer2", {
 	animationEnabled: true,
 	height: 800,
 	title:{
@@ -169,7 +137,7 @@ function toggleDataSeries(e) {
 		e.dataSeries.visible = true;
 	}
 	chart2.render();
-}
+}*/
 
 }
 </script>
