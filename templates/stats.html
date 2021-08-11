@@ -88,7 +88,7 @@ calculateTrendLine(chart);
 
         yIntercept = (ySum - e) / dpsLength;
 
-        var startPoint = getTrendLinePoint({{ start_point }}, slope, yIntercept);
+        var startPoint = getTrendLinePoint(0.0, slope, yIntercept);
 
         var endPoint = getTrendLinePoint({{ end_point }}, slope, yIntercept);
 
