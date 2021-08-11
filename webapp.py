@@ -223,22 +223,6 @@ def render_stats():
                     chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
                 else:
                     chart_data[str(row[1])] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
-            #if num_people == float(row[1]) or num_people == 0.123456789:
-            #if is_number(row[6]) and is_number(row[7]):
-            #    chart += '{ x: ' + str(row[7]) + ', y:' + str(row[6]) + '},'
-            #    num_people = float(row[1])
-            #else:
-            #    chart = chart[:-1]
-            #    chart += (']' +
-            #                   '},' +
-            #                   '{' +
-            #                   'type: "scatter",' +
-            #                   'name: "' + row[1] + 'People",' +
-            #                   'showInLegend: true,' +
-            #                   'indexLabelFontSize: 16,' +
-            #                   'toolTipContent: "<span style=\"color:#4F81BC \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-            #                   'dataPoints: [')
-            #    num_people = float(row[1])
         try:
             x_coord = float(row[9].partition(',')[0])
             y_coord = float(row[9].partition(',')[2])
