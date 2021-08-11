@@ -205,7 +205,6 @@ def render_stats():
     coords = []
     names = []
     month = 1
-    chart = 'data: ['
     chart_data = {}
     for row in data:
         if is_number(row[6]):
@@ -242,6 +241,7 @@ def render_stats():
         except:
             pass
     counter = 1
+    chart = ''
     for key in chart_data:
         chart_data[key] = chart_data.get(key)[:-1]
         chart += ('{' +
