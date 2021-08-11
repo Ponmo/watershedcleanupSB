@@ -207,11 +207,11 @@ def render_stats():
     month = 1
     chart = ('data: [{' +
              'type: "scatter",' +
-			 'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-			 'name: "1 Person",' +
-	     	 'indexLabelFontSize: 16,' +
-	     	 'showInLegend: true,' +
-	     	 'dataPoints: [')
+             'toolTipContent: "<span style=\"color:red \"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+             'name: "1 Person",' +
+             'indexLabelFontSize: 16,' +
+             'showInLegend: true,' +
+             'dataPoints: [')
     chart_data = {}
     for row in data:
         if is_number(row[6]):
@@ -264,7 +264,6 @@ def render_stats():
         except:
             pass
     counter = 1
-    console.log(chart_data)
     for key in chart_data:
         chart_data[key] = chart_data[key][:-1]
         if counter < len(chart_data):
@@ -288,7 +287,7 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         counter += 1
-    return render_template('stats.html', table = Markup(table), chart = Markup(chart))
+    return render_template('stats.html', table = Markup(table), chart = Markup(chart), test = chart_data)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
