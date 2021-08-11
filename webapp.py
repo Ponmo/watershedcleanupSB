@@ -266,7 +266,7 @@ def render_stats():
     counter = 1
     for key in chart_data:
         chart_data[key] = chart_data.get(key)[:-1]
-        if counter < len(chart_data):
+        if counter < len(chart_data) and key != '1':
             chart += (']' +
                       '},' +
                       '{' +
