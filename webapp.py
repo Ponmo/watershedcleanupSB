@@ -205,6 +205,7 @@ def render_stats():
         if counter == increment and index < 11:
             counter = 0
             index += 1
+        counter += 1
         if is_number(row[1]):
             if is_number(row[6]) and is_number(row[7]):
                 if str(row[1]) in chart_data:
