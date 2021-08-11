@@ -226,7 +226,7 @@ def render_stats():
         if is_number(row[1]):
             if is_number(row[6]) and is_number(row[7]):
                 if str(float(row[1])) in chart_data:
-                    chart_data[str(float(row[1]))] = chart_data.get(str(row[1])) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
+                    chart_data[str(float(row[1]))] = chart_data.get(str(float(row[1]))) +'{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
                 else:
                     chart_data[str(float(row[1]))] = '{ x: ' + str(row[7]) + ', y: ' + str(row[6]) + ' },'
             #if num_people == float(row[1]) or num_people == 0.123456789:
