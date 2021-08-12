@@ -194,7 +194,8 @@ def render_stats():
     colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
     for row in data:
-        total_cleanups[row[3] - 1] += 1
+        if is_number(row[6]) and is_number(row[7]) and is_number(row[1]):
+            total_cleanups[row[3] - 1] += 1
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
         if is_number(row[7]):
