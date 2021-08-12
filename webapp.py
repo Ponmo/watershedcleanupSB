@@ -274,9 +274,9 @@ def render_stats():
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
         if total_trash[counter] != 0.0 and total_cleanups[counter] != 0 and total_persons[counter] != 0.0 and total_time[counter] != 0.0:
-            histogram_weight += '{ label: "' + months[counter] + '", y: ' + str(total_trash[counter]//total_cleanups[counter]) + ' },'
-            histogram_persons += '{ label: "' + months[counter] + '", y: ' + str(total_persons[counter]//total_cleanups[counter]) + ' },'
-            histogram_time += '{ label: "' + months[counter] + '", y: ' + str(total_time[counter]//total_cleanups[counter]) + ' },'
+            histogram_weight += '{ label: "' + months[counter] + '", y: ' + str(total_trash[counter]//float(total_cleanups[counter])) + ' },'
+            histogram_persons += '{ label: "' + months[counter] + '", y: ' + str(total_persons[counter]//float(total_cleanups[counter])) + ' },'
+            histogram_time += '{ label: "' + months[counter] + '", y: ' + str(total_time[counter]//float(total_cleanups[counter])) + ' },'
         counter += 1
     histogram_weight = histogram_weight[:-1]
     histogram_persons = histogram_persons[:-1]
