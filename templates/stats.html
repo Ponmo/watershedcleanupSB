@@ -103,7 +103,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 		legendText: "Time (hrs)",
 		showInLegend: true, 
 		dataPoints:[
-			{{ histogram_time }}
+			{{ histogram_weight }}
 		]
 	},
 	{
@@ -113,7 +113,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 		legendText: "Person(s)",
 		showInLegend: true,
 		dataPoints:[
-			{{ histogram_persons }}
+			{{ histogram_time }}
 		]
 	},
 	{
@@ -123,7 +123,7 @@ var chart2 = new CanvasJS.Chart("chartContainer2", {
 		legendText: "Weight (lbs)",
 		showInLegend: true, 
 		dataPoints:[
-			{{ histogram_weight }}
+			{{ histogram_persons }}
 		]
 	}]
 });
