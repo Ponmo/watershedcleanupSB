@@ -280,7 +280,7 @@ def render_stats():
     histogram_weight = histogram_weight[:-1]
     histogram_persons = histogram_persons[:-1]
     histogram_time = histogram_time[:-1]
-    return render_template('stats.html', table = Markup(table), chart = chart, trend_line = trend_line, end_point = end_point, histogram_weight = histogram_weight, histogram_persons = histogram_persons, histogram_time = histogram_time, test = histogram_persons + histogram_weight + histogram_time)
+    return render_template('stats.html', table = Markup(table), chart = Markup(chart), trend_line = Markup(trend_line), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time), test = histogram_persons + histogram_weight + histogram_time)
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
