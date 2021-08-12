@@ -2,6 +2,18 @@ body {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
+#chartContainer {
+  position: relative;
+  width: 50%;
+  margin: auto;
+  min-width: 360px;
+}
+#chartContainer2 {
+  position: relative;
+  width: 50%;
+  margin: auto;
+  min-width: 360px;
+}
 #blue-bg {
   border: 20px solid #7bbfc8;
   width: 50%;
