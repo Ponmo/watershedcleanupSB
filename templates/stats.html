@@ -6,7 +6,7 @@ window.onload = function () {
 
 var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
-	height: 800,
+	height: 600,
 	zoomEnabled: true,
 	title:{
 		text: "Weight of Trash Clean Up vs Total Hours Spent",
@@ -73,7 +73,7 @@ calculateTrendLine(chart);
 
 var chart2 = new CanvasJS.Chart("chartContainer2", {
 	animationEnabled: true,
-	height: 800,
+	height: 600,
 	title:{
 		text: "Average Time, Person(s), and Weight per Cleanup per Month",
 		fontSize: 30
@@ -163,6 +163,7 @@ Statistics
 <p>{{ test }}</p>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<br>
 <div id="chartContainer2" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 {% endblock %}
