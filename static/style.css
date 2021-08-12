@@ -2,17 +2,11 @@ body {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
-#myCarousel {
-  width: 90%;
-  margin: auto;
-  margin-top: 25px;
-  min-height: 400px;
-  border: 2px solid grey;
-}
 #blue-bg {
   border: 20px solid #7bbfc8;
-  width: 80%;
+  width: 70%;
   margin: auto;
+  margin-top: 25px;
   min-width: 360px;
 }
 #chart {
