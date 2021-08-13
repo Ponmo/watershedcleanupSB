@@ -351,9 +351,6 @@ def render_stats_embed():
     total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    total_cleanups = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    total_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    total_time = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     coords = []
     names = []
     month = 1
@@ -362,12 +359,8 @@ def render_stats_embed():
     colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
     for row in data:
-        if is_number(row[6]) and is_number(row[7]) and is_number(row[1]):
-            total_cleanups[row[3] - 1] += 1
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
-        if is_number(row[7]):
-            total_time[row[3] - 1] += float(row[7])
         if row[0] not in names:
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
@@ -375,25 +368,6 @@ def render_stats_embed():
             month = row[3]
             coords = []
             names = []
-        if is_number(row[1]):
-            total_persons[row[3] - 1] += float(row[1])
-            if float(row[1]) <= 1:
-                index = 0
-            elif float(row[1]) <= 5:
-                index = 1
-            elif float(row[1]) <= 10:
-                index = 2
-            elif float(row[1]) <= 20:
-                index = 3
-            else:
-                index = 4
-            if is_number(row[6]) and is_number(row[8]):
-                if str(row[1]) in chart_data:
-                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
-                else:
-                    chart_data[str(row[1])] = '{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
-                if float(row[8]) > end_point:
-                    end_point = float(row[8])
         try:
             x_coord = float(row[10].partition(',')[0])
             y_coord = float(row[10].partition(',')[2])
@@ -412,44 +386,16 @@ def render_stats_embed():
                 coords.append(row[10])
         except:
             pass
-    counter = 1
-    chart = ''
-    trend_line = ''
-    for key in chart_data:
-        chart_data[key] = chart_data.get(key)[:-1]
-        chart += ('{' +
-                  'type: "scatter",' +
-                  'name: "' + key + ' Person Group",' +
-                  'indexLabelFontSize: 16,' +
-                  'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
-                  'dataPoints: [')
-        chart += chart_data.get(key)
-        chart += ']}'
-        if counter < len(chart_data):
-            chart += ','
-            trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
-        counter += 1
-    trend_line = trend_line[:-1]
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = ''
-    histogram_weight = ''
-    histogram_persons = ''
-    histogram_time = ''
     while counter < 12:
         if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
         else:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
-        if total_trash[counter] != 0.0 and total_cleanups[counter] != 0 and total_persons[counter] != 0.0 and total_time[counter] != 0.0:
-            histogram_weight += '{ label: "' + months[counter] + '", y: ' + str(total_trash[counter]/total_cleanups[counter]) + ' },'
-            histogram_persons += '{ label: "' + months[counter] + '", y: ' + str(total_persons[counter]/total_cleanups[counter]) + ' },'
-            histogram_time += '{ label: "' + months[counter] + '", y: ' + str(total_time[counter]/total_cleanups[counter]) + ' },'
         counter += 1
-    histogram_weight = histogram_weight[:-1]
-    histogram_persons = histogram_persons[:-1]
-    histogram_time = histogram_time[:-1]
-    return render_template('stats-embed.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), trend_line = Markup(trend_line), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time))
+    return render_template('stats-embed.html', year = datetime.now().strftime('%Y'), table = Markup(table))
 
 @app.route('/report', methods=['GET', 'POST'])
 def report():
