@@ -143,7 +143,29 @@ def render_maps():
 
 @app.route('/maps_embed')
 def render_maps_embed():
-    return render_template('maps_embed.html', checkboxes = '', report_limit = '', submit = '')
+    data = get_data()
+    checkboxes = ''
+    month = []
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    for row in data:
+        if row[3] not in month:
+            month.append(row[3])
+    for item in month:
+        checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
+    wsheet = gsheet.worksheet('Reports')
+    data_report = wsheet.get_all_values()
+    reports = 0
+    disable = ''
+    report_limit = ''
+    date_now = datetime.now(tz=pytz.utc)
+    date_now = date_now.astimezone(timezone('America/Los_Angeles'))
+    for row in data_report:
+        if row[4] == date_now.strftime('%m/%d/%Y'):
+            reports += 1
+        if reports >= 10:
+            report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
+            disable = 'disabled'
+    return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/ranks')
 def render_ranks():
