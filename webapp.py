@@ -165,7 +165,7 @@ def render_maps_embed():
         if reports >= 10:
             report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
             disable = 'disabled'
-    return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
+    return render_template('maps_embed.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/ranks')
 def render_ranks():
