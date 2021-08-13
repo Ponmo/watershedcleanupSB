@@ -467,7 +467,7 @@ def report():
         cell = wsheet.range('G1:G1')
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
-    if request.form['embed'] == 'true'
+    if request.form['embed'] == 'true':
         return render_maps_embed()
     return render_maps()
 
