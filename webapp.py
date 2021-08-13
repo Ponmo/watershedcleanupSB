@@ -469,8 +469,7 @@ def report():
         wsheet.update_cells(cell, 'USER_ENTERED')
     if request.form['embed'] == 'true'
         return render_maps_embed()
-    else: 
-        return render_maps()
+    return render_maps()
 
 def is_number(s):
     try:
