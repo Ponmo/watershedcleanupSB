@@ -348,6 +348,6 @@ footer {
 .switcher-embed {
   border-left: 1px solid grey;
 }
-#mapOverlay-embed {
+.map-embed {
   border-top: 1px solid grey;
 }
