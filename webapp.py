@@ -203,6 +203,42 @@ def render_ranks():
         place += 1
     return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
+@app.route('/ranks_embed')
+def render_ranks_embed():
+    data = get_data()
+    month = int(data[len(data) - 1][2].partition('/')[0])
+    participants = {}
+    for row in data:
+        if int(row[2].partition('/')[0]) == month:
+            if is_number(row[8]):
+                if row[0] in participants:
+                    participants[row[0]] += float(row[9])
+                else:
+                    participants[row[0]] = float(row[9])
+    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    first = ''
+    second = ''
+    third = ''
+    first_score = ''
+    second_score = ''
+    third_score = ''
+    if len(participants) >= 1:
+        first = participants[0][0]
+        first_score = str(participants[0][1])
+    if len(participants) >= 2:
+        second = participants[1][0]
+        second_score = str(participants[1][1])
+    if len(participants) >= 3:
+        third = participants[2][0]
+        third_score = str(participants[2][1])
+    place = 4
+    rankings_bottom = ''
+    while place <= len(participants):
+        rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
+                            '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
+        place += 1
+    return render_template('ranks_embed.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+
 @app.route('/stats')
 def render_stats():
     data = get_data()
