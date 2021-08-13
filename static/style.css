@@ -88,6 +88,9 @@ footer {
 #first-row {
   height: 175px;
 }
+#first-row-embed {
+  height: 60px;
+}
 .rankings-bottom {margin: 10px;
   margin-left: 25px;
   margin-right: 25px;
