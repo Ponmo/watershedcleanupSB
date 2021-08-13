@@ -141,6 +141,10 @@ def render_maps():
             disable = 'disabled'
     return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
+@app.route('/maps_embed')
+def render_maps_embed():
+    return render_template('maps_embed.html', checkboxes = '', report_limit = '', submit = '')
+
 @app.route('/ranks')
 def render_ranks():
     data = get_data()
