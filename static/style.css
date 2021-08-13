@@ -347,6 +347,7 @@ footer {
 }
 .switcher-embed {
   border-left: 1px solid grey;
+  border-top: 1px solid grey;
 }
 .map-embed {
   width: 100%;
