@@ -74,7 +74,14 @@ body {
 }
 footer {
   width: 100%;
+  margin: auto;
+  position: absolute;
+  bottom: -10px;
   height: 10px;
+}
+#credit {
+  text-align: center;
+  color: grey;
 }
 .name {
   display: inline-block;
