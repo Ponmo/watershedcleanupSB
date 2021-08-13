@@ -2,6 +2,9 @@ body {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
+.embed {
+  background-image: none;
+}
 #chartContainer {
 	margin: auto;
 	margin-top: 25px;
