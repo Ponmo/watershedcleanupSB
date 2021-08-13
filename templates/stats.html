@@ -146,19 +146,47 @@ Statistics
 {% endblock %}
 
 {% block content %}
-<div id="blue-bg">
-  <table id="chart">
-    <caption id="caption">WATERSHED BRIGADE CUMALATIVE CLEAN-UP CHART {{ year }}</caption>
-    <tr id="heading_gradient">
-      <th id="month_heading" class="chart_headings">MONTH</th>
-      <th class="chart_headings"># OF SITES CLEANED</th>
-      <th class="chart_headings"># OF VOLUNTEERS</th>
-      <th class="chart_headings">TOTAL LBS OF TRASH</th>
-    </tr>
-    {{ table }}
-  </table>
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+  <!-- Full-width images with number and caption text -->
+  <div class="mySlides fade">
+    <div class="numbertext">1 / 3</div>
+    <div id="blue-bg">
+      <table id="chart">
+        <caption id="caption">WATERSHED BRIGADE CUMALATIVE CLEAN-UP CHART {{ year }}</caption>
+        <tr id="heading_gradient">
+          <th id="month_heading" class="chart_headings">MONTH</th>
+          <th class="chart_headings"># OF SITES CLEANED</th>
+          <th class="chart_headings"># OF VOLUNTEERS</th>
+          <th class="chart_headings">TOTAL LBS OF TRASH</th>
+        </tr>
+        {{ table }}
+      </table>
+    </div>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">2 / 3</div>
+    <div id="chartContainer" style="height: 370px; width: 80%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  </div>
+
+  <div class="mySlides fade">
+    <div class="numbertext">3 / 3</div>
+    <div id="chartContainer2" style="height: 370px; width: 80%;"></div>
+  </div>
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
 </div>
-<div id="chartContainer" style="height: 370px; width: 80%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<div id="chartContainer2" style="height: 370px; width: 80%;"></div>
+<br>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
 {% endblock %}
