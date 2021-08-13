@@ -141,7 +141,7 @@ def render_maps():
             disable = 'disabled'
     return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
-@app.route('/maps_embed')
+@app.route('/maps-embed')
 def render_maps_embed():
     data = get_data()
     checkboxes = ''
@@ -165,7 +165,7 @@ def render_maps_embed():
         if reports >= 10:
             report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
             disable = 'disabled'
-    return render_template('maps_embed.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
+    return render_template('maps-embed.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/ranks')
 def render_ranks():
@@ -203,7 +203,7 @@ def render_ranks():
         place += 1
     return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
-@app.route('/ranks_embed')
+@app.route('/ranks-embed')
 def render_ranks_embed():
     data = get_data()
     month = int(data[len(data) - 1][2].partition('/')[0])
@@ -237,7 +237,7 @@ def render_ranks_embed():
         rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
-    return render_template('ranks_embed.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+    return render_template('ranks-embed.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/stats')
 def render_stats():
@@ -345,6 +345,112 @@ def render_stats():
     histogram_time = histogram_time[:-1]
     return render_template('stats.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), trend_line = Markup(trend_line), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time), test = histogram_persons + histogram_weight + histogram_time)
 
+@app.route('/stats-embed')
+def render_stats_embed():
+    data = get_data()
+    total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_cleanups = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    total_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    total_time = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    coords = []
+    names = []
+    month = 1
+    chart_data = {}
+    end_point = 0.0
+    colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
+    index = 0
+    for row in data:
+        if is_number(row[6]) and is_number(row[7]) and is_number(row[1]):
+            total_cleanups[row[3] - 1] += 1
+        if is_number(row[6]):
+            total_trash[row[3] - 1] += float(row[6])
+        if is_number(row[7]):
+            total_time[row[3] - 1] += float(row[7])
+        if row[0] not in names:
+            total_volunteers[row[3] - 1] += 1
+            names.append(row[0])
+        if month != row[3]:
+            month = row[3]
+            coords = []
+            names = []
+        if is_number(row[1]):
+            total_persons[row[3] - 1] += float(row[1])
+            if float(row[1]) <= 1:
+                index = 0
+            elif float(row[1]) <= 5:
+                index = 1
+            elif float(row[1]) <= 10:
+                index = 2
+            elif float(row[1]) <= 20:
+                index = 3
+            else:
+                index = 4
+            if is_number(row[6]) and is_number(row[8]):
+                if str(row[1]) in chart_data:
+                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                else:
+                    chart_data[str(row[1])] = '{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                if float(row[8]) > end_point:
+                    end_point = float(row[8])
+        try:
+            x_coord = float(row[10].partition(',')[0])
+            y_coord = float(row[10].partition(',')[2])
+            similar = False
+            if coords != []:
+                for item in coords:
+                    item_x = float(item.partition(',')[0])
+                    item_y = float(item.partition(',')[2])
+                    if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
+                        similar = True
+            else:
+                coords.append(row[10])
+            if similar == False:
+                total_sites[row[3] - 1] += 1
+            else:
+                coords.append(row[10])
+        except:
+            pass
+    counter = 1
+    chart = ''
+    trend_line = ''
+    for key in chart_data:
+        chart_data[key] = chart_data.get(key)[:-1]
+        chart += ('{' +
+                  'type: "scatter",' +
+                  'name: "' + key + ' Person Group",' +
+                  'indexLabelFontSize: 16,' +
+                  'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+                  'dataPoints: [')
+        chart += chart_data.get(key)
+        chart += ']}'
+        if counter < len(chart_data):
+            chart += ','
+            trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
+        counter += 1
+    trend_line = trend_line[:-1]
+    counter = 0
+    months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
+    table = ''
+    histogram_weight = ''
+    histogram_persons = ''
+    histogram_time = ''
+    while counter < 12:
+        if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
+        else:
+            table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell"></td><td class="cell"></td><td class="cell"></td></tr>' 
+        if total_trash[counter] != 0.0 and total_cleanups[counter] != 0 and total_persons[counter] != 0.0 and total_time[counter] != 0.0:
+            histogram_weight += '{ label: "' + months[counter] + '", y: ' + str(total_trash[counter]/total_cleanups[counter]) + ' },'
+            histogram_persons += '{ label: "' + months[counter] + '", y: ' + str(total_persons[counter]/total_cleanups[counter]) + ' },'
+            histogram_time += '{ label: "' + months[counter] + '", y: ' + str(total_time[counter]/total_cleanups[counter]) + ' },'
+        counter += 1
+    histogram_weight = histogram_weight[:-1]
+    histogram_persons = histogram_persons[:-1]
+    histogram_time = histogram_time[:-1]
+    return render_template('stats-embed.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), trend_line = Markup(trend_line), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time), test = histogram_persons + histogram_weight + histogram_time)
+
 @app.route('/report', methods=['GET', 'POST'])
 def report():
     if request.method == 'POST':
@@ -361,7 +467,10 @@ def report():
         cell = wsheet.range('G1:G1')
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
-    return render_maps()
+    if request.form['embed'] == 'true'
+        return render_maps_embed()
+    else: 
+        return render_maps()
 
 def is_number(s):
     try:
