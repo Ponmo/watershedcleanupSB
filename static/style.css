@@ -2,6 +2,16 @@ body {
   background-image: url('/static/images/bg_pattern.jpg');
   background-repeat: repeat;
 }
+#chartContainer {
+	margin: auto;
+	margin-top: 25px;
+	border: 1px solid grey;
+}
+#chartContainer2 {
+	margin: auto;
+	margin-top: 25px;
+	border: 1px solid grey;
+}
 #blue-bg {
   border: 20px solid #7bbfc8;
   width: 70%;
