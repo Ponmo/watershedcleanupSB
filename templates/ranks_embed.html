@@ -1,1 +1,43 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Watershed Cleanup - Rankings</title>
+  </head>
+  <body>
+    <table id="top">
+      <tr>
+        <td id="second">
+          <div class="plate">
+            <img src="/static/images/silver.png" alt="silver" id="silver">
+            <p class="ranking">{{ second }}<br><b>{{ second_score }}</b></p>
+          </div>
+        </td>
+        <td id="first">
+          <div class="plate">
+            <img src="/static/images/gold.png" alt="gold" id="gold">
+            <p class="ranking">{{ first }}<br><b>{{ first_score }}</b></p>
+          </div>
+        </td>
+        <td id="third">
+          <div class="plate">
+            <img src="/static/images/bronze.png" alt="bronze" id="bronze">
+            <p class="ranking">{{ third }}<br><b>{{ third_score }}</b></p>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <table id="bottom">
+      <tr id="first-row">
+        <td>
+        </td>
+      </tr>
+      {{ rankings_bottom }}
+    </table>
+  </body>
+</html>
