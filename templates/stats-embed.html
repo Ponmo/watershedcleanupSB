@@ -1,1 +1,154 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+window.onload = function () {
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	zoomEnabled: true,
+	title:{
+		text: "Weight of Trash Picked Up in Cleanups vs Total Time Spent",
+		fontSize: 30
+	},
+	axisX: {
+		title:"Time (hrs)",
+		titleFontSize: 20,
+		labelFontSize: 16,
+		minimum: 0
+	},
+	axisY:{
+		title: "Weight of Trash (lbs)",
+		includeZero: true,
+		titleFontSize: 20,
+		labelFontSize: 16,
+		minimum: 0
+	},
+        data: [
+          {{ chart }}
+        ]
+});
+chart.render();
+calculateTrendLine(chart);
+    function calculateTrendLine(chart){
+        const totalPoints = chart.data[0].dataPoints.concat({{ trend_line }})
+        var a, b, c, d, e, slope, yIntercept;
+        var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = totalPoints.length;
+        for(var i = 0; i < dpsLength; i++)
+            xySum += (totalPoints[i].x * totalPoints[i].y)
+        a = xySum * dpsLength;
+        for(var i = 0; i < dpsLength; i++){
+            xSum += totalPoints[i].x;
+            ySum += totalPoints[i].y;
+        }
+        b = xSum * ySum;
+        for(var i = 0; i < dpsLength; i++)
+            xSquare += Math.pow(totalPoints[i].x, 2);
+        c = dpsLength * xSquare;
+        d = Math.pow(xSum, 2);
+        slope = (a-b)/(c-d);
+        e = slope * xSum;
+        yIntercept = (ySum - e) / dpsLength;
+        var startPoint = getTrendLinePoint(0.0, slope, yIntercept);
+        var endPoint = getTrendLinePoint({{ end_point }}, slope, yIntercept);
+        chart.addTo("data",{
+            type: "line", //Line series showing trend
+            markerSize: 0,
+            dataPoints: [startPoint, endPoint]
+        });
+    }
+    function getTrendLinePoint(x, slope, intercept){
+        return {x: x, y: ((slope * x) + intercept)};
+    }
+var chart2 = new CanvasJS.Chart("chartContainer2", {
+	animationEnabled: true,
+	title:{
+		text: "Monthly Average Weight, Time, and # of People per Cleanup",
+		fontSize: 30
+	},	
+	axisY: {
+		title: "Quantity",
+		titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC",
+		includeZero: true,
+		titleFontSize: 20,
+		labelFontSize: 16,
+		minimum: 0
+	},
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor:"pointer",
+		itemclick: toggleDataSeries
+	},
+	data: [{
+		type: "column",
+		name: "Weight (lbs)",
+		indexLabelFontSize: 16,
+		legendText: "Time (hrs)",
+		showInLegend: true, 
+		dataPoints:[
+			{{ histogram_weight }}
+		]
+	},
+	{
+		type: "column",	
+		name: "Time (hrs)",
+		indexLabelFontSize: 16,
+		legendText: "Person(s)",
+		showInLegend: true,
+		dataPoints:[
+			{{ histogram_time }}
+		]
+	},
+	{
+		type: "column",
+		name: "Person(s)",
+		indexLabelFontSize: 16,
+		legendText: "Weight (lbs)",
+		showInLegend: true, 
+		dataPoints:[
+			{{ histogram_persons }}
+		]
+	}]
+});
+chart2.render();
+function toggleDataSeries(e) {
+	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+		e.dataSeries.visible = false;
+	}
+	else {
+		e.dataSeries.visible = true;
+	}
+	chart2.render();
+}
+}
+</script>
+    <title>Watershed Cleanup - Statistics</title>
+  </head>
+  <body>
+    <div id="blue-bg">
+      <table id="chart">
+        <caption id="caption">WATERSHED BRIGADE CUMALATIVE CLEAN-UP CHART {{ year }}</caption>
+        <tr id="heading_gradient">
+          <th id="month_heading" class="chart_headings">MONTH</th>
+          <th class="chart_headings"># OF SITES CLEANED</th>
+          <th class="chart_headings"># OF VOLUNTEERS</th>
+          <th class="chart_headings">TOTAL LBS OF TRASH</th>
+        </tr>
+        {{ table }}
+      </table>
+    </div>
+    <div id="chartContainer" style="height: 370px; width: 80%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div id="chartContainer2" style="height: 370px; width: 80%;"></div>
+  </body>
+</html>
