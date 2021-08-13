@@ -17,7 +17,7 @@ body {
 }
 #blue-bg {
   border: 20px solid #7bbfc8;
-  width: 70%;
+  width: 80%;
   margin: auto;
   margin-top: 25px;
   min-width: 360px;
@@ -282,26 +282,14 @@ footer {
   #navbar {
     right: 10px;
   }
-  #chart {
-    width: 100%;
-    font-size 10px;
-    color: white;
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    word-wrap: break-word;
-    table-layout:fixed;
-    border: 1px solid white;
-    background-color: #7bbfc8;
+  .chart_headings {
+    font-size: 12px;
   }
-#caption {
-	text-align: center;
-	font-size: 16px;
-	border: 1px solid white;
-	border-bottom: none;
-	padding: 15px;
-	color: white;
-	font-weight:bold;
-	background-color: #7bbfc8;
+  .cell {
+  	font-size: 11px;
+  }
+  #month_heading {
+	width: 25%;
 }
 }
 #mapOverlay {
