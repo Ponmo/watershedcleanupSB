@@ -320,11 +320,6 @@ footer {
   top: 194px;
   left: 20px;
 }
-#legend {
-  position: absolute;
-  top: 100px;
-  left: 20px;
-}
 #blue-square {
   border: 1px solid black;
   height: 15px;
@@ -344,4 +339,15 @@ footer {
 }
 #red-text {
   display: inline-block;
+}
+#legend-embed {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+}
+.switcher-embed {
+  border-left: 1px solid grey;
+}
+#mapOverlay-embed {
+  border-top: 1px solid grey;
 }
