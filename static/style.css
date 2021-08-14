@@ -231,6 +231,7 @@ footer {
   text-align: center;
   z-index: -1;
   top: 250px;
+  min-height: 350px;
   background: rgb(4,0,255);
   background: linear-gradient(0deg, rgba(4,0,255,1) 0%, rgba(255,0,0,1) 100%);
 }
