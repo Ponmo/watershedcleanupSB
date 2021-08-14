@@ -20,7 +20,7 @@ body {
   font-weight: bold;
   font-size: 25px;
 }
-#globeIcon {
+#globe-icon {
   display: inline-block;
   margin-top: -8px;
   width: 70px;
@@ -33,7 +33,7 @@ body {
   border-bottom: 1px solid grey;
   background-color: white;
 }
-#mapOverlay {
+#map-overlay {
   display: flex;
 }
 .map {
@@ -43,7 +43,7 @@ body {
   border-bottom: none;
   border-top: none;
 }
-.headingTwo {
+.heading-two {
   background-color: black;
   height: 60px;
   display: flex;
@@ -52,14 +52,14 @@ body {
   margin-top: -1px;
   border-top: 1px solid grey;
 }
-.headingTitle {
+.heading-title {
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   color: white;
   font-weight: bold;
   margin-top: 16px;
   align-items: center;
 }
-.noSelect {
+.no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -291,20 +291,20 @@ footer {
   font-weight:bold;
   background-color: #7bbfc8;
 }
-.chart_headings{
+.chart-headings{
   text-align: center;
   padding: 5px;
   border: 1px solid white;
   font-weight: normal;
 }
-#month_heading {
+#month-heading {
   background-color: #7bbfc8;
   text-align: left;
   width: 20%;
   font-size: 12px;
   padding-left: 10px;
 }
-#heading_gradient {
+#heading-gradient {
   background: rgb(243,120,34);
   background: linear-gradient(90deg, rgba(243,120,34,1) 0%, rgba(252,180,44,1) 100%);rgba(255,206,153,1) 100%);
 }
