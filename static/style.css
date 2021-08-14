@@ -336,7 +336,7 @@ footer {
     font-size: 22px;
     margin-left: 10px;
   }
-  #globeIcon {
+  #globe-icon {
     margin-left: 5px;
     width: 60px;
     height: 60px;
@@ -344,13 +344,13 @@ footer {
   #navbar {
     right: 10px;
   }
-  .chart_headings {
+  .chart-headings {
     font-size: 12px;
   }
   .cell {
     font-size: 11px;
   }
-  #month_heading {
+  #month-heading {
   width: 25%;
   }
 }
