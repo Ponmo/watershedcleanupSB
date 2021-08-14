@@ -408,7 +408,7 @@ def report(): #adds a report to the reports sheet.
         try: 
             data_report.append([request.form['location'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
         except:
-            data_report.append(request.form['x-location']) + ', ' + request.form['y-location'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
+            data_report.append([request.form['x-location'] + ', ' + request.form['y-location'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
         wsheet.update('A1:G' + str(len(data_report)), data_report)
         cell = wsheet.range('G1:G1')
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
