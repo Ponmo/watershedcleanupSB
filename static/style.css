@@ -1,5 +1,5 @@
 body {
-  background-image: url('/static/images/bg_pattern.jpg'); /* Source: https://www.google.com/search?q=triangle+background&tbm=isch&ved=2ahUKEwik4rC-m6_yAhWOITQIHbXbCOEQ2-cCegQIABAA&oq=triangle+background&gs_lcp=CgNpbWcQAzIECAAQQzIECAAQQzIECAAQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6CAgAEIAEELEDOgcIABCxAxBDOgYIABAFEB46BggAEAoQGFCKIljRPGDHPWgCcAB4AYAB-QGIAfYQkgEGMjEuMS4xmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=pwgXYeTyF47D0PEPtbejiA4&bih=869&biw=1920&rlz=1C5CHFA_enUS831US831#imgrc=F6c0J4bwjtMqoM */
+  background-image: url('/static/images/bg_pattern.jpg'); 
   background-repeat: repeat;
 }
 .embed {
