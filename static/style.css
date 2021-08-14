@@ -1,80 +1,197 @@
-body {
+body { 
   background-image: url('/static/images/bg_pattern.jpg'); 
   background-repeat: repeat;
 }
 .embed {
   background-image: none;
 }
-#chartContainer {
-	margin: auto;
-	margin-top: 25px;
-	border: 1px solid grey;
+#navbar {
+  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 15px;  
+  position: absolute;
+  right: 100px;
+  top: 63px;
 }
-#chartContainer2 {
-	margin: auto;
-	margin-top: 25px;
-	border: 1px solid grey;
+#title {
+  display: inline-block;
+  margin-left: 15px;
+  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 25px;
 }
-#blue-bg {
-  border: 20px solid #7bbfc8;
-  width: 80%;
-  margin: auto;
-  margin-top: 25px;
-  min-width: 360px;
+#globeIcon {
+  display: inline-block;
+  margin-top: -8px;
+  width: 70px;
+  height: 70px;
+  margin-left: 60px;
 }
-#chart {
+#header {
+  padding: 15px; 
+  width: 100%; 
+  border-bottom: 1px solid grey;
+  background-color: white;
+}
+#mapOverlay {
+  display: flex;
+}
+.map {
   width: 100%;
+  height: 65vh;
+  border: 1px solid grey;
+  border-bottom: none;
+  border-top: none;
+}
+.headingTwo {
+  background-color: black;
+  height: 60px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: -1px;
+  border-top: 1px solid grey;
+}
+.headingTitle {
+  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   color: white;
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  word-wrap: break-word;
-  table-layout:fixed;
-  border: 1px solid white;
-  background-color: #7bbfc8;
+  font-weight: bold;
+  margin-top: 16px;
+  align-items: center;
 }
-#caption {
-	text-align: center;
-	font-size: 18px;
-	border: 1px solid white;
-	border-bottom: none;
-	padding: 15px;
-	color: white;
-	font-weight:bold;
-	background-color: #7bbfc8;
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
-.chart_headings{
-	text-align: center;
-	padding: 5px;
-	border: 1px solid white;
-	font-weight: normal;
+.switcher {
+  position: absolute;
+  width: 320px;
+  height: 62px;
+  display: flex;
+  border-radius: 25px;
 }
-#month_heading {
-	background-color: #7bbfc8;
-	text-align: left;
-	width: 20%;
-	font-size: 12px;
-	padding-left: 10px;
+.switcher input {
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance: none;
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
+  position: relative;
+  width: 320px;
+  border-bottom-right-radius: 20px 20px;
+  height: 79px;
+  top: -4px;
+  background-color: #1e1e1e;
+  outline: none;
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
 }
-#heading_gradient {
-	background: rgb(243,120,34);
-    background: linear-gradient(90deg, rgba(243,120,34,1) 0%, rgba(252,180,44,1) 100%);rgba(255,206,153,1) 100%);
+.switcher input:before, .switcher input:after {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
 }
-.cell {
-	padding: 5px 0px 10px 0px;
-	text-align: center;
-    border: 1px solid white;
-	font-weight: bold;
+.switcher input:before {
+  content: 'Cleanups';
+  left: 60px;
+  text-decoration: underline;
 }
-.no-bold {
-  font-weight: normal;
-  text-align: left;
-  padding-left: 8px;
-  font-size: 12px;
-  padding-right: 5px;
+.switcher input:after {
+  content: 'Report Trash';
+  right: 60px;
+  text-decoration: underline;
 }
-
+.switcher label {
+  z-index: 1;
+  position: absolute;
+  top: 20px;
+  bottom: -5px;
+  border-radius: 20px;
+}
+.switcher.switcher-1 input {
+  transition: 0.25s -0.1s;
+}
+.switcher.switcher-1 input:checked {
+  background-color: #fff;
+}
+.switcher.switcher-1 input:checked:before {
+  color: #baf6ff;
+  transition: color 0.5s 0.2s;
+  text-decoration: none;
+}
+.switcher.switcher-1 input:checked:after {
+  color: #828282;
+  transition: color 0.5s;
+}
+.switcher.switcher-1 input:checked + label {
+  left: 40px;
+  right: 175px;
+  background: #1e1e1e;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+.switcher.switcher-1 input:not(:checked) {
+  background: #1e1e1e;
+  transition: background 0.5s -0.1s;
+}
+.switcher.switcher-1 input:not(:checked):before {
+  color: #ccc;
+  transition: color 0.5s;
+}
+.switcher.switcher-1 input:not(:checked):after {
+  color: #6b1515;
+  transition: color 0.5s 0.2s;
+  text-decoration: none;
+}
+.switcher.switcher-1 input:not(:checked) + label {
+  left: 150px;
+  right: 40px;
+  background: #fff;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
+#legend {
+  position: absolute;
+  top: 194px;
+  left: 20px;
+}
+#blue-square {
+  border: 1px solid black;
+  height: 15px;
+  width: 15px;
+  display: inline-block;
+  background-color: #4285F4;
+}
+#red-square {
+  border: 1px solid black;
+  height: 15px;
+  display: inline-block;
+  width: 15px;
+  background-color: #DB4437;
+}
+#blue-text {
+  display: inline-block;
+}
+#red-text {
+  display: inline-block;
+}
+.content {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+#report-limit {
+  color: red;	
+}
 footer {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 #credit {
   text-align: center;
@@ -123,7 +240,6 @@ footer {
 }
 #gold, #silver, #bronze {
   width: 90px;
-
 }
 #second, #first, #third {
  text-align: center;
@@ -148,130 +264,72 @@ footer {
 .ranking {
   margin-top: 5px;
 }
-#navbar {
-  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
+#blue-bg {
+  border: 20px solid #7bbfc8;
+  width: 80%;
+  margin: auto;
+  margin-top: 25px;
+  min-width: 360px;
+}
+#chart {
+  width: 100%;
+  color: white;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  word-wrap: break-word;
+  table-layout:fixed;
+  border: 1px solid white;
+  background-color: #7bbfc8;
+}
+#caption {
+  text-align: center;
+  font-size: 18px;
+  border: 1px solid white;
+  border-bottom: none;
+  padding: 15px;
+  color: white;
+  font-weight:bold;
+  background-color: #7bbfc8;
+}
+.chart_headings{
+  text-align: center;
+  padding: 5px;
+  border: 1px solid white;
+  font-weight: normal;
+}
+#month_heading {
+  background-color: #7bbfc8;
+  text-align: left;
+  width: 20%;
+  font-size: 12px;
+  padding-left: 10px;
+}
+#heading_gradient {
+  background: rgb(243,120,34);
+  background: linear-gradient(90deg, rgba(243,120,34,1) 0%, rgba(252,180,44,1) 100%);rgba(255,206,153,1) 100%);
+}
+.cell {
+  padding: 5px 0px 10px 0px;
+  text-align: center;
+  border: 1px solid white;
   font-weight: bold;
-  font-size: 15px;  
-  position: absolute;
-  right: 100px;
-  top: 63px;
 }
-.noSelect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    outline: none !important;
-    -webkit-tap-highlight-color: transparent;
+.no-bold {
+  font-weight: normal;
+  text-align: left;
+  padding-left: 8px;
+  font-size: 12px;
+  padding-right: 5px;
 }
-.switcher {
-	 position: absolute;
-	 width: 320px;
-	 height: 62px;
-	 display: flex;
-	 border-radius: 25px;
+#chartContainer {
+  margin: auto;
+  margin-top: 25px;
+  border: 1px solid grey;
 }
-.switcher input {
-	 -webkit-appearance: none;
-     -moz-appearance:    none;
-	 appearance: none;
-	 border-bottom: 1px solid grey;
-	 border-right: 1px solid grey;
-	 position: relative;
-	 width: 320px;
-	 border-bottom-right-radius: 20px 20px;
-	 height: 79px;
-	 top: -4px;
-	 background-color: #1e1e1e;
-	 outline: none;
-	 font-weight: bold;
-	 font-family: 'Oswald', sans-serif;
-}
-.switcher input:before, .switcher input:after {
-	 z-index: 2;
-	 position: absolute;
-	 top: 50%;
-	 transform: translateY(-50%);
-	 color: #fff;
-}
-.switcher input:before {
-	 content: 'Cleanups';
-	 left: 60px;
-	 text-decoration: underline;
-}
-.switcher input:after {
-	 content: 'Report Trash';
-	 right: 60px;
-	 text-decoration: underline;
-}
-.switcher label {
-	 z-index: 1;
-	 position: absolute;
-	 top: 20px;
-	 bottom: -5px;
-	 border-radius: 20px;
-}
-.switcher.switcher-1 input {
-	 transition: 0.25s -0.1s;
-}
-.switcher.switcher-1 input:checked {
-	 background-color: #fff;
-}
-.switcher.switcher-1 input:checked:before {
-	 color: #baf6ff;
-	 transition: color 0.5s 0.2s;
-	 text-decoration: none;
-}
-.switcher.switcher-1 input:checked:after {
-	 color: #828282;
-	 transition: color 0.5s;
-}
-.switcher.switcher-1 input:checked + label {
-	 left: 40px;
-	 right: 175px;
-	 background: #1e1e1e;
-	 transition: left 0.5s, right 0.4s 0.2s;
-}
-.switcher.switcher-1 input:not(:checked) {
-	 background: #1e1e1e;
-	 transition: background 0.5s -0.1s;
-}
-.switcher.switcher-1 input:not(:checked):before {
-	 color: #ccc;
-	 transition: color 0.5s;
-}
-.switcher.switcher-1 input:not(:checked):after {
-	 color: #6b1515;
-	 transition: color 0.5s 0.2s;
-	 text-decoration: none;
-}
-.switcher.switcher-1 input:not(:checked) + label {
-	 left: 150px;
-	 right: 40px;
-	 background: #fff;
-	 transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
-}
-#header {
-  padding: 15px; 
-  width: 100%; 
-  border-bottom: 1px solid grey;
-  background-color: white;
-}
-#title {
-  display: inline-block;
-  margin-left: 15px;
-  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
-  font-weight: bold;
-  font-size: 25px;
-}
-#globeIcon {
-  display: inline-block;
-  margin-top: -8px;
-  width: 70px;
-  height: 70px;
-  margin-left: 60px;
+#chartContainer2 {
+  margin: auto;
+  margin-top: 25px;
+  border: 1px solid grey;
 }
 @media only screen and (max-width: 600px) {
   #title {
@@ -290,71 +348,11 @@ footer {
     font-size: 12px;
   }
   .cell {
-  	font-size: 11px;
+    font-size: 11px;
   }
   #month_heading {
-	width: 25%;
-}
-}
-#mapOverlay {
-  display: flex;
-}
-.map {
-  width: 100%;
-  height: 65vh;
-  border: 1px solid grey;
-  border-bottom: none;
-  border-top: none;
-}
-.headingTwo {
-  background-color: black;
-  height: 60px;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  margin-top: -1px;
-  border-top: 1px solid grey;
-}
-.headingTitle {
-  font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
-  color: white;
-  font-weight: bold;
-  margin-top: 16px;
-  align-items: center;
-}
-.content {
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 10px;
-  text-align: center;
-}
-#report-limit {
-  color: red;	
-}
-#legend {
-  position: absolute;
-  top: 194px;
-  left: 20px;
-}
-#blue-square {
-  border: 1px solid black;
-  height: 15px;
-  width: 15px;
-  display: inline-block;
-  background-color: #4285F4;
-}
-#red-square {
-  border: 1px solid black;
-  height: 15px;
-  display: inline-block;
-  width: 15px;
-  background-color: #DB4437;
-}
-#blue-text {
-  display: inline-block;
-}
-#red-text {
-  display: inline-block;
+  width: 25%;
+  }
 }
 #legend-embed {
   position: absolute;
@@ -371,4 +369,3 @@ footer {
   border: 1px solid grey;
   border-bottom: none;
 }
-
