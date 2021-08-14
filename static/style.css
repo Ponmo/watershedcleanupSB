@@ -73,16 +73,8 @@ body {
   padding-right: 5px;
 }
 
-#content-wrap {
-  min-height: 100vh;
-  padding-bottom: 2.5rem;
-}
-
 footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 2.5rem;
+	margin-top: 10px;
 }
 #credit {
   text-align: center;
