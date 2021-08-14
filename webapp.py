@@ -69,16 +69,15 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         data_update.append([row[1], row[2], row[3], color, row[4], row[5], row[7], row[8], row[16], month])
         counter += 1
     counter = len(data_old) - len(data_update)
-    while counter > 0: #add #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows.
+    while counter > 0: #adds blank rows to data_update in case the number of cleanups on the cleanups sheet is more than in data_update.
         data_update.append(['', '', '', '', '', '', '', '', '', ''])
         counter -= 1
-    if data_update != data_old:
-        return 'bruh'
+    if data_update != data_old: #if data_update (new data from Channelkeeper) is different from the data on the cleanups sheet, then it updates the cleanups sheet.
         wsheet.update('A1:J' + str(len(data_update)), data_update)
         cell = wsheet.range('K1:K1')
-        cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
+        cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")' #adds geosheets formula to the cleanups sheet to generate the new map.
         wsheet.update_cells(cell, 'USER_ENTERED')
-    wsheet = gsheet.worksheet('Reports')
+    wsheet = gsheet.worksheet('Reports') #open up the reports sheet on the maps google Sheet.
     data_report = wsheet.get_all_values()
     date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
@@ -86,39 +85,39 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
     counter_two = 0
     counter_three = 0
     change = False
-    for row in data_report:
-        if '/' in row[4]:
-            if row[3] != 'Not resolved' and row[5] != '#4285F4':
+    for row in data_report: #removes any reports from the sheet that is older than a month. Changes the color of the report on the map if it is resolved or anything other than the normal "Not resolved".
+        if '/' in row[4]: #checks if the row is a valid report by checking if the date column has a "/".
+            if row[3] != 'Not resolved' and row[5] != '#4285F4': #if the status of the report is anything other than "Not resolved", then change the color of the dot.
                 data_report[counter_three][5] = '#4285F4'
                 change = True
             date_report = row[4].partition('/')
             date_report = datetime(int(date_report[2].partition("/")[2]), int(date_report[0]), int(date_report[2].partition("/")[0]), 0, 0, 0, 0, tzinfo=pytz.utc)
             delta = date_now - date_report
-            if delta.days > 30:
+            if delta.days > 30: #if the report is over 30 days old, then remove it from the reports sheet.
                 data_report.remove(row)
                 counter_two += 1
                 change = True
         counter_three += 1
-    while counter_two > 0:
+    while counter_two > 0:  #adds blank rows to data_report in case the number of reports on the reports sheet is more than in data_reports.
         data_report.append(['', '', '', '', '', ''])
         counter_two -= 1
-    if change == True:
+    if change == True: #if any changes had to be made to data_reports (old data), then update the reports sheet with new information.
         wsheet.update('A1:G' + str(len(data_report)), data_report)
         cell = wsheet.range('G1:G1')
-        cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
+        cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")' #adds geosheets formula to the reports sheet to generate the new map.
         wsheet.update_cells(cell, 'USER_ENTERED')
     return data_new
 
-@app.route('/') #change start route later?
-def render_maps():
-    data = get_data()
+@app.route('/') 
+def render_maps(): #renders the maps page.
+    data = get_data() #gets cleanup data.
     checkboxes = ''
     month = []
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    for row in data:
+    for row in data: #creates a list of all months in which cleanups were done in. 
         if row[3] not in month:
             month.append(row[3])
-    for item in month:
+    for item in month: #adds a checkbox for each month in which cleanups were done so that points from each month can be toggled on or off from the cleanups map.
         checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
     wsheet = gsheet.worksheet('Reports')
     data_report = wsheet.get_all_values()
@@ -127,7 +126,7 @@ def render_maps():
     report_limit = ''
     date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
-    for row in data_report:
+    for row in data_report: #if the number of reports made on the current date exceed ten, then disable the reports form.
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
         if reports >= 10:
@@ -136,7 +135,7 @@ def render_maps():
     return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/maps-embed')
-def render_maps_embed():
+def render_maps_embed(): #same as render_maps() except this renders a page without the top bar and background image.
     data = get_data()
     checkboxes = ''
     month = []
@@ -162,43 +161,43 @@ def render_maps_embed():
     return render_template('maps-embed.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/ranks')
-def render_ranks():
-    data = get_data()
+def render_ranks(): #renders the ranks page.
+    data = get_data() #gets cleanup data.
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
-    for row in data:
-        if int(row[2].partition('/')[0]) == month:
-            if is_number(row[8]):
+    for row in data: #checks every cleanup. Checks if the cleanup was conducted in the current month, and if it has points. It counts all the points for every participant.
+        if int(row[2].partition('/')[0]) == month: #cleanup has to be conducted this month.
+            if is_number(row[8]): #the points column must contain a number.
                 if row[0] in participants:
                     participants[row[0]] += float(row[9])
                 else:
                     participants[row[0]] = float(row[9])
-    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
     first = ''
     second = ''
     third = ''
     first_score = ''
     second_score = ''
     third_score = ''
-    if len(participants) >= 1:
+    if len(participants) >= 1: #first place.
         first = participants[0][0]
         first_score = str(participants[0][1])
-    if len(participants) >= 2:
+    if len(participants) >= 2: #second place.
         second = participants[1][0]
         second_score = str(participants[1][1])
-    if len(participants) >= 3:
+    if len(participants) >= 3: #third place.
         third = participants[2][0]
         third_score = str(participants[2][1])
     place = 4
     rankings_bottom = ''
-    while place <= len(participants):
+    while place <= len(participants): #generates a row in the rankings table for every participant other than the leading three.
         rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
     return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/ranks-embed')
-def render_ranks_embed():
+def render_ranks_embed(): #same as render_ranks() except this renders a page without the top bar and background image.
     data = get_data()
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
@@ -234,9 +233,9 @@ def render_ranks_embed():
     return render_template('ranks-embed.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
 
 @app.route('/stats')
-def render_stats():
-    data = get_data()
-    total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+def render_stats(): #renders the statistics page.
+    data = get_data() #gets cleanup data.
+    total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #lists containing information about the cleanups for every month.
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_cleanups = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -249,23 +248,23 @@ def render_stats():
     end_point = 0.0
     colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
-    for row in data:
-        if is_number(row[6]) and is_number(row[7]) and is_number(row[1]):
+    for row in data: #checks every cleanup and adds them to the lists of information if they are valid.
+        if is_number(row[6]) and is_number(row[7]) and is_number(row[1]): #adds to the number of monthly cleanups.
             total_cleanups[row[3] - 1] += 1
-        if is_number(row[6]):
+        if is_number(row[6]): #adds to the monthly pounds of trash.
             total_trash[row[3] - 1] += float(row[6])
-        if is_number(row[7]):
+        if is_number(row[7]): #adds to the monthly hours of cleanup time (uses individual time)
             total_time[row[3] - 1] += float(row[7])
-        if row[0] not in names:
+        if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
             total_volunteers[row[3] - 1] += 1
             names.append(row[0])
-        if month != row[3]:
+        if month != row[3]: #if the month of the cleanup is not the same as the cleanup before it, reset the coordinates and names list.
             month = row[3]
             coords = []
             names = []
         if is_number(row[1]):
-            total_persons[row[3] - 1] += float(row[1])
-            if float(row[1]) <= 1:
+            total_persons[row[3] - 1] += float(row[1]) #adds to the monthly number of total people involved in cleanups.
+            if float(row[1]) <= 1: #assigns a color to each dot on the weight vs time graph, more people involved gives the dot a redder color.
                 index = 0
             elif float(row[1]) <= 5:
                 index = 1
@@ -275,18 +274,18 @@ def render_stats():
                 index = 3
             else:
                 index = 4
-            if is_number(row[6]) and is_number(row[8]):
+            if is_number(row[6]) and is_number(row[8]): #generates data points for the weight vs time graph.
                 if str(row[1]) in chart_data:
                     chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
                 else:
                     chart_data[str(row[1])] = '{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
                 if float(row[8]) > end_point:
-                    end_point = float(row[8])
-        try:
+                    end_point = float(row[8]) #end point x-coordinate coordinate of the trend line is the same as the point with the greatest time.
+        try: #adds the the monthly number of cleanup locations.
             x_coord = float(row[10].partition(',')[0])
             y_coord = float(row[10].partition(',')[2])
             similar = False
-            if coords != []:
+            if coords != []: #if coordinates are within 0.00002 of eachother in the x or y direction, then they are considered as cleanups in the same location.
                 for item in coords:
                     item_x = float(item.partition(',')[0])
                     item_y = float(item.partition(',')[2])
@@ -303,7 +302,7 @@ def render_stats():
     counter = 1
     chart = ''
     trend_line = ''
-    for key in chart_data:
+    for key in chart_data: #adds a group of data to the weight vs time graph for every different number of people in a cleanup group. 
         chart_data[key] = chart_data.get(key)[:-1]
         chart += ('{' +
                   'type: "scatter",' +
@@ -313,7 +312,7 @@ def render_stats():
                   'dataPoints: [')
         chart += chart_data.get(key)
         chart += ']}'
-        if counter < len(chart_data):
+        if counter < len(chart_data): #creates javascript that concats each group of data to calculate the trend line.
             chart += ','
             trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
         counter += 1
@@ -324,7 +323,7 @@ def render_stats():
     histogram_weight = ''
     histogram_persons = ''
     histogram_time = ''
-    while counter < 12:
+    while counter < 12: #calculates averages for histogram and adds them as data, as well as generates the table rows with data for the cumulative cleanup chart.
         if total_trash[counter] != 0.0 and total_volunteers[counter] != 0 and total_sites[counter] != 0:
             table += '<tr><td class="cell no-bold">' + months[counter] + '</td><td class="cell">' + str(total_sites[counter]) + '</td><td class="cell">' + str(total_volunteers[counter]) + '</td><td class="cell">' + str(round(total_trash[counter], 2)) + '</td></tr>' 
         else:
@@ -340,7 +339,7 @@ def render_stats():
     return render_template('stats.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), trend_line = Markup(trend_line), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time))
 
 @app.route('/stats-embed')
-def render_stats_embed():
+def render_stats_embed(): #same as render_ranks() except this renders a page without the top bar and background image. It also does not generate data for the charts.
     data = get_data()
     total_trash = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -392,7 +391,7 @@ def render_stats_embed():
     return render_template('stats-embed.html', year = datetime.now().strftime('%Y'), table = Markup(table))
 
 @app.route('/report', methods=['GET', 'POST'])
-def report():
+def report(): #adds a report to the reports sheet.
     if request.method == 'POST':
         gsheet = gp.open('Watershed Brigade Information')
         wsheet = gsheet.worksheet('Reports')
@@ -411,7 +410,7 @@ def report():
         return render_maps_embed()
     return render_maps()
 
-def is_number(s):
+def is_number(s): #simple way to check if a string is a valid number
     try:
         float(s)
         return True
