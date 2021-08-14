@@ -72,12 +72,9 @@ body {
   font-size: 12px;
   padding-right: 5px;
 }
-#page {
-  position: relative;
-  min-height: 100vh;
-}
 
 #content-wrap {
+  min-height: 100vh;
   padding-bottom: 2.5rem;
 }
 
