@@ -129,10 +129,14 @@ def render_maps(): #renders the maps page.
     for row in data_report: #if the number of reports made on the current date exceed ten, then disable the reports form.
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
-        if reports >= 10:
-            report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
-            disable = 'disabled'
-    return render_template('maps.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
+    if reports >= 10:
+        report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
+        disable = 'disabled'
+    if len(data_report) > 40: #if there are more than 40 reports already, change location question so that it only accepts coordinates. This is to prevent geocoding limits.
+        location_question = '<label>Coordinates:(<input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" required>,<input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" required>)</label>'
+    else:
+        location_question = '<label for="location">Specific Address/Coordinates:</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
+    return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable))
 
 @app.route('/maps-embed')
 def render_maps_embed(): #same as render_maps() except this renders a page without the top bar and background image.
@@ -401,7 +405,10 @@ def report(): #adds a report to the reports sheet.
         counter_three = 0
         date_now = datetime.now(tz=pytz.utc)
         date_now = date_now.astimezone(timezone('America/Los_Angeles'))
-        data_report.append([request.form['coords'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
+        try: 
+            data_report.append([request.form['location'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
+        except:
+            data_report.append(request.form['x-location']) + ', ' + request.form['y-location'], request.form['trash'], request.form['comment'], 'Not resolved', date_now.strftime('%m/%d/%Y'), '#DB4437'])
         wsheet.update('A1:G' + str(len(data_report)), data_report)
         cell = wsheet.range('G1:G1')
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
