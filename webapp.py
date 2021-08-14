@@ -1,8 +1,3 @@
-#handle exceptions to gspread calls
-#change geosheet calls
-#sanitize inputs
-#while loop that goes through 12 times. Three long strings generated with list of months[cpuntweer] calculate each statistic at the cac
-
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask import render_template
 
@@ -30,54 +25,55 @@ credentials = {
         'client_x509_cert_url': os.environ['client_x509_cert_url']
     }
 gp = gspread.service_account_from_dict(credentials)
-gsheet_raw = gp.open('Watershed Brigade')
-gsheet = gp.open('Watershed Brigade Information')
+gsheet_raw = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
+gsheet = gp.open('Watershed Brigade Information') #Name of Google Sheet used to generate geosheet maps (referred to as the "map Google Sheet" later on).
 
-def get_data():
+def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     utc_year = datetime.now().strftime('%Y')
     try:
-        wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking')
+        wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
     except:
-        wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking')
-    data_new = wsheet.get_all_values()
-    wsheet = gsheet.worksheet('This Year')
-    data_old = wsheet.get_all_values()
+        wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
+    data_new = wsheet.get_all_values() #retrieves all the raw data from Channelkeeper's Google Sheet as a list of lists.
+    wsheet = gsheet.worksheet('This Year') #opens the sheet in the maps Google Sheet containing data for the cleanups map.
+    data_old = wsheet.get_all_values() #retrieves all data from 'This Year' in the maps Google Sheet as a list of lists. 
     counter = len(data_old) - 1
-    while counter >= 0:
+    while counter >= 0: #removes extra columns from data_old (the geosheets formula and any notes)
         while len(data_old[counter]) > 10:
             data_old[counter].pop(len(data_old[counter]) - 1)
         counter -= 1
     data_map = []
     data_stat = []
-    for row in data_new:
-        if row[1] != '' and is_number(row[2]) and '/' in row[3] and row[4] != '' and row[16] != '': #and is_number(row[5]) and is_number(row[7]) and is_number(row[8]) and row[16] != '':
-            data_map.append(row)
+    for row in data_new: #checks every row of raw data from Channelkeeper's Google Sheet and removes any that are not valid cleanups. It does this by checking if the column containing names is not empty, the date column contains a '/', and the column containing locations is not empty.
+        if row[1] != '' and is_number(row[2]) and '/' in row[3] and row[4] != '' and row[16] != '': #in order to be a valid cleanup to be put on the cleanups map, it also checks if the coordinates column is not empty. Make sure it is a valid coordinate, or else a geocoding limit might be reached.
+            data_map.append(row) #contains valid cleanups that can be put on maps.
         if row[1] != '' and is_number(row[2]) and '/' in row[3] and row[4] != '':
-            data_stat.append(row)
-    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', 'Month']] 
+            data_stat.append(row) #contains valid cleanups.
+    data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', 'Month']] #first row on the cleanups sheet has these labels
     data_new = []
-    colors = ['#edff00', '#f4ef00', '#f9de00', '#fecd00', '#ffbb00', '#ffa900', '#ff9700', '#ff8300', '#ff6e00', '#ff5700', '#ff3a00', '#ff0000']
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    for row in data_stat:
-        month = int(row[3].split("/")[0])
+    colors = ['#edff00', '#f4ef00', '#f9de00', '#fecd00', '#ffbb00', '#ffa900', '#ff9700', '#ff8300', '#ff6e00', '#ff5700', '#ff3a00', '#ff0000'] #color gradient used to color points on the cleanups map from old to new.
+    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] #12 months of the year.
+    for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
+        month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
         data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[9], row[15], row[16]])
     counter = 0
     index = 0
     increment = int(len(data_map)/12)
-    for row in data_map:
-        month = int(row[3].split("/")[0])
+    for row in data_map: #organizes and removes any useless data from data_map and puts them in data_update, which will be updated into the cleanups sheet.
+        month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
         color = colors[index]
-        if counter == increment and index < 11:
+        if counter == increment and index < 11: #an even color gradient is given to each cleanup.
             counter = 0
             index += 1
-        month = months[month - 1]
+        month = months[month - 1] #turns the numbered month from the cleanup date into the month as a word.
         data_update.append([row[1], row[2], row[3], color, row[4], row[5], row[7], row[8], row[16], month])
         counter += 1
     counter = len(data_old) - len(data_update)
-    while counter > 0: #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows 
+    while counter > 0: #add #adds any necessary blank rows to replace old rows in case the number of new rows is less than the number of old rows.
         data_update.append(['', '', '', '', '', '', '', '', '', ''])
         counter -= 1
     if data_update != data_old:
+        return 'bruh'
         wsheet.update('A1:J' + str(len(data_update)), data_update)
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")'
