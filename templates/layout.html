@@ -13,13 +13,15 @@
     <title>Watershed Cleanup - {% block title %}{% endblock %}</title>
   </head>
   <body>
-    <div id="header">
-      <img src="/static/images/globe.png" alt="globe" id="globeIcon"> <!--Source: https://www.pngegg.com/en/png-buevu -->
-      <h2 id="title">Watershed Cleanup</h2>
-      <div id="navbar">
-        <p id="links"><a href="/.">MAPS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ranks">RANKS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/stats">STATISTICS</a></p>
+    <div id="page">
+      <div id="header">
+        <img src="/static/images/globe.png" alt="globe" id="globeIcon"> <!--Source: https://www.pngegg.com/en/png-buevu -->
+        <h2 id="title">Watershed Cleanup</h2>
+        <div id="navbar">
+          <p id="links"><a href="/.">MAPS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ranks">RANKS</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/stats">STATISTICS</a></p>
+        </div>
       </div>
+      {% block content %}{% endblock %}
     </div>
-    {% block content %}{% endblock %}
   </body>
 </html>
