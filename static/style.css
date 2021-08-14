@@ -72,6 +72,15 @@ body {
   font-size: 12px;
   padding-right: 5px;
 }
+#page {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+}
+
 footer {
   position: absolute;
   bottom: 0;
