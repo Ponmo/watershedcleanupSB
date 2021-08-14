@@ -5,12 +5,12 @@ Maps
 {% endblock %}
 
 {% block content %}
-<div id="mapOverlay">
-  <iframe id="map_cleanups" src="https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed" class="map"></iframe>
-  <iframe id="map_reports" src="https://www.geosheets.com/map/s:KJV92kAM/reports/embed" class="map"></iframe>
-  <span class="switcher switcher-1 noSelect">
-    <input type="checkbox" id="switcher-1" class="noSelect" checked>
-    <label for="switcher-1" class="noSelect"></label>
+<div id="map-overlay">
+  <iframe src="https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed" class="map"></iframe>
+  <iframe src="https://www.geosheets.com/map/s:KJV92kAM/reports/embed" class="map"></iframe>
+  <span class="switcher switcher-1 no-select">
+    <input type="checkbox" id="switcher-1" class="no-select" checked>
+    <label for="switcher-1" class="no-select"></label>
   </span>
   <div id="legend">
     <div id="red-square"></div>
@@ -21,16 +21,16 @@ Maps
   </div>
 </div>
 <div id="cleanups">
-  <div class="headingTwo">
-    <h3 class="headingTitle">Month Filter</h3>
+  <div class="heading-two">
+    <h3 class="heading-title">Month Filter</h3>
   </div>
  <div class="content">
     {{ checkboxes }}
   </div>
 </div> 
 <div id="reports">
-  <div class="headingTwo">
-    <h3 class="headingTitle">Report Trash</h3>
+  <div class="heading-two">
+    <h3 class="heading-title">Report Trash</h3>
   </div>
   <div class="content">
     <form action="/report" class="form-inline" method="POST">
