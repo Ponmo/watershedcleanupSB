@@ -130,7 +130,7 @@ def render_maps(): #renders the maps page.
     for row in data_report: #if the number of reports made on the current date exceed ten, then disable the reports form.
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
-        if '/' in row[4]:
+        if '/' in row[4] and row[3] == 'Not resolved':
             resolve_locations += '<option>' + row[0] + '</option>'
     if reports >= 10:
         report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
