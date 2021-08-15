@@ -401,12 +401,8 @@ def render_stats_embed(): #same as render_ranks() except this renders a page wit
 @app.route('/report', methods=['GET', 'POST'])
 def report(): #adds a report to the reports sheet.
     if request.method == 'POST':
-        gsheet = gp.open('Watershed Brigade Information')
         wsheet = gsheet.worksheet('Reports')
         data_report = wsheet.get_all_values()
-        counter = 0
-        counter_two = 0
-        counter_three = 0
         date_now = datetime.now(tz=pytz.utc)
         date_now = date_now.astimezone(timezone('America/Los_Angeles'))
         try: 
@@ -427,6 +423,15 @@ def is_number(s): #simple way to check if a string is a valid number space on qu
         return True
     except ValueError:
         return False
+@app.route('/resolve', methods=['GET', 'POST'])
+def resolve():
+    if request.method == 'POST':
+        wsheet = gsheet.worksheet('Resolve Requests')
+        data_resolve = wsheet.get_all_values()
+        data_resolve.append([request.form['resolve-name'], request.form['resolve-location'], request.form['resolve-date'], request.form['resolve-notes']])
+        wsheet.update('A1:G' + str(len(data_resolve)), data_resolve)
+    return redirect(url_for('render_maps'))
 
 if __name__ == "__main__":
     app.run()
+
