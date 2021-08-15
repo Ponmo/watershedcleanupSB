@@ -2,6 +2,8 @@ $(document).ready(function() {
   $("#map-reports").hide();
   $("#reports").hide();
   $("#legend").hide();
+  $("#resolve").hide();
+  $("#resolve-switch").hide();
   $(".Month").change(function() {
     if ($(".Month:checked").length == $(".Month").length) {
       $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed' class='map'></iframe>")
@@ -134,5 +136,19 @@ $(document).ready(function() {
       $("#map-cleanups").hide();
       $("#legend").show();
     }
+  });
+  $("#report-switch").click(function() {
+    $("#report").hide();
+    $("#report-limit").hide();
+    $("#report-switch").hide();
+    $("#resolve").show();
+    $("#resolve-switch").show();
+  });
+  $("#resolve-switch").click(function() {
+    $("#report").show();
+    $("#report-limit").show();
+    $("#report-switch").show();
+    $("#resolve").hide();
+    $("#resolve-switch").hide();
   });
 });
