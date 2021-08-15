@@ -166,7 +166,7 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
         location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" required> )</label>'
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
-    return render_template('maps-embed.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
+    return render_template('maps-embed.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/ranks')
 def render_ranks(): #renders the ranks page.
