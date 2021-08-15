@@ -53,6 +53,28 @@ Maps
       <input type="hidden" name="embed" value="false">
     </form>
     {{ report_limit }}
+    <form action="/resolve" class="form-inline" method="POST">
+      <div class="form-group">
+        <label for="resolve-name">Name:</label>
+        <input type="text" class="form-control" id="resolve-name" maxlength="120" name="resolve-name" required>
+      </div>
+      <div class="form-group">
+        <label for="trash">Which location did you clean up?:</label>
+        <select class="form-control" id="resolve-location" name="resolve-location">
+          {{ resolve-locations }}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="resolve-date">Date:</label>
+        <input type="date" id="resolve-date" name="resolve-date" required>
+      </div>
+      <div class="form-group">
+        <label for="resolve-notes">Notes:</label>
+        <input type="text" class="form-control" id="resolve-notes" maxlength="1000" name="resolve-notes" required>
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+      <input type="hidden" name="embed" value="false">
+    </form>
   </div>
 </div>
 <footer>
