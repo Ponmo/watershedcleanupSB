@@ -130,7 +130,7 @@ def render_maps(): #renders the maps page.
     for row in data_report: #if the number of reports made on the current date exceed ten, then disable the reports form.
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
-        if '/' in row[4] and row[3] == 'Not resolved':
+        if '/' in row[4] and row[3] == 'Not resolved': #generates options for the resolve form.
             resolve_locations += '<option>' + row[0] + '</option>'
     if reports >= 10:
         report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
@@ -420,20 +420,21 @@ def report(): #adds a report to the reports sheet.
         return redirect(url_for('render_maps_embed'))
     return redirect(url_for('render_maps'))
 
+@app.route('/resolve', methods=['GET', 'POST'])
+def resolve():
+    if request.method == 'POST':
+        wsheet = gsheet.worksheet('Resolve Requests')
+        data_resolve = wsheet.get_all_values()
+        data_resolve.append([request.form['resolve-name'], request.form['resolve-location'], request.form['resolve-date'].replace('-', '/'), request.form['resolve-notes']])
+        wsheet.update('A1:G' + str(len(data_resolve)), data_resolve)
+    return redirect(url_for('render_maps'))
+
 def is_number(s): #simple way to check if a string is a valid number space on question, check app route, and return post
     try:
         float(s)
         return True
     except ValueError:
         return False
-@app.route('/resolve', methods=['GET', 'POST'])
-def resolve():
-    if request.method == 'POST':
-        wsheet = gsheet.worksheet('Resolve Requests')
-        data_resolve = wsheet.get_all_values()
-        data_resolve.append([request.form['resolve-name'], request.form['resolve-location'], request.form['resolve-date'], request.form['resolve-notes']])
-        wsheet.update('A1:G' + str(len(data_resolve)), data_resolve)
-    return redirect(url_for('render_maps'))
 
 if __name__ == "__main__":
     app.run()
