@@ -128,6 +128,7 @@ $(document).ready(function() {
       $("#map-reports").hide();
       $("#map-cleanups").show();
       $("#legend").hide();
+      $("#credit").show();
     }
     else {
       $("#cleanups").hide();  // unchecked
@@ -135,6 +136,7 @@ $(document).ready(function() {
       $("#map-reports").show();
       $("#map-cleanups").hide();
       $("#legend").show();
+      $("#credit").hide();
     }
   });
   $("#report-switch").click(function() {
