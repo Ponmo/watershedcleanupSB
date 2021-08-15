@@ -126,9 +126,12 @@ def render_maps(): #renders the maps page.
     report_limit = ''
     date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
+    resolve_locations = ''
     for row in data_report: #if the number of reports made on the current date exceed ten, then disable the reports form.
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
+            if row[3] == 'Not resolved':
+                resolve_locations = '<option>' + row[0] + '</option>'
     if reports >= 10:
         report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
         disable = 'disabled'
@@ -136,7 +139,7 @@ def render_maps(): #renders the maps page.
         location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" step="0.000001" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" step="0.000001" required> )</label>'
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
-    return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable))
+    return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable), resolve_locations = Markup(resolve_locations))
 
 @app.route('/maps-embed')
 def render_maps_embed(): #same as render_maps() except this renders a page without the top bar and background image.
