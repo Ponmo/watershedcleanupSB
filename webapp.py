@@ -133,7 +133,7 @@ def render_maps(): #renders the maps page.
         report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
         disable = 'disabled'
     if len(data_report) > 40: #if there are more than 40 reports already, change location question so that it only accepts coordinates. This is to prevent geocoding limits.
-        location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" required> )</label>'
+        location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" step="0.000001" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" step="0.000001" required> )</label>'
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
     return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable))
@@ -163,7 +163,7 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
         report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
         disable = 'disabled'
     if len(data_report) > 40:
-        location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" required> )</label>'
+        location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" step="0.000001" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" step="0.000001" required> )</label>'
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
     return render_template('maps-embed.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = disable)
