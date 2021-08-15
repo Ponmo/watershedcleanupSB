@@ -418,8 +418,8 @@ def report(): #adds a report to the reports sheet.
         cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")'
         wsheet.update_cells(cell, 'USER_ENTERED')
     if request.form['embed'] == 'true':
-        return render_maps_embed()
-    return render_maps()
+        return redirect(url_for('render_maps_embed'))
+    return redirect(url_for('render_maps'))
 
 def is_number(s): #simple way to check if a string is a valid number space on question, check app route, and return post
     try:
@@ -427,4 +427,6 @@ def is_number(s): #simple way to check if a string is a valid number space on qu
         return True
     except ValueError:
         return False
-            
+
+if __name__ == "__main__":
+    app.run()
