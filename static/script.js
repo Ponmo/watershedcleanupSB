@@ -138,7 +138,7 @@ $(document).ready(function() {
     }
   });
   $("#report-switch").click(function() {
-    $(".heading-title").replaceWith("Resolve a Location")
+    document.getElementById("replaceable").innerHTML = "Resolve a Location";
     $("#report").hide();
     $("#report-limit").hide();
     $("#report-switch").hide();
@@ -146,7 +146,7 @@ $(document).ready(function() {
     $("#resolve-switch").show();
   });
   $("#resolve-switch").click(function() {
-    $(".heading-title").replaceWith("Trash Report")
+    document.getElementById("replaceable").innerHTML = "Trash Report";
     $("#report").show();
     $("#report-limit").show();
     $("#report-switch").show();
