@@ -33,7 +33,7 @@ Maps
     <h3 class="heading-title">Report Trash</h3>
   </div>
   <div class="content">
-    <form action="/report" class="form-inline" method="POST">
+    <form action="/report" class="form-inline" id="report" method="POST">
       <div class="form-group">
         {{ location_question }}
       </div>
@@ -53,7 +53,8 @@ Maps
       <input type="hidden" name="embed" value="false">
     </form>
     {{ report_limit }}
-    <form action="/resolve" class="form-inline" method="POST">
+    
+    <form action="/resolve" class="form-inline" id="resolve" method="POST">
       <div class="form-group">
         <label for="resolve-name">Name:</label>
         <input type="text" class="form-control" id="resolve-name" maxlength="120" name="resolve-name" required>
