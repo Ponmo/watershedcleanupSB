@@ -204,6 +204,12 @@ input[type=number] {
   border-radius: 5px;
   padding-left: 10px;
 }
+#report-switch {
+  margin-top: 10px;
+}
+#resolve-switch {
+  margin-top: 10px;
+}
 footer {
   margin-top: 10px;
 }
