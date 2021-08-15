@@ -159,9 +159,13 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
     for row in data_report:
         if row[4] == date_now.strftime('%m/%d/%Y'):
             reports += 1
-        if reports >= 10:
-            report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
-            disable = 'disabled'
+    if reports >= 10:
+        report_limit = '<p id="report-limit">The maximum number of reports have been reached, please try tomorrow.</p>'
+        disable = 'disabled'
+    if len(data_report) > 40:
+        location_question = '<label>Coordinates:(<input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" required>,<input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" required>)</label>'
+    else:
+        location_question = '<label for="location">Specific Address/Coordinates:</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
     return render_template('maps-embed.html', checkboxes = Markup(checkboxes), report_limit = Markup(report_limit), submit = disable)
 
 @app.route('/ranks')
@@ -417,7 +421,7 @@ def report(): #adds a report to the reports sheet.
         return render_maps_embed()
     return render_maps()
 
-def is_number(s): #simple way to check if a string is a valid number
+def is_number(s): #simple way to check if a string is a valid number space on question, check app route, and return post
     try:
         float(s)
         return True
