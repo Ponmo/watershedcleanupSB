@@ -39,6 +39,7 @@ body {
 #links > a {
   color: #0645AD;
 }
+#map-overlay {
   display: flex;
 }
 .map {
