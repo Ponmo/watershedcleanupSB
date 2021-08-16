@@ -204,7 +204,7 @@ input[type=number] {
   border-radius: 5px;
   padding-left: 10px;
 }
-#report-switch {
+#report-switch, #report-switch-embed {
   margin-top: 10px;
 }
 #resolve-switch {
