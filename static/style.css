@@ -33,7 +33,12 @@ body {
   border-bottom: 1px solid grey;
   background-color: white;
 }
-#map-overlay {
+.active {
+  color: #0B0080;
+}
+#links > a {
+  color: #0645AD;
+}
   display: flex;
 }
 .map {
