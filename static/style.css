@@ -33,11 +33,11 @@ body {
   border-bottom: 1px solid grey;
   background-color: white;
 }
-.active {
-  color: #0B0080;
-}
 #links > a {
   color: #0645AD;
+}
+#links > a.active {
+  color: #0B0080;
 }
 #map-overlay {
   display: flex;
