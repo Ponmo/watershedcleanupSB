@@ -34,7 +34,7 @@ body {
   background-color: white;
 }
 #links > a.active {
-  color: #f37822;
+  color: #24527d;
 }
 #map-overlay {
   display: flex;
