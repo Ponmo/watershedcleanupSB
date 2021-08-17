@@ -2,6 +2,7 @@ $(document).ready(function() {
   $("#map-reports").hide();
   $("#reports").hide();
   $("#legend").hide();
+  $("#legend-embed").hide();
   $("#resolve").hide();
   $("#resolve-switch").hide();
   $(".Month").change(function() {
@@ -128,6 +129,7 @@ $(document).ready(function() {
       $("#map-reports").hide();
       $("#map-cleanups").show();
       $("#legend").hide();
+      $("#legend-embed").hide();
       $("#credit").show();
     }
     else {
@@ -136,6 +138,7 @@ $(document).ready(function() {
       $("#map-reports").show();
       $("#map-cleanups").hide();
       $("#legend").show();
+      $("#legend-embed").show();
       $("#credit").hide();
     }
   });
