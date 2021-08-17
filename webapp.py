@@ -27,23 +27,16 @@ credentials = {
 gp = gspread.service_account_from_dict(credentials)
 gsheet_raw = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 gsheet = gp.open('Watershed Brigade Information') #Name of Google Sheet used to generate geosheet maps (referred to as the "map Google Sheet" later on).
-#utc_year = datetime.now().strftime('%Y')
-#try:
-#    wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
-#except:
-#    wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
-wsheet = gsheet_raw.worksheet(str(2022) + ' WB Tracking')
-data_raw = wsheet.get_all_values() #retrieves all the raw data from Channelkeeper's Google Sheet as a list of lists.
-wsheet = gsheet.worksheet('This Year') #opens the sheet in the maps Google Sheet containing data for the cleanups map.
-data_cleanups = wsheet.get_all_values() #retrieves all data from 'This Year' in the maps Google Sheet as a list of lists. 
-wsheet = gsheet.worksheet('Reports') #opens the sheet in the maps Google Sheet containing data for the reports map.
-data_reports = wsheet.get_all_values() #retrieves all data from reports as a list of lists.
-wsheet = gsheet.worksheet('Resolve Requests') #opens the sheet in the maps Google Sheet containing resolve requests for reports. Not used by Channelkeeper.
-data_resolved = wsheet.get_all_values() #retrieves all data from requests as a list of lists.
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
-    data_new = data_raw
-    data_old = data_cleanups
+    utc_year = datetime.now().strftime('%Y')
+    try:
+        wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
+    except:
+        wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
+    data_new = wsheet.get_all_values() #retrieves all the raw data from Channelkeeper's Google Sheet as a list of lists.
+    wsheet = gsheet.worksheet('This Year') #opens the sheet in the maps Google Sheet containing data for the cleanups map.
+    data_old = wsheet.get_all_values() #retrieves all data from 'This Year' in the maps Google Sheet as a list of lists. 
     counter = len(data_old) - 1
     while counter >= 0: #removes extra columns from data_old (the geosheets formula and any notes)
         while len(data_old[counter]) > 10:
@@ -84,7 +77,8 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         cell = wsheet.range('K1:K1')
         cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")' #adds geosheets formula to the cleanups sheet to generate the new map.
         wsheet.update_cells(cell, 'USER_ENTERED')
-    data_report = data_reports
+    wsheet = gsheet.worksheet('Reports') #open up the reports sheet on the maps google Sheet.
+    data_report = wsheet.get_all_values()
     date_now = datetime.now(tz=pytz.utc)
     date_now = date_now.astimezone(timezone('America/Los_Angeles'))
     counter = 0
@@ -125,7 +119,8 @@ def render_maps(): #renders the maps page.
             month.append(row[3])
     for item in month: #adds a checkbox for each month in which cleanups were done so that points from each month can be toggled on or off from the cleanups map.
         checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
-    data_report = data_reports
+    wsheet = gsheet.worksheet('Reports')
+    data_report = wsheet.get_all_values()
     reports = 0
     disable = ''
     report_limit = ''
@@ -157,7 +152,8 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
             month.append(row[3])
     for item in month:
         checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
-    data_report = data_reports
+    wsheet = gsheet.worksheet('Reports')
+    data_report = wsheet.get_all_values()
     reports = 0
     disable = ''
     report_limit = ''
@@ -408,7 +404,8 @@ def render_stats_embed(): #same as render_ranks() except this renders a page wit
 @app.route('/report', methods=['GET', 'POST'])
 def report(): #adds a report to the reports sheet.
     if request.method == 'POST':
-        data_report = data_reports
+        wsheet = gsheet.worksheet('Reports')
+        data_report = wsheet.get_all_values()
         date_now = datetime.now(tz=pytz.utc)
         date_now = date_now.astimezone(timezone('America/Los_Angeles'))
         try: 
@@ -426,7 +423,8 @@ def report(): #adds a report to the reports sheet.
 @app.route('/resolve', methods=['GET', 'POST'])
 def resolve():
     if request.method == 'POST':
-        data_resolve = data_resolved
+        wsheet = gsheet.worksheet('Resolve Requests')
+        data_resolve = wsheet.get_all_values()
         data_resolve.append([request.form['resolve-name'], request.form['resolve-location'], request.form['resolve-date'].replace('-', '/'), request.form['resolve-notes']])
         wsheet.update('A1:G' + str(len(data_resolve)), data_resolve)
     return redirect(url_for('render_maps'))
@@ -440,4 +438,3 @@ def is_number(s): #simple way to check if a string is a valid number space on qu
 
 if __name__ == "__main__":
     app.run()
-
