@@ -29,7 +29,7 @@ gsheet_raw = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 gsheet = gp.open('Watershed Brigade Information') #Name of Google Sheet used to generate geosheet maps (referred to as the "map Google Sheet" later on).
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
-    utc_year = datetime.now().strftime('%Y')
+    utc_year = '2022'#datetime.now().strftime('%Y')
     try:
         wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
     except:
