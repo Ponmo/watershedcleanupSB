@@ -27,6 +27,7 @@ credentials = {
 gp = gspread.service_account_from_dict(credentials)
 gsheet_raw = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 gsheet = gp.open('Watershed Brigade Information') #Name of Google Sheet used to generate geosheet maps (referred to as the "map Google Sheet" later on).
+utc_year = datetime.now().strftime('%Y')
 try:
     wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
 except:
@@ -40,7 +41,6 @@ wsheet = gsheet.worksheet('Resolve Requests') #opens the sheet in the maps Googl
 data_resolved = wsheet.get_all_values() #retrieves all data from requests as a list of lists.
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
-    utc_year = datetime.now().strftime('%Y')
     data_new = data_raw
     data_old = data_cleanups
     counter = len(data_old) - 1
