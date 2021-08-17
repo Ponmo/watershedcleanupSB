@@ -27,11 +27,12 @@ credentials = {
 gp = gspread.service_account_from_dict(credentials)
 gsheet_raw = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 gsheet = gp.open('Watershed Brigade Information') #Name of Google Sheet used to generate geosheet maps (referred to as the "map Google Sheet" later on).
-utc_year = datetime.now().strftime('%Y')
-try:
-    wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
-except:
-    wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
+#utc_year = datetime.now().strftime('%Y')
+#try:
+#    wsheet = gsheet_raw.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
+#except:
+#    wsheet = gsheet_raw.worksheet(str(int(utc_year) - 1) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
+wsheet = gsheet_raw.worksheet(str(2022) + ' WB Tracking')
 data_raw = wsheet.get_all_values() #retrieves all the raw data from Channelkeeper's Google Sheet as a list of lists.
 wsheet = gsheet.worksheet('This Year') #opens the sheet in the maps Google Sheet containing data for the cleanups map.
 data_cleanups = wsheet.get_all_values() #retrieves all data from 'This Year' in the maps Google Sheet as a list of lists. 
