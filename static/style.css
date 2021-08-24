@@ -329,16 +329,16 @@ footer {
   padding-left: 10px;
 }
 #gradient-one {
-  background: rgb(186,94,29);
-  background: linear-gradient(90deg, rgba(186,94,29,1) 0%, rgba(208,122,34,1) 100%);
+  background: rgb(243,119,36);
+  background: linear-gradient(90deg, rgba(243,119,36,1) 0%, rgba(246,139,39,1) 100%);
 }
 #gradient-two {
-  background: rgb(203,115,33);
-  background: linear-gradient(90deg, rgba(203,115,33,1) 0%, rgba(230,151,39,1) 100%);
+  background: rgb(246,139,39);
+  background: linear-gradient(90deg, rgba(246,139,39,1) 0%, rgba(249,159,41,1) 100%);
 }
 #gradient-three {
-  background: rgb(236,160,41);
-  background: linear-gradient(90deg, rgba(236,160,41,1) 0%, rgba(252,180,44,1) 100%);
+  background: rgb(249,159,41);
+  background: linear-gradient(90deg, rgba(249,159,41,1) 0%, rgba(252,180,44,1) 100%);
 }
 .cell {
   padding: 5px 0px 10px 0px;
