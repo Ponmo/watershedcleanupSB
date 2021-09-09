@@ -7,13 +7,13 @@ $(document).ready(function() {
   $("#resolve-switch").hide();
   $(".Month").change(function() {
     if ($(".Month:checked").length == $(".Month").length) {
-      $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:KJV92kAM/cleanups/embed' class='map'></iframe>")
+      $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed' class='map'></iframe>")
     }
     else if ($(".Month:checked").length === 0) {
-      $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:KJV92kAM/cleanups?filters=%7B%22Month%22%3A%5B%22None%22%5D%2C%22a.%20Name%22%3A%22_all_%22%2C%22b.%20People%22%3A%22_all_%22%2C%22c.%20Date%22%3A%22_all_%22%2C%22d.%20Place(s)%22%3A%22_all_%22%2C%22e.%20Weight%20(lbs)%22%3A%22_all_%22%2C%22f.%20Bag(s)%22%3A%22_all_%22%2C%22g.%20Time%20(hrs)%22%3A%22_all_%22%7D' class='map'></iframe>")
+      $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:DJj8Kv6R/cleanups?filters=%7B%22Month%22%3A%5B%22None%22%5D%2C%22a.%20Name%22%3A%22_all_%22%2C%22b.%20People%22%3A%22_all_%22%2C%22c.%20Date%22%3A%22_all_%22%2C%22d.%20Place(s)%22%3A%22_all_%22%2C%22e.%20Weight%20(lbs)%22%3A%22_all_%22%2C%22f.%20Bag(s)%22%3A%22_all_%22%2C%22g.%20Time%20(hrs)%22%3A%22_all_%22%7D' class='map'></iframe>")
     }
     else {
-      var baseLink = "https://www.geosheets.com/map/s:KJV92kAM/cleanups?filters=%7B%22Month%22%3A%5B"
+      var baseLink = "https://www.geosheets.com/map/s:DJj8Kv6R/cleanups?filters=%7B%22Month%22%3A%5B"
       var first = true;
       if ($("#January").is(":checked")) {
         baseLink += "%22January%22"
