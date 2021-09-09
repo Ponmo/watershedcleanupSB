@@ -401,3 +401,18 @@ footer {
   border: 1px solid grey;
   border-bottom: none;
 }
+#bottom-embed {
+  position: absolute;
+  border: 2px solid black;
+  width: 375px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: -1;
+  top: 200px;
+  min-height: 300px;
+  background: rgb(243,119,36);
+  background: linear-gradient(0deg, rgba(243,119,36,1) 0%, rgba(252,180,44,1) 100%);
+}
