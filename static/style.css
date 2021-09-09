@@ -254,9 +254,9 @@ footer {
   text-align: center;
   z-index: -1;
   top: 250px;
-  min-height: 350px;
-  background: rgb(4,0,255);
-  background: linear-gradient(0deg, rgba(4,0,255,1) 0%, rgba(255,0,0,1) 100%);
+  min-height: 300px;
+  background: rgb(243,119,36);
+  background: linear-gradient(0deg, rgba(243,119,36,1) 0%, rgba(252,180,44,1) 100%);
 }
 #top {
   margin: auto;
@@ -276,7 +276,7 @@ footer {
 }
 .plate {
   border: 2px solid black;
-  background-color: #6800ad;
+  background-color: #0054a0;
   color: white;
   padding: 8px;
   box-shadow: rgba(0, 0, 0, 0.55) 0px 5px 15px;
