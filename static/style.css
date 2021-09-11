@@ -184,6 +184,17 @@ body {
 #red-text {
   display: inline-block;
 }
+#legend-main {
+  position: absolute;
+  top: 194px;
+  left: 20px;
+  display: inline-block;
+}
+#legend-gradient {
+  background: rgb(243,119,36);
+  background: linear-gradient(90deg, rgba(243,119,36,1) 0%, rgba(252,180,44,1) 100%);
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
