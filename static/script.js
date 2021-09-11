@@ -130,6 +130,8 @@ $(document).ready(function() {
       $("#map-cleanups").show();
       $("#legend").hide();
       $("#legend-embed").hide();
+      $("#legend-main").show();
+      $("#legend-main-embed").show();
       $("#credit").show();
     }
     else {
@@ -139,6 +141,8 @@ $(document).ready(function() {
       $("#map-cleanups").hide();
       $("#legend").show();
       $("#legend-embed").show();
+      $("#legend-main").hide();
+      $("#legend-main-embed").hide();
       $("#credit").hide();
     }
   });
