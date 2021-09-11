@@ -197,8 +197,8 @@ body {
   height: 10px;
   display: inline-block;
   border: 1px solid black;
-  background: rgb(243,119,36);
-  background: linear-gradient(90deg, rgba(243,119,36,1) 0%, rgba(252,180,44,1) 100%);
+  background: #edff00;
+  background: linear-gradient(90deg, #edff00 0%, #ff0000 100%);
 }
 
 input::-webkit-outer-spin-button,
