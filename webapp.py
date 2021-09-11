@@ -50,7 +50,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
             data_stat.append(row) #contains valid cleanups.
     data_update = [['a. Name', 'b. People', 'c. Date', 'Color', 'd. Place(s)', 'f. Bag(s)', 'e. Weight (lbs)', 'g. Time (hrs)', 'Location', 'Month']] #first row on the cleanups sheet has these labels
     data_new = []
-    colors = ['#ff00c6', '#d601cf', '#c202d4', '#b002d8', '#9103df', '#8203e2', '#7003e6', '#6803e8', '#5603ec', '#3d04f2', '#2404f7', '#0005ff'] #color gradient used to color points on the cleanups map from old to new.
+    colors = ['#ab00ff', '#b300e6', '#bb00cc', '#c400b3', '#cc0099', '#d1008d', '#d50080', '#db006e', '#e0005c', '#e80045', '#ef0030', '#ff0000'] #color gradient used to color points on the cleanups map from old to new.
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] #12 months of the year.
     for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
         month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
