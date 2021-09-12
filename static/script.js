@@ -1,5 +1,5 @@
 $(document).ready(function() { 
-  $("#map-reports").hide();
+  //$("#map-reports").hide();
   $("#reports").hide();
   $("#legend").hide();
   $("#legend-embed").hide();
