@@ -22,10 +22,13 @@ body {
 }
 #header-icon {
   display: inline-block;
-  margin-top: -8px;
-  height: 70px;
-  margin-left: -10px;
+  margin-top: 5px;
+  height: 55px;
+  margin-left: 30px;
+  margin-bottom: 10px;
 }
+
+img#header-icon {}
 #header {
   padding: 15px; 
   width: 100%; 
@@ -399,7 +402,14 @@ footer {
     font-size: 11px;
   }
   #month-heading {
-  width: 25%;
+    width: 25%;
+  }
+  #header-icon {
+    display: inline-block;
+    margin-top: -15px;
+    height: 60px;
+    margin-left: 30px;
+    margin-bottom: 20px;
   }
 }
 #legend-embed {
