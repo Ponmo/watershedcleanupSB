@@ -310,8 +310,18 @@ def render_stats(): #renders the statistics page.
         except:
             pass
     counter = 1
+    counter_individual = 1
+    counter_group = 1
     chart = ''
+    chart_individual = ('{' +
+                        'type: "scatter",' +
+                        'indexLabelFontSize: 16,' +
+                        'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+                        'dataPoints: [')
+    chart_group = ''
     trend_line = ''
+    trend_line_individual = ''
+    trend_line_group = ''
     for key in chart_data: #adds a group of data to the weight vs time graph for every different number of people in a cleanup group. 
         chart_data[key] = chart_data.get(key)[:-1]
         chart += ('{' +
@@ -321,12 +331,32 @@ def render_stats(): #renders the statistics page.
                   'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
                   'dataPoints: [')
         chart += chart_data.get(key)
-        chart += ']}'
+        chart += ']},'
+        if key == '1':
+            chart_individual += chart_data.get(key)
+            chart_individual += ']},'
+            trend_line_individual += 'chart.data[' + str(counter_individual) + '].dataPoints,'
+            counter_individual += 1
+        if key != '1':
+            chart_group += ('{' +
+              'type: "scatter",' +
+              'name: "' + key + ' Person Group",' +
+              'indexLabelFontSize: 16,' +
+              'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
+              'dataPoints: [')
+            chart_group += chart_data.get(key)
+            chart_group += ']},'
+            trend_line_group += 'chart.data[' + str(counter_group) + '].dataPoints,'
+            counter_group += 1
         if counter < len(chart_data): #creates javascript that concats each group of data to calculate the trend line.
-            chart += ','
             trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
         counter += 1
+    chart = chart[:-1]
+    chart_group = chart_group[:-1]
+    chart_individual = chart_individual[:-1]
     trend_line = trend_line[:-1]
+    trend_line_individual = trend_line_individual.replace('chart.data[' + str(counter_individual) + '].dataPoints,', '');
+    trend_line_group = trend_line_group.replace('chart.data[' + str(counter_group) + '].dataPoints,', '');
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = ''
@@ -346,7 +376,7 @@ def render_stats(): #renders the statistics page.
     histogram_weight = histogram_weight[:-1]
     histogram_persons = histogram_persons[:-1]
     histogram_time = histogram_time[:-1]
-    return render_template('stats.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), trend_line = Markup(trend_line), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time))
+    return render_template('stats.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), chart_group = Markup(chart_group), chart_individual = Markup(chart_individual), trend_line = Markup(trend_line), trend_line_individual = Markup(trend_line_individual), trend_line_group = Markup(trend_line_group),  end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time))
 
 @app.route('/stats-embed')
 def render_stats_embed(): #same as render_ranks() except this renders a page without the top bar and background image. It also does not generate data for the charts.
@@ -357,10 +387,6 @@ def render_stats_embed(): #same as render_ranks() except this renders a page wit
     coords = []
     names = []
     month = 1
-    chart_data = {}
-    end_point = 0.0
-    colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
-    index = 0
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
