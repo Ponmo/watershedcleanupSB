@@ -22,13 +22,12 @@ body {
 }
 #header-icon {
   display: inline-block;
-  margin-top: 5px;
-  height: 55px;
+  margin-top: 10px;
+  height: 30px;
   margin-left: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-img#header-icon {}
 #header {
   padding: 15px; 
   width: 100%; 
@@ -405,11 +404,11 @@ footer {
     width: 25%;
   }
   #header-icon {
-    display: inline-block;
-    margin-top: -15px;
-    height: 60px;
-    margin-left: 30px;
-    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+  }
+  #title {
+    display: none;
   }
 }
 #legend-embed {
