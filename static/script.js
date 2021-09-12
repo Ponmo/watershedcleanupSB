@@ -4,7 +4,7 @@ $(document).ready(function() {
   $("#legend-embed").hide();
   $("#resolve").hide();
   $("#resolve-switch").hide();
-  $("#map-reports").css("width", "1px");
+  $("#map-reports").fadeOut(500)
   $(".Month").change(function() {
     if ($(".Month:checked").length == $(".Month").length) {
       $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed' class='map'></iframe>")
@@ -138,7 +138,6 @@ $(document).ready(function() {
       $("#cleanups").hide();  // unchecked
       $("#reports").show();
       $("#map-reports").show();
-      $("#map-reports").css("width", "100%");
       $("#map-cleanups").hide();
       $("#legend").show();
       $("#legend-embed").show();
