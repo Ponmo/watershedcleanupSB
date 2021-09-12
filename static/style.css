@@ -20,10 +20,9 @@ body {
   font-weight: bold;
   font-size: 25px;
 }
-#globe-icon {
+#header-icon {
   display: inline-block;
   margin-top: -8px;
-  width: 70px;
   height: 70px;
   margin-left: 60px;
 }
