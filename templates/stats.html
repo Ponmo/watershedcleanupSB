@@ -58,9 +58,6 @@ calculateTrendLine(chart);
             dataPoints: [startPoint, endPoint]
         });
     }
-function getTrendLinePoint(x, slope, intercept){
-return {x: x, y: ((slope * x) + intercept)};
-}
 
 var chart2 = new CanvasJS.Chart("chartContainer2", {
 	animationEnabled: true,
@@ -153,8 +150,8 @@ var chart3 = new CanvasJS.Chart("chartContainer3", {
 	]
 });
 chart3.render();
-calculateTrendLine(chart3);
-    function calculateTrendLine(chart3){
+calculateTrendLine3(chart3);
+    function calculateTrendLine3(chart3){
         const totalPoints = chart3.data[0].dataPoints.concat({{ trend_line_individual }});
         var a, b, c, d, e, slope, yIntercept;
         var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = totalPoints.length;
@@ -181,9 +178,6 @@ calculateTrendLine(chart3);
             dataPoints: [startPoint, endPoint]
         });
     }
-function getTrendLinePoint(x, slope, intercept){
-return {x: x, y: ((slope * x) + intercept)};
-}
 
 var chart4 = new CanvasJS.Chart("chartContainer4", {
 	animationEnabled: true,
@@ -210,8 +204,8 @@ var chart4 = new CanvasJS.Chart("chartContainer4", {
 	]
 });
 chart4.render();
-calculateTrendLine(chart4);
-    function calculateTrendLine(chart4){
+calculateTrendLine4(chart4);
+    function calculateTrendLine4(chart4){
         const totalPoints = chart4.data[0].dataPoints.concat({{ trend_line_group }});
         var a, b, c, d, e, slope, yIntercept;
         var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = totalPoints.length;
@@ -222,7 +216,7 @@ calculateTrendLine(chart4);
             xSum += totalPoints[i].x;
             ySum += totalPoints[i].y;
         }
-        b = xSum * ySum;
+        b = xSum * ySum; 
         for(var i = 0; i < dpsLength; i++)
             xSquare += Math.pow(totalPoints[i].x, 2);
         c = dpsLength * xSquare;
@@ -238,7 +232,7 @@ calculateTrendLine(chart4);
             dataPoints: [startPoint, endPoint]
         });
     }
-function getTrendLinePoint(x, slope, intercept){
+	function getTrendLinePoint(x, slope, intercept){
 return {x: x, y: ((slope * x) + intercept)};
 }
 }
