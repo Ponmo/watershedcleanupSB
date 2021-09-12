@@ -128,6 +128,64 @@ function toggleDataSeries(e) {
 	chart2.render();
 }
 }
+	
+var chart3 = new CanvasJS.Chart("chartContainer3", {
+	animationEnabled: true,
+	zoomEnabled: true,
+	title:{
+		text: "Weight of Trash Picked Up in Cleanups vs Total Time Spent (Solo)",
+		fontSize: 30
+	},
+	axisX: {
+		title:"Time (hrs)",
+		titleFontSize: 20,
+		labelFontSize: 16,
+		minimum: 0
+	},
+	axisY:{
+		title: "Weight of Trash (lbs)",
+		includeZero: true,
+		titleFontSize: 20,
+		labelFontSize: 16,
+		minimum: 0
+	},
+        data: [ 
+		{{ chart }} 
+	]
+});
+chart3.render();
+calculateTrendLine(chart3);
+    function calculateTrendLine(chart3){
+        const totalPoints = chart3.data[0].dataPoints.concat({{ trend_line }})
+        var a, b, c, d, e, slope, yIntercept;
+        var xSum = 0, ySum = 0, xySum = 0, xSquare = 0, dpsLength = totalPoints.length;
+        for(var i = 0; i < dpsLength; i++)
+            xySum += (totalPoints[i].x * totalPoints[i].y)
+        a = xySum * dpsLength;
+        for(var i = 0; i < dpsLength; i++){
+            xSum += totalPoints[i].x;
+            ySum += totalPoints[i].y;
+        }
+        b = xSum * ySum;
+        for(var i = 0; i < dpsLength; i++)
+            xSquare += Math.pow(totalPoints[i].x, 2);
+        c = dpsLength * xSquare;
+        d = Math.pow(xSum, 2);
+        slope = (a-b)/(c-d);
+        e = slope * xSum;
+        yIntercept = (ySum - e) / dpsLength;
+        var startPoint = getTrendLinePoint(0.0, slope, yIntercept);
+        var endPoint = getTrendLinePoint({{ end_point }}, slope, yIntercept);
+        chart3.addTo("data",{
+            type: "line", //Line series showing trend
+            markerSize: 0,
+            dataPoints: [startPoint, endPoint]
+        });
+    }
+function getTrendLinePoint(x, slope, intercept){
+return {x: x, y: ((slope * x) + intercept)};
+}
+
 </script>
 {% endblock %}
 
@@ -152,4 +210,5 @@ Statistics
     <div id="chartContainer" style="height: 370px; width: 80%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <div id="chartContainer2" style="height: 370px; width: 80%;"></div>
+    <div id="chartContainer3" style="height: 370px; width: 80%;"></div>
 {% endblock %}
