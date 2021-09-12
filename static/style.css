@@ -391,9 +391,6 @@ footer {
   margin-top: 25px;
   border: 1px solid grey;
 }
-.fade-in {
-  opacity:0;
-}
 @media only screen and (max-width: 600px) {
   #title {
     font-size: 16.5px;
