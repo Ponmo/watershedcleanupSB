@@ -174,7 +174,7 @@ calculateTrendLine(chart3);
         e = slope * xSum;
         yIntercept = (ySum - e) / dpsLength;
         var startPoint = getTrendLinePoint(0.0, slope, yIntercept);
-        var endPoint = getTrendLinePoint({{ end_point }}, slope, yIntercept);
+        var endPoint = getTrendLinePoint(15, slope, yIntercept);
         chart3.addTo("data",{
             type: "line", //Line series showing trend
             markerSize: 0,
