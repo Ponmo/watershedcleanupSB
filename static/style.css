@@ -381,6 +381,16 @@ footer {
   margin-top: 25px;
   border: 1px solid grey;
 }
+#chartContainer3 {
+  margin: auto;
+  margin-top: 25px;
+  border: 1px solid grey;
+}
+#chartContainer4 {
+  margin: auto;
+  margin-top: 25px;
+  border: 1px solid grey;
+}
 .fade-in {
   opacity:0;
 }
