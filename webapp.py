@@ -316,6 +316,7 @@ def render_stats(): #renders the statistics page.
     chart_individual = ('{' +
                         'type: "scatter",' +
                         'indexLabelFontSize: 16,' +
+                        'name: "Individual",' +
                         'toolTipContent: "<span style=\\"color:#4F81BC \\"><b>{name}</b></span><br/><b> Time: </b> {x} hrs<br/><b> Weight of Trash </b></span> {y} lbs",' +
                         'dataPoints: [')
     chart_group = ''
@@ -376,7 +377,7 @@ def render_stats(): #renders the statistics page.
     histogram_weight = histogram_weight[:-1]
     histogram_persons = histogram_persons[:-1]
     histogram_time = histogram_time[:-1]
-    return render_template('stats.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), chart_group = Markup(chart_group), chart_individual = Markup(chart_individual), trend_line = Markup(trend_line), trend_line_individual = Markup(trend_line_individual), trend_line_group = Markup(trend_line_group),  end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time))
+    return render_template('stats.html', year = datetime.now().strftime('%Y'), table = Markup(table), chart = Markup(chart), chart_group = Markup(chart_group), chart_individual = Markup(chart_individual), trend_line = Markup(trend_line), trend_line_individual = Markup(trend_line_individual), trend_line_group = Markup(trend_line_group), end_point = Markup(end_point), histogram_weight = Markup(histogram_weight), histogram_persons = Markup(histogram_persons), histogram_time = Markup(histogram_time))
 
 @app.route('/stats-embed')
 def render_stats_embed(): #same as render_ranks() except this renders a page without the top bar and background image. It also does not generate data for the charts.
