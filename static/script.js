@@ -4,7 +4,7 @@ $(document).ready(function() {
   $("#legend-embed").hide();
   $("#resolve").hide();
   $("#resolve-switch").hide();
-  $("#map-reports").fadeOut(100000)
+  $("#map-reports").fadeOut(1000)
   $(".Month").change(function() {
     if ($(".Month:checked").length == $(".Month").length) {
       $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed' class='map'></iframe>")
