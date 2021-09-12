@@ -18,14 +18,14 @@ body {
   margin-left: 15px;
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 22px;
 }
 #header-icon {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 8px;
   height: 30px;
   margin-left: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 23px;
 }
 
 #header {
@@ -383,8 +383,8 @@ footer {
 }
 @media only screen and (max-width: 600px) {
   #title {
-    font-size: 22px;
-    margin-left: 10px;
+    font-size: 16.5px;
+    margin-left: 5px;
   }
   #globe-icon {
     margin-left: 5px;
@@ -407,8 +407,8 @@ footer {
     margin-left: 10px;
     margin-bottom: 30px;
   }
-  #title {
-    display: none;
+  #links {
+    font-size: 14px;
   }
 }
 #legend-embed {
