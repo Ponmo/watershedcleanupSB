@@ -1,10 +1,10 @@
 $(document).ready(function() { 
-  //$("#map-reports").hide();
   $("#reports").hide();
   $("#legend").hide();
   $("#legend-embed").hide();
   $("#resolve").hide();
   $("#resolve-switch").hide();
+  $("#map-reports").hide();
   $(".Month").change(function() {
     if ($(".Month:checked").length == $(".Month").length) {
       $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed' class='map'></iframe>")
