@@ -5,6 +5,9 @@ body {
 .embed {
   background-image: none;
 }
+.modal-title {
+  text-align: center;
+}
 #navbar {
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   font-weight: bold;
