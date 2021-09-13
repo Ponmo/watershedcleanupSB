@@ -32,7 +32,7 @@ gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 @app.route('/modal_hide')
 def render_maps_embed():
     if request.method == 'POST':
-        resp = make_response(render_maps())
+        resp = make_response('setting a cookie')
         resp.set_cookie('returner', 'yes')
         return resp 
 
