@@ -316,7 +316,6 @@ def render_stats(): #renders the statistics page.
         except:
             pass
     counter = 1
-    counter_individual = 1
     counter_group = 1
     chart = ''
     chart_individual = ('{' +
@@ -360,7 +359,7 @@ def render_stats(): #renders the statistics page.
     chart_group = chart_group[:-1]
     chart_individual = chart_individual[:-1]
     trend_line = trend_line[:-1]
-    trend_line_group = trend_line_group.replace(',chart4.data[' + str(counter_group) + '].dataPoints,', '')
+    trend_line_group = trend_line_group.replace(',chart4.data[' + str(counter_group - 1) + '].dataPoints,', '')
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = ''
