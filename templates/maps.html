@@ -7,18 +7,6 @@ Maps
 {% endblock %}
 
 {% block content %}
-<div class="modal show fade" id="myModal">
-    <div class="modal-header">
-        <a class="close" data-dismiss="modal">×</a>
-        <h3>Modal header</h3>
-    </div>
-    <div class="modal-body">
-        <p>One fine body…</p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn">Close</a>
-    </div>
-</div>
 <div id="map-overlay">
   <iframe id="map-cleanups" src="https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed" class="map"></iframe>
   <iframe id="map-reports" src="https://www.geosheets.com/map/s:DJj8Kv6R/reports/embed" class="map"></iframe>
@@ -102,4 +90,16 @@ Maps
 <footer>
   <p id="credit">Data is sourced from Santa Barbara Channelkeeper's Watershed Brigade. Join the effort to see your own data being added!</p>
 </footer>
+<div class="modal show fade" id="myModal">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Modal header</h3>
+    </div>
+    <div class="modal-body">
+        <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+    </div>
+</div>
 {% endblock %}
