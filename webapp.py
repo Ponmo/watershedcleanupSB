@@ -354,8 +354,7 @@ def render_stats(): #renders the statistics page.
             chart_group += chart_data.get(key)
             chart_group += ']},'
             trend_line_group += 'chart.data[' + str(counter_group) + '].dataPoints,'
-            if counter_group < 5:
-                counter_group += 1
+            counter_group += 1
         if counter < len(chart_data): #creates javascript that concats each group of data to calculate the trend line.
             trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
         counter += 1
