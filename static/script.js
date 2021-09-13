@@ -1,10 +1,5 @@
-$(window).on('load', function() {
-        $('#myModal').modal('show');
-    });
 $(document).ready(function() { 
-  $(window).on('load', function() {
-        $('#myModal').modal('show');
-    });
+  $('#myModal').modal('show');
   $("#reports").hide();
   $("#legend").hide();
   $("#legend-embed").hide();
@@ -169,6 +164,3 @@ $(document).ready(function() {
     $("#resolve-switch").hide();
   });
 });
-$(window).on('load', function() {
-        $('#myModal').modal('show');
-    });
