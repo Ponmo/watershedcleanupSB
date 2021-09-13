@@ -29,10 +29,6 @@ credentials = {
 gp = gspread.service_account_from_dict(credentials)
 gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 
-#@app.route('/modal_hide')
-#def modal_hide():
-#    if request.method == 'POST':
-
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     utc_year = datetime.now().strftime('%Y')
     try:
