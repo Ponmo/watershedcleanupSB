@@ -57,6 +57,7 @@ calculateTrendLine(chart);
             markerSize: 0,
             dataPoints: [startPoint, endPoint]
         });
+	console.log(totalPoints)
     }
 
 var chart2 = new CanvasJS.Chart("chartContainer2", {
@@ -231,7 +232,6 @@ calculateTrendLine4(chart4);
             markerSize: 0,
             dataPoints: [startPoint, endPoint]
         });
-	 console.log(totalPoints);
     }
 	function getTrendLinePoint(x, slope, intercept){
 return {x: x, y: ((slope * x) + intercept)};
