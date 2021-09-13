@@ -32,7 +32,6 @@ gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 @app.route('/modal_hide')
 def modal_hide():
     if request.method == 'POST':
-        session['returner'] = 'yes'
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     utc_year = datetime.now().strftime('%Y')
@@ -148,6 +147,7 @@ def render_maps(): #renders the maps page.
     returner = ''
     if 'returner' not in session:
         returner = '<script>$(document).ready(function() { $("#myModal").modal("show");});</script>'
+        session['returner'] = 'yes'
     return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable), resolve_locations = Markup(resolve_locations), returner = Markup(returner))
 
 @app.route('/maps-embed')
