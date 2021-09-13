@@ -5,7 +5,6 @@ $(document).ready(function() {
   $("#resolve").hide();
   $("#resolve-switch").hide();
   $("#map-reports").fadeOut(500)
-  $('#myModal').modal('show');
   $(".Month").change(function() {
     if ($(".Month:checked").length == $(".Month").length) {
       $("#map-cleanups").replaceWith("<iframe id='map-cleanups' src='https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed' class='map'></iframe>")
