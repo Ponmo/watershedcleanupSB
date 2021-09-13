@@ -340,7 +340,6 @@ def render_stats(): #renders the statistics page.
         if key == '1':
             chart_individual += chart_data.get(key)
             chart_individual += ']},'
-            counter_individual += 1
         else:
             chart_group += ('{' +
               'type: "scatter",' +
