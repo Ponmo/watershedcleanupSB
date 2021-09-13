@@ -344,7 +344,7 @@ def render_stats(): #renders the statistics page.
             chart_individual += ']},'
             trend_line_individual += 'chart.data[' + str(counter_individual) + '].dataPoints,'
             counter_individual += 1
-        if key != '1':
+        else:
             chart_group += ('{' +
               'type: "scatter",' +
               'name: "' + key + ' Person Group",' +
