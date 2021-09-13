@@ -360,7 +360,7 @@ def render_stats(): #renders the statistics page.
     chart_group = chart_group[:-1]
     chart_individual = chart_individual[:-1]
     trend_line = trend_line[:-1]
-    trend_line_group = trend_line_group.replace('chart4.data[' + str(counter_group) + '].dataPoints,', '')
+    trend_line_group = trend_line_group.replace(',chart4.data[' + str(counter_group) + '].dataPoints,', '')
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = ''
