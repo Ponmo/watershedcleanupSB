@@ -1,4 +1,4 @@
-from flask import Flask, redirect, Markup, url_for, session, request, make_response, jsonify
+from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask import render_template
 
 import pprint
@@ -32,10 +32,7 @@ gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 @app.route('/modal_hide')
 def modal_hide():
     if request.method == 'POST':
-        resp = make_response('setting a cookie')
-        resp.set_cookie('returner', 'yes')
-        request.cookies['returner'] = 'yes'
-        return resp 
+        session['returner'] = 'yes'
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     utc_year = datetime.now().strftime('%Y')
@@ -149,7 +146,7 @@ def render_maps(): #renders the maps page.
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
     returner = ''
-    if 'returner' not in request.cookies:
+    if 'returner' not in session:
         returner = '<script>$(document).ready(function() { $("#myModal").modal("show");});</script>'
     return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable), resolve_locations = Markup(resolve_locations), returner = Markup(returner))
 
