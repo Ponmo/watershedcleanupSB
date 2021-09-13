@@ -8,6 +8,9 @@ body {
 .modal-title {
   text-align: center;
 }
+#myModal {
+  top: 140px;
+}
 #navbar {
   font-family: "Verdana", "Trebuchet MS", Helvetica, sans-serif;
   font-weight: bold;
