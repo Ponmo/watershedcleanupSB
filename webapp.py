@@ -34,6 +34,7 @@ def modal_hide():
     if request.method == 'POST':
         resp = make_response('setting a cookie')
         resp.set_cookie('returner', 'yes')
+        request.cookies['returner'] = 'yes'
         return resp 
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
