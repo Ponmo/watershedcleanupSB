@@ -6,6 +6,9 @@
 Maps
 {% endblock %}
 
+{% block script %}
+<script>$('#myModal').modal('show');</script>
+{% endblock %}
 {% block content %}
 <div id="map-overlay">
   <iframe id="map-cleanups" src="https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed" class="map"></iframe>
