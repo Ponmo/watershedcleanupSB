@@ -342,7 +342,7 @@ def render_stats(): #renders the statistics page.
         if key == '1':
             chart_individual += chart_data.get(key)
             chart_individual += ']},'
-            trend_line_individual += 'chart.data[' + str(counter_individual) + '].dataPoints,'
+            trend_line_individual += 'chart3.data[' + str(counter_individual) + '].dataPoints,'
             counter_individual += 1
         else:
             chart_group += ('{' +
@@ -353,7 +353,7 @@ def render_stats(): #renders the statistics page.
               'dataPoints: [')
             chart_group += chart_data.get(key)
             chart_group += ']},'
-            trend_line_group += 'chart.data[' + str(counter_group) + '].dataPoints,'
+            trend_line_group += 'chart4.data[' + str(counter_group) + '].dataPoints,'
             counter_group += 1
         if counter < len(chart_data): #creates javascript that concats each group of data to calculate the trend line.
             trend_line += 'chart.data[' + str(counter) + '].dataPoints,'
