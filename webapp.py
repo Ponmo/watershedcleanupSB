@@ -29,12 +29,12 @@ credentials = {
 gp = gspread.service_account_from_dict(credentials)
 gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 
-@app.route('/modal_hide')
-def render_maps_embed():
-    if request.method == 'POST':
-        resp = make_response(render_maps())
-        resp.set_cookie('returner', 'yes')
-        return resp 
+#@app.route('/modal_hide')
+#def render_maps_embed():
+#    if request.method == 'POST':
+#        resp = make_response(render_maps())
+#        resp.set_cookie('returner', 'yes')
+#        return resp 
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     utc_year = datetime.now().strftime('%Y')
@@ -118,6 +118,8 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
 
 @app.route('/') 
 def render_maps(): #renders the maps page.
+    res = flask.make_response()
+    res.set_cookie("name", value="I am cookie")
     data = get_data() #gets cleanup data.
     checkboxes = ''
     month = []
