@@ -35,7 +35,6 @@ def render_maps_embed():
         resp = make_response(render_maps())
         resp.set_cookie('returner', 'yes')
         return resp 
-    return redirect(url_for('render_maps'))
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     utc_year = datetime.now().strftime('%Y')
@@ -149,10 +148,10 @@ def render_maps(): #renders the maps page.
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
     returner = ''
-    try: 
-        returner = request.cookies.get('returner')
-    except: 
-        returner = '<script>$(document).ready(function() { $("#myModal").modal("show");});</script>'
+    #try: 
+    #    returner = request.cookies.get('returner')
+    #except: 
+    #    returner = '<script>$(document).ready(function() { $("#myModal").modal("show");});</script>'
     return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable), resolve_locations = Markup(resolve_locations), returner = Markup(returner))
 
 @app.route('/maps-embed')
