@@ -12,6 +12,8 @@ import pytz
 
 app = Flask(__name__)
 
+app.secret_key = os.environ['SECRET_KEY']
+
 credentials = {
         'type': 'service_account',
         'project_id': os.environ['project_id'],
