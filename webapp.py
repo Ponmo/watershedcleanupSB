@@ -147,9 +147,9 @@ def render_maps(): #renders the maps page.
         location_question = '<label>Coordinates: ( <input name="x-location" class="form-control" placeholder="34.011761" maxlength="10" type="number" step="0.000001" required> , <input name="y-location" class="form-control" placeholder="-119.777489" maxlength="10" type="number" step="0.000001" required> )</label>'
     else:
         location_question = '<label for="location">Specific Address/Coordinates:&nbsp;</label><input type="text" class="form-control" id="location" maxlength="40" name="location" required>'
-    returner = request.cookies.get('returner')
-    #if returner == "None ":
-    returner = '<script>$(document).ready(function() { $("#myModal").modal("show");});</script>'
+    returner = ''
+    if 'returner' not in request.cookies:
+        returner = '<script>$(document).ready(function() { $("#myModal").modal("show");});</script>'
     return render_template('maps.html', checkboxes = Markup(checkboxes), location_question = Markup(location_question), report_limit = Markup(report_limit), submit = Markup(disable), resolve_locations = Markup(resolve_locations), returner = Markup(returner))
 
 @app.route('/maps-embed')
