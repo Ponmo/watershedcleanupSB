@@ -7,7 +7,11 @@ Maps
 {% endblock %}
 
 {% block script %}
-<script>$('#myModal').modal('show');</script>
+<script>
+  $(document).ready(function() { 
+  $('#myModal').modal('show');
+});
+  </script>
 {% endblock %}
 {% block content %}
 <div id="map-overlay">
