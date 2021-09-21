@@ -11,3 +11,5 @@ Werkzeug
 wheel
 gspread
 pytz
+Flask-PyMongo
+pymongo
