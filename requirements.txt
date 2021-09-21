@@ -13,3 +13,4 @@ gspread
 pytz
 Flask-PyMongo
 pymongo
+dnspython
