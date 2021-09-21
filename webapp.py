@@ -187,7 +187,8 @@ def render_ranks(): #renders the ranks page.
                 if row[0] in participants:
                     participants[row[0]] += float(row[9])
                 else:
-                    participants[row[0]] = float(row[9])
+                    if is_number(row[9]):
+                        participants[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
     first = ''
     second = ''
