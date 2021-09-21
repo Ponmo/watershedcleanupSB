@@ -1,9 +1,11 @@
 from flask import Flask, redirect, Markup, url_for, session, request, jsonify
 from flask import render_template
+from bson.objectid import ObjectId
 
 import pprint
 import os
 import sys
+import pymongo
 from datetime import datetime, timedelta
 import gspread
 from datetime import datetime, date, timedelta
@@ -13,6 +15,11 @@ import pytz
 app = Flask(__name__)
 
 app.secret_key = os.environ['SECRET_KEY']
+
+connection_string = os.environ['MONGO_CONNECTION_STRING']
+db_name = os.environ['MONGO_DBNAME']
+client = pymongo.MongoClient(connection_string)
+db = client[db_name]
 
 credentials = {
         'type': 'service_account',
