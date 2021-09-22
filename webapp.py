@@ -65,13 +65,18 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         data_new = []
         colors = ['#ab00ff', '#b300e6', '#bb00cc', '#c400b3', '#cc0099', '#d1008d', '#d50080', '#db006e', '#e0005c', '#e80045', '#ef0030', '#ff0000'] #color gradient used to color points on the cleanups map from old to new.
         months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] #12 months of the year.
-        collection.delete_many({})
-        for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
-            month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
-            data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[9], row[15], row[16]])
-            generate = ObjectId()
-            item = {'_id': generate, '0': row[1], '1': row[2], '2': row[3], '3': month, '4': row[4], '5': row[5], '6': row[7], '7': row[8], '8': row[9], '9': row[15], '10': row[16]}
-            collection.insert_one(item)
+        if 'returner' not in session:
+            collection.delete_many({})
+            for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
+                month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
+                data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[9], row[15], row[16]])
+                generate = ObjectId()
+                item = {'_id': generate, '0': row[1], '1': row[2], '2': row[3], '3': month, '4': row[4], '5': row[5], '6': row[7], '7': row[8], '8': row[9], '9': row[15], '10': row[16]}
+                collection.insert_one(item)
+        else:
+            for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
+                month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
+                data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[9], row[15], row[16]])
         counter = 0
         index = 0
         increment = int(len(data_map)/12)
