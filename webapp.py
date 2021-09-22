@@ -21,7 +21,6 @@ db_name = os.environ['MONGO_DBNAME']
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
 collection = db['Cleanups']
-cursor = collection.find({}).sort('_id', -1)
 
 credentials = {
         'type': 'service_account',
@@ -39,6 +38,7 @@ gp = gspread.service_account_from_dict(credentials)
 gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
+    cursor = collection.find({}).sort('_id', -1)
     data_new = []
     try:
         utc_year = datetime.now().strftime('%Y')
