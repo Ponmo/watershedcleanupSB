@@ -6,7 +6,6 @@ import pprint
 import os
 import sys
 import pymongo
-from datetime import datetime, timedelta
 import gspread
 from datetime import datetime, date, timedelta
 from pytz import timezone
