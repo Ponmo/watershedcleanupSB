@@ -129,7 +129,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
     except:
         cursor = collection.find({})#.sort('_id', -1)
         for item in cursor:
-            data_new.append([item.get('0'), item.get('1'), item.get('2'), int(item.get('3')), item.get('4'), item.get('5'), item.get('6'), item.get('7'), item.get('8'), item.get('9'), item.get('10')])
+            data_new.append([item.get('0'), item.get('1'), item.get('2'), item.get('3'), item.get('4'), item.get('5'), item.get('6'), item.get('7'), item.get('8'), item.get('9'), item.get('10')])
     return data_new
             
 @app.route('/') 
