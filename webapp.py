@@ -71,7 +71,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
             data_new.append([row[1], row[2], row[3], month, row[4], row[5], row[7], row[8], row[9], row[15], row[16]])
             generate = ObjectId()
             item = {'_id': generate, '0': row[1], '1': row[2], '2': row[3], '3': month, '4': row[4], '5': row[5], '6': row[7], '7': row[8], '8': row[9], '9': row[15], '10': row[16]}
-            collection.insert_one(post)
+            collection.insert_one(item)
         counter = 0
         index = 0
         increment = int(len(data_map)/12)
