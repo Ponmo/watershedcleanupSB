@@ -154,8 +154,8 @@ def render_maps(): #renders the maps page.
         checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
     data_report = []
     cursor = collectionTwo.find({})
-        for item in cursor:
-            data_report.append([item.get('0'), item.get('1'), item.get('2'), item.get('3'), item.get('4'), item.get('5')])
+    for item in cursor:
+        data_report.append([item.get('0'), item.get('1'), item.get('2'), item.get('3'), item.get('4'), item.get('5')])
     reports = 0
     disable = ''
     report_limit = ''
