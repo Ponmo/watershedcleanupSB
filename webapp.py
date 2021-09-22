@@ -125,7 +125,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
             collectionTwo.delete_many({})
             for row in data_report:
                 generate = ObjectId()
-                item = {'_id': generate, row[0], row[1], row[2], row[3], row[4], row[5]}
+                item = {'_id': generate, '0': row[0], '1': row[1], '2': row[2], '3': row[3], '4': row[4], '5': row[5]}
                 collection.insert_one(item)
         while counter_two > 0:  #adds blank rows to data_report in case the number of reports on the reports sheet is more than in data_reports.
             data_report.append(['', '', '', '', '', ''])
