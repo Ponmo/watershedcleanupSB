@@ -20,6 +20,7 @@ db_name = os.environ['MONGO_DBNAME']
 client = pymongo.MongoClient(connection_string)
 db = client[db_name]
 collection = db['Cleanups']
+collectionTwo = db['Reports']
 
 credentials = {
         'type': 'service_account',
@@ -38,6 +39,9 @@ gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     data_new = []
+    updateMongo = True
+    if 'returner' in session:
+        updateMongo = False
     try:
         utc_year = datetime.now().strftime('%Y')
         try:
@@ -63,7 +67,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         data_new = []
         colors = ['#ab00ff', '#b300e6', '#bb00cc', '#c400b3', '#cc0099', '#d1008d', '#d50080', '#db006e', '#e0005c', '#e80045', '#ef0030', '#ff0000'] #color gradient used to color points on the cleanups map from old to new.
         months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] #12 months of the year.
-        if 'returner' not in session:
+        if updateMongo:
             collection.delete_many({})
             for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
                 month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
@@ -97,7 +101,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
             cell[0].value = '=GEO_MAP(A1:J' + str(len(data_update)) + ', "cleanups", "Location")' #adds geosheets formula to the cleanups sheet to generate the new map.
             wsheet.update_cells(cell, 'USER_ENTERED')
         wsheet = gsheet.worksheet('Reports') #open up the reports sheet on the maps google Sheet.
-        data_report = wsheet.get_all_values()
+        data_report = wsheet.get_all_values() 
         date_now = datetime.now(tz=pytz.utc)
         date_now = date_now.astimezone(timezone('America/Los_Angeles'))
         counter = 0
@@ -117,6 +121,12 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
                     counter_two += 1
                     change = True
             counter_three += 1
+        if updateMongo:
+            collectionTwo.delete_many({})
+            for row in data_report:
+                generate = ObjectId()
+                item = {'_id': generate, row[0], row[1], row[2], row[3], row[4], row[5]}
+                collection.insert_one(item)
         while counter_two > 0:  #adds blank rows to data_report in case the number of reports on the reports sheet is more than in data_reports.
             data_report.append(['', '', '', '', '', ''])
             counter_two -= 1
@@ -126,7 +136,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
             cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")' #adds geosheets formula to the reports sheet to generate the new map.
             wsheet.update_cells(cell, 'USER_ENTERED')
     except:
-        cursor = collection.find({})#.sort('_id', -1)
+        cursor = collection.find({})
         for item in cursor:
             data_new.append([item.get('0'), item.get('1'), item.get('2'), item.get('3'), item.get('4'), item.get('5'), item.get('6'), item.get('7'), item.get('8'), item.get('9'), item.get('10')])
     return data_new
@@ -142,8 +152,10 @@ def render_maps(): #renders the maps page.
             month.append(row[3])
     for item in month: #adds a checkbox for each month in which cleanups were done so that points from each month can be toggled on or off from the cleanups map.
         checkboxes += '<label class="checkbox-inline"><input type="checkbox" value="' + months[item - 1] + '" class="Month" id="' + months[item - 1] + '" checked>' + months[item - 1] + '</label>'
-    wsheet = gsheet.worksheet('Reports')
-    data_report = wsheet.get_all_values()
+    data_report = []
+    cursor = collectionTwo.find({})
+        for item in cursor:
+            data_report.append([item.get('0'), item.get('1'), item.get('2'), item.get('3'), item.get('4'), item.get('5')])
     reports = 0
     disable = ''
     report_limit = ''
