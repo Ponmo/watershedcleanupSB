@@ -38,7 +38,6 @@ gp = gspread.service_account_from_dict(credentials)
 gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
-    cursor = collection.find({})#.sort('_id', -1)
     data_new = []
     try:
         utc_year = datetime.now().strftime('%Y')
@@ -128,6 +127,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
             cell[0].value = '=GEO_MAP(A1:F' + str(len(data_report)) + ', "reports", "Location")' #adds geosheets formula to the reports sheet to generate the new map.
             wsheet.update_cells(cell, 'USER_ENTERED')
     except:
+        cursor = collection.find({})#.sort('_id', -1)
         for item in cursor:
             data_new.append([item.get('0'), item.get('1'), item.get('2'), item.get('3'), item.get('4'), item.get('5'), item.get('6'), item.get('7'), item.get('8'), item.get('9'), item.get('10')])
     return data_new
