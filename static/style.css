@@ -7,6 +7,7 @@ body {
 }
 .modal-title {
   text-align: center;
+  border-bottom: none;
 }
 #myModal {
   top: 100px;
