@@ -8,6 +8,10 @@ body {
 .modal-title {
   text-align: center;
   border-bottom: none;
+  color: rgb(243,119,36);
+}
+.modal-body {
+  border-top: none;
 }
 #myModal {
   top: 100px;
