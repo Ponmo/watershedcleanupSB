@@ -128,10 +128,10 @@ body {
   text-decoration: underline;
 }
 .rank-content input:before {
-  content: 'Month';
+  content: 'Monthly';
 }
 .rank-content input:after {
-  content: 'Year';
+  content: 'Yearly';
 }
 .switcher label {
   z-index: 1;
