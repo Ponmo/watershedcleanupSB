@@ -3,6 +3,8 @@ $(document).ready(function() {
   $("#legend").hide();
   $("#legend-embed").hide();
   $("#resolve").hide();
+  $("#yearly").hide();
+  $("#yearly2").hide();
   $("#resolve-switch").hide();
   $("#map-reports").fadeOut(1000)
   $(".Month").change(function() {
