@@ -324,6 +324,9 @@ footer {
 }
 
 .switch-button {
+    -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance: none;
   background: rgba(255, 255, 255, 0.56);
   border-radius: 30px;
   overflow: hidden;
