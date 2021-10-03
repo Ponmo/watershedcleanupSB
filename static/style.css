@@ -115,23 +115,13 @@ body {
 }
 .switcher input:before {
   left: 60px;
-  text-decoration: underline;
-}
-.map-content input:before {
   content: 'Cleanups';
-}
-.map-content input:after {
-  content: 'Report Trash';
+  text-decoration: underline;
 }
 .switcher input:after {
   right: 60px;
+  content: 'Report Trash';
   text-decoration: underline;
-}
-.rank-content input:before {
-  content: 'Monthly';
-}
-.rank-content input:after {
-  content: 'Yearly';
 }
 .switcher label {
   z-index: 1;
