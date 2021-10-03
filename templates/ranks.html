@@ -7,33 +7,63 @@ Rankings
 {% endblock %}
 
 {% block content %}
-<table id="top">
+<table class="top" id="monthly">
   <tr>
-    <td id="second">
+    <td class="second">
       <div class="plate">
-        <img src="/static/images/silver.png" alt="silver" id="silver"> <!-- Source for Medal Images: https://www.google.com/search?q=medals+bronze+gold+silver&rlz=1C5CHFA_enUS831US831&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiR3ISPnq_yAhUDJTQIHSZRAoQQ_AUoAnoECAEQBA&biw=1920&bih=812#imgrc=d-5IeE4vIQBRuM -->
+        <img src="/static/images/silver.png" alt="silver" class="silver"> <!-- Source for Medal Images: https://www.google.com/search?q=medals+bronze+gold+silver&rlz=1C5CHFA_enUS831US831&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiR3ISPnq_yAhUDJTQIHSZRAoQQ_AUoAnoECAEQBA&biw=1920&bih=812#imgrc=d-5IeE4vIQBRuM -->
         <p class="ranking">{{ second }}<br><b>{{ second_score }}</b></p>
       </div>
     </td>
-    <td id="first">
+    <td class="first">
       <div class="plate">
-        <img src="/static/images/gold.png" alt="gold" id="gold">
+        <img src="/static/images/gold.png" alt="gold" class="gold">
         <p class="ranking">{{ first }}<br><b>{{ first_score }}</b></p>
       </div>
     </td>
-    <td id="third">
+    <td class="third">
       <div class="plate">
-        <img src="/static/images/bronze.png" alt="bronze" id="bronze">
+        <img src="/static/images/bronze.png" alt="bronze" class="bronze">
         <p class="ranking">{{ third }}<br><b>{{ third_score }}</b></p>
       </div>
     </td>
   </tr>
 </table>
-<table id="bottom">
-  <tr id="first-row">
+<table class="bottom" id="monthly2">
+  <tr class="first-row">
     <td>
     </td>
   </tr>
   {{ rankings_bottom }}
+</table>
+<!-- Yearly Table -->
+<table class="top" id="yearly">
+  <tr>
+    <td class="second">
+      <div class="plate">
+        <img src="/static/images/silver.png" alt="silver" class="silver"> <!-- Source for Medal Images: https://www.google.com/search?q=medals+bronze+gold+silver&rlz=1C5CHFA_enUS831US831&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiR3ISPnq_yAhUDJTQIHSZRAoQQ_AUoAnoECAEQBA&biw=1920&bih=812#imgrc=d-5IeE4vIQBRuM -->
+        <p class="ranking">{{ SOMETHING }}<br><b>{{ SOMETHING }}</b></p>
+      </div>
+    </td>
+    <td class="first">
+      <div class="plate">
+        <img src="/static/images/gold.png" alt="gold" class="gold">
+        <p class="ranking">{{ SOMETHING }}<br><b>{{ SOMETHING }}</b></p>
+      </div>
+    </td>
+    <td class="third">
+      <div class="plate">
+        <img src="/static/images/bronze.png" alt="bronze" class="bronze">
+        <p class="ranking">{{ SOMETHING }}<br><b>{{ SOMETHING }}</b></p>
+      </div>
+    </td>
+  </tr>
+</table>
+<table class="bottom" id="yearly2">
+  <tr class="first-row">
+    <td>
+    </td>
+  </tr>
+  {{ SOMETHING }}
 </table>
 {% endblock %}
