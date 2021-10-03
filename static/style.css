@@ -120,10 +120,18 @@ body {
 .map-content input:before {
   content: 'Cleanups';
 }
-.switcher input:after {
+.map-content input:after {
   content: 'Report Trash';
+}
+.switcher input:after {
   right: 60px;
   text-decoration: underline;
+}
+.rank-content input:before {
+  content: 'Month';
+}
+.rank-content input:after {
+  content: 'Year';
 }
 .switcher label {
   z-index: 1;
