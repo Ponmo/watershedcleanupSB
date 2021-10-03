@@ -148,6 +148,22 @@ $(document).ready(function() {
       $("#credit").hide();
     }
   });
+  $(".month-switch").click(function() {
+    $("#monthly").hide();
+    $("#monthly2").hide();
+    $("#month-switch").hide();
+    $("#yearly").show();
+    $("#yearly2").show();
+    $("#year-switch").show();
+  });
+  $(".year-switch").click(function() {
+    $("#monthly").show();
+    $("#monthly2").show();
+    $("#month-switch").show();
+    $("#yearly").hide();
+    $("#yearly2").hide();
+    $("#year-switch").hide();
+  });
   $("#report-switch").click(function() {
     document.getElementById("replaceable").innerHTML = "Resolve a Location";
     $("#report").hide();
