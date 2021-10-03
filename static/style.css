@@ -114,9 +114,11 @@ body {
   color: #fff;
 }
 .switcher input:before {
-  content: 'Cleanups';
   left: 60px;
   text-decoration: underline;
+}
+.map-content input:before {
+  content: 'Cleanups';
 }
 .switcher input:after {
   content: 'Report Trash';
