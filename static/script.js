@@ -5,7 +5,7 @@ $(document).ready(function() {
   $("#resolve").hide();
   $("#yearly").hide();
   $("#yearly2").hide();
-  $("#year-switch").hide();
+  $(".year-switch").hide();
   $("#resolve-switch").hide();
   $("#map-reports").fadeOut(1000)
   $(".Month").change(function() {
