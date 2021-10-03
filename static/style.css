@@ -257,7 +257,7 @@ footer {
 .points {
   display: inline-block;
 }
-#first-row {
+.first-row {
   height: 175px;
 }
 #first-row-embed {
@@ -271,7 +271,7 @@ footer {
   border-radius: 15px;
   background-color: white;
 }
-#bottom {
+.bottom {
   position: absolute;
   border: 2px solid black;
   width: 375px;
@@ -286,20 +286,20 @@ footer {
   background: rgb(243,119,36);
   background: linear-gradient(0deg, rgba(243,119,36,1) 0%, rgba(252,180,44,1) 100%);
 }
-#top {
+.top {
   margin: auto;
   margin-top: 20px;
 }
-#gold, #silver, #bronze {
+.gold, .silver, .bronze {
   width: 90px;
 }
-#second, #first, #third {
+.second, .first, .third {
  text-align: center;
 }
-#second {
+.second {
   padding-right: 10px;
 }
-#third {
+.third {
   padding-left: 10px;
 }
 .plate {
