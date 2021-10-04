@@ -10,6 +10,10 @@
     <title>Watershed Cleanup - Rankings</title>
   </head>
   <body class="embed">
+    <div id="aligning-buttons">
+      <button type="button" class="btn btn-primary button-scoreboard month-switch">Monthly Scoreboard</button>
+      <button type="button" class="btn btn-primary button-scoreboard year-switch">Yearly Scoreboard</button>
+    </div>
     <table class="top">
       <tr>
         <td class="second">
@@ -39,5 +43,36 @@
       </tr>
       {{ rankings_bottom }}
     </table>
+    
+    
+    <table class="top" id="yearly">
+  <tr>
+    <td class="second">
+      <div class="plate">
+        <img src="/static/images/silver.png" alt="silver" class="silver"> <!-- Source for Medal Images: https://www.google.com/search?q=medals+bronze+gold+silver&rlz=1C5CHFA_enUS831US831&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiR3ISPnq_yAhUDJTQIHSZRAoQQ_AUoAnoECAEQBA&biw=1920&bih=812#imgrc=d-5IeE4vIQBRuM -->
+        <p class="ranking">{{ second_year }}<br><b>{{ second_score_year }}</b></p>
+      </div>
+    </td>
+    <td class="first">
+      <div class="plate">
+        <img src="/static/images/gold.png" alt="gold" class="gold">
+        <p class="ranking">{{ first_year }}<br><b>{{ first_score_year }}</b></p>
+      </div>
+    </td>
+    <td class="third">
+      <div class="plate">
+        <img src="/static/images/bronze.png" alt="bronze" class="bronze">
+        <p class="ranking">{{ third_year }}<br><b>{{ third_score_year }}</b></p>
+      </div>
+    </td>
+  </tr>
+</table>
+<table class="bottom-embed" id="yearly2">
+  <tr class="first-row-embed">
+    <td>
+    </td>
+  </tr>
+  {{ rankings_bottom_year }}
+</table>
   </body>
 </html>
