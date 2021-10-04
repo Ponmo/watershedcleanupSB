@@ -217,21 +217,35 @@ def render_ranks(): #renders the ranks page.
     data = get_data() #gets cleanup data.
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
+    participants_year = {}
     for row in data: #checks every cleanup. Checks if the cleanup was conducted in the current month, and if it has points. It counts all the points for every participant.
-        if int(row[2].partition('/')[0]) == month: #cleanup has to be conducted this month.
-            if is_number(row[8]): #the points column must contain a number.
+        if is_number(row[8]): #the points column must contain a number.
+            if int(row[2].partition('/')[0]) == month: #cleanup has to be conducted this month.
                 if row[0] in participants:
                     participants[row[0]] += float(row[9])
                 else:
                     if is_number(row[9]):
                         participants[row[0]] = float(row[9])
+            else:
+                if row[0] in participants_year:
+                    participants_year[row[0]] += float(row[9])
+                else:
+                    if is_number(row[9]):
+                        participants_year[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
+    participants_year = sorted(participants_year.items(), key=lambda x: x[1], reverse=True)
     first = ''
     second = ''
     third = ''
     first_score = ''
     second_score = ''
     third_score = ''
+    first_year = ''
+    second_year = ''
+    third_year = ''
+    first_score_year = ''
+    second_score_year = ''
+    third_score_year = ''
     if len(participants) >= 1: #first place.
         first = participants[0][0]
         first_score = str(participants[0][1])
@@ -241,13 +255,28 @@ def render_ranks(): #renders the ranks page.
     if len(participants) >= 3: #third place.
         third = participants[2][0]
         third_score = str(participants[2][1])
+    if len(participants_year) >= 1:
+        first_year = participants_year[0][0]
+        first_score_year = str(participants_year[0][1])
+    if len(participants_year) >= 2:
+        second_year = participants_year[1][0]
+        second_score_year = str(participants_year[1][1])
+    if len(participants_year) >= 3:
+        third_year = participants_year[2][0]
+        third_score_year = str(participants_year[2][1])
     place = 4
     rankings_bottom = ''
+    rankings_bottom_year = ''
     while place <= len(participants): #generates a row in the rankings table for every participant other than the leading three.
         rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
-    return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+    place = 4
+    while place <= len(participants_year):
+        rankings_bottom_year += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants_year[place - 1][0] + 
+                            '</p></div><div class="points"><p><b>' + str(participants_year[place - 1][1]) + '</b></p></div></div></td></tr>')
+        place += 1
+    return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom), first_year = first_year, second_year = second_year, third_year = third_year, first_score_year = first_score_year, second_score_year = second_score_year, third_score_year = third_score_year, rankings_bottom_year = Markup(rankings_bottom_year))
 
 @app.route('/ranks-embed')
 def render_ranks_embed(): #same as render_ranks() except this renders a page without the top bar and background image.
