@@ -272,7 +272,7 @@ footer {
 .first-row {
   height: 175px;
 }
-#first-row-embed {
+.first-row-embed {
   height: 60px;
 }
 .rankings-bottom {margin: 10px;
@@ -463,7 +463,7 @@ footer {
   border: 1px solid grey;
   border-bottom: none;
 }
-#bottom-embed {
+.bottom-embed {
   position: absolute;
   border: 2px solid black;
   width: 375px;
