@@ -283,21 +283,35 @@ def render_ranks_embed(): #same as render_ranks() except this renders a page wit
     data = get_data()
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
+    participants_year = {}
     for row in data:
-        if int(row[2].partition('/')[0]) == month:
-            if is_number(row[8]):
+        if is_number(row[9]):
+            if int(row[2].partition('/')[0]) == month:
                 if row[0] in participants:
                     participants[row[0]] += float(row[9])
                 else:
                     if is_number(row[9]):
                         participants[row[0]] = float(row[9])
-    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True)
+            else:
+                if row[0] in participants_year:
+                    participants_year[row[0]] += float(row[9])
+                else:
+                    if is_number(row[9]):
+                        participants_year[row[0]] = float(row[9])
+    participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
+    participants_year = sorted(participants_year.items(), key=lambda x: x[1], reverse=True)
     first = ''
     second = ''
     third = ''
     first_score = ''
     second_score = ''
     third_score = ''
+    first_year = ''
+    second_year = ''
+    third_year = ''
+    first_score_year = ''
+    second_score_year = ''
+    third_score_year = ''
     if len(participants) >= 1:
         first = participants[0][0]
         first_score = str(participants[0][1])
@@ -307,13 +321,28 @@ def render_ranks_embed(): #same as render_ranks() except this renders a page wit
     if len(participants) >= 3:
         third = participants[2][0]
         third_score = str(participants[2][1])
+    if len(participants_year) >= 1:
+        first_year = participants_year[0][0]
+        first_score_year = str(participants_year[0][1])
+    if len(participants_year) >= 2:
+        second_year = participants_year[1][0]
+        second_score_year = str(participants_year[1][1])
+    if len(participants_year) >= 3:
+        third_year = participants_year[2][0]
+        third_score_year = str(participants_year[2][1])
     place = 4
     rankings_bottom = ''
-    while place <= len(participants):
+    rankings_bottom_year = ''
+    while place <= len(participants): 
         rankings_bottom += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
-    return render_template('ranks-embed.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom))
+    place = 4
+    while place <= len(participants_year):
+        rankings_bottom_year += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants_year[place - 1][0] + 
+                            '</p></div><div class="points"><p><b>' + str(participants_year[place - 1][1]) + '</b></p></div></div></td></tr>')
+        place += 1
+    return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom), first_year = first_year, second_year = second_year, third_year = third_year, first_score_year = first_score_year, second_score_year = second_score_year, third_score_year = third_score_year, rankings_bottom_year = Markup(rankings_bottom_year))
 
 @app.route('/stats')
 def render_stats(): #renders the statistics page.
