@@ -342,7 +342,7 @@ def render_ranks_embed(): #same as render_ranks() except this renders a page wit
         rankings_bottom_year += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants_year[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants_year[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
-    return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom), first_year = first_year, second_year = second_year, third_year = third_year, first_score_year = first_score_year, second_score_year = second_score_year, third_score_year = third_score_year, rankings_bottom_year = Markup(rankings_bottom_year))
+    return render_template('ranks-embed.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom), first_year = first_year, second_year = second_year, third_year = third_year, first_score_year = first_score_year, second_score_year = second_score_year, third_score_year = third_score_year, rankings_bottom_year = Markup(rankings_bottom_year))
 
 @app.route('/stats')
 def render_stats(): #renders the statistics page.
