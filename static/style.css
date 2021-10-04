@@ -248,7 +248,9 @@ footer {
   text-align: center;
   color: grey;
 }
-
+#aligning-buttons {
+  margin: auto;
+}
 .button-scoreboard {
 
 }
