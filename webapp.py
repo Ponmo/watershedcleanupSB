@@ -406,7 +406,7 @@ def render_stats(): #renders the statistics page.
                 for item in coords:
                     item_x = float(item.partition(',')[0])
                     item_y = float(item.partition(',')[2])
-                    if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
+                    if item_x > x_coord - 0.002 and item_x < x_coord + 0.002 and item_y > y_coord - 0.002 and item_y < y_coord + 0.002:
                         similar = True
             else:
                 coords.append(row[10])
