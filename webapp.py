@@ -21,6 +21,7 @@ client = pymongo.MongoClient(connection_string)
 db = client[db_name]
 collection = db['Cleanups']
 collectionTwo = db['Reports']
+collectionThree = db['Update']
 
 credentials = {
         'type': 'service_account',
@@ -40,8 +41,10 @@ gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     data_new = []
     updateMongo = True
-    if 'returner' in session:
+    if datetime.now().strftime('%d') == collectionThree.find_one().get('date'):
         updateMongo = False
+    #if 'returner' in session:
+    #    updateMongo = False
     try:
         utc_year = datetime.now().strftime('%Y')
         try:
@@ -68,6 +71,8 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         colors = ['#ab00ff', '#b300e6', '#bb00cc', '#c400b3', '#cc0099', '#d1008d', '#d50080', '#db006e', '#e0005c', '#e80045', '#ef0030', '#ff0000'] #color gradient used to color points on the cleanups map from old to new.
         months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] #12 months of the year.
         if updateMongo:
+            collectionThree.delete_many({})
+            collectionThree.insert_one({'date': datetime.now().strftime('%d')})
             collection.delete_many({})
             for row in data_stat: #organizes and removes any useless data from data_stat and puts them in data_new, which is used by this web app.
                 month = int(row[3].split("/")[0]) #obtains the month of the cleanup from its date.
