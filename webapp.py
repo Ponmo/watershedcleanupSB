@@ -220,13 +220,16 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
 @app.route('/ranks')
 def render_ranks(): #renders the ranks page.
     data = get_data() #gets cleanup data.
-    latest_year = 2021
+    latest_year = 21
     for row in data:
-        if int(row[2].partition('/')[2].partition('/')[2]) > latest_year:
-            latest_year = int(row[2].partition('/')[2].partition('/')[2])
+        year = int(row[2].partition('/')[2].partition('/')[2])
+        if len(row[2].partition('/')[2].partition('/')[2]) > 2:
+            year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
+        if year > latest_year:
+            latest_year = year
     latest_month = 1
     for row in data:
-        if int(row[2].partition('/')[0]) > latest_month and int(row[2].partition('/')[2].partition('/')[2]) == latest_year:
+        if int(row[2].partition('/')[0]) > latest_month and abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
             latest_month = int(row[2].partition('/')[0])
     month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
