@@ -311,7 +311,7 @@ def render_ranks_embed(): #same as render_ranks() except this renders a page wit
     participants_year = {}
     for row in data:
         if is_number(row[9]):
-            if int(row[2].partition('/')[0]) == month:
+            if int(row[2].partition('/')[0]) == latest_month and int(row[2].partition('/')[2].partition('/')[2]) == latest_year: 
                 if row[0] in participants:
                     participants[row[0]] += float(row[9])
                 else:
