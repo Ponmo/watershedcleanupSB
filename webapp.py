@@ -231,7 +231,6 @@ def render_ranks(): #renders the ranks page.
     for row in data:
         if int(row[2].partition('/')[0]) > latest_month and abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
             latest_month = int(row[2].partition('/')[0])
-    month = int(data[len(data) - 1][2].partition('/')[0])
     participants = {}
     participants_year = {}
     for row in data: #checks every cleanup. Checks if the cleanup was conducted in the current month, and if it has points. It counts all the points for every participant.
@@ -297,7 +296,17 @@ def render_ranks(): #renders the ranks page.
 @app.route('/ranks-embed')
 def render_ranks_embed(): #same as render_ranks() except this renders a page without the top bar and background image.
     data = get_data()
-    month = int(data[len(data) - 1][2].partition('/')[0])
+    latest_year = 21
+    for row in data:
+        year = int(row[2].partition('/')[2].partition('/')[2])
+        if len(row[2].partition('/')[2].partition('/')[2]) > 2:
+            year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
+        if year > latest_year:
+            latest_year = year
+    latest_month = 1
+    for row in data:
+        if int(row[2].partition('/')[0]) > latest_month and abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
+            latest_month = int(row[2].partition('/')[0])
     participants = {}
     participants_year = {}
     for row in data:
