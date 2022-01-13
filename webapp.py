@@ -36,7 +36,7 @@ credentials = {
         'client_x509_cert_url': os.environ['client_x509_cert_url']
     }
 gp = gspread.service_account_from_dict(credentials)
-gsheet = gp.open('Watershed Brigade') #Name of Channelkeeper's Google Sheet.
+gsheet = gp.open('Watershed Brigade - Master Tracking Sheet') #Name of Channelkeeper's Google Sheet.
 
 def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data if anything is new/changed in the other Google Sheet. Removes old reports from reports map. Returns formatted data as a list of lists to be used for this webapp. 
     data_new = []
