@@ -220,9 +220,11 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
 @app.route('/ranks')
 def render_ranks(): #renders the ranks page.
     data = get_data() #gets cleanup data.
+    test = ''
     latest_year = 21
     for row in data:
         year = int(row[2].partition('/')[2].partition('/')[2]) ######QUICKFIX: takes rows from volunteers. Bug with dates, probably. Make sure that these partitions are correct!
+        test += str(year)
         if len(row[2].partition('/')[2].partition('/')[2]) > 2:
             year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
         if year > latest_year:
@@ -291,7 +293,7 @@ def render_ranks(): #renders the ranks page.
         rankings_bottom_year += ('<tr><td><div class="rankings-bottom"><div class="name"><p>' + str(place) + '. ' + participants_year[place - 1][0] + 
                             '</p></div><div class="points"><p><b>' + str(participants_year[place - 1][1]) + '</b></p></div></div></td></tr>')
         place += 1
-    return render_template('ranks.html', first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom), first_year = first_year, second_year = second_year, third_year = third_year, first_score_year = first_score_year, second_score_year = second_score_year, third_score_year = third_score_year, rankings_bottom_year = Markup(rankings_bottom_year))
+    return render_template('ranks.html', test = test, first = first, second = second, third = third, first_score = first_score, second_score = second_score, third_score = third_score, rankings_bottom = Markup(rankings_bottom), first_year = first_year, second_year = second_year, third_year = third_year, first_score_year = first_score_year, second_score_year = second_score_year, third_score_year = third_score_year, rankings_bottom_year = Markup(rankings_bottom_year))
 
 @app.route('/ranks-embed')
 def render_ranks_embed(): #same as render_ranks() except this renders a page without the top bar and background image.
