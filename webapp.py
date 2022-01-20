@@ -222,7 +222,7 @@ def render_ranks(): #renders the ranks page.
     data = get_data() #gets cleanup data.
     latest_year = 21
     for row in data:
-        year = int(row[2].partition('/')[2].partition('/')[2])
+        year = int(row[2].partition('/')[2].partition('/')[2]) ######QUICKFIX: takes rows from volunteers. Bug with dates, probably. Make sure that these partitions are correct!
         if len(row[2].partition('/')[2].partition('/')[2]) > 2:
             year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
         if year > latest_year:
