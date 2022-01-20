@@ -237,7 +237,7 @@ def render_ranks(): #renders the ranks page.
     participants_year = {}
     for row in data: #checks every cleanup. Checks if the cleanup was conducted in the current month, and if it has points. It counts all the points for every participant.
         if is_number(row[9]): #the points column must contain a number.
-            if int(row[2].partition('/')[0]) == latest_month and int(row[2].partition('/')[2].partition('/')[2]) == latest_year: #cleanup has to be conducted in current month and current year
+            if int(row[2].partition('/')[0]) == latest_month and abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year: #cleanup has to be conducted in current month and current year
                 if row[0] in participants:
                     participants[row[0]] += float(row[9])
                 else:
