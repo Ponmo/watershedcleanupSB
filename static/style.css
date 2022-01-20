@@ -50,9 +50,6 @@ body {
 #map-overlay {
   display: flex;
 }
-#map-cleanups {
-  border-bottom: 1px solid black
-}
 .map {
   width: 100%;
   height: 65vh;
