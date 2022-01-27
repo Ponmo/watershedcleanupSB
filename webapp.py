@@ -382,58 +382,59 @@ def render_stats(): #renders the statistics page.
     colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
     for row in data: #checks every cleanup and adds them to the lists of information if they are valid.
-        if is_number(row[6]) and is_number(row[7]) and is_number(row[1]): #adds to the number of monthly cleanups.
-            total_cleanups[row[3] - 1] += 1
-        if is_number(row[6]): #adds to the monthly pounds of trash.
-            total_trash[row[3] - 1] += float(row[6])
-        if is_number(row[7]): #adds to the monthly hours of cleanup time (uses individual time)
-            total_time[row[3] - 1] += float(row[7])
-        if is_number(row[1]):
-            total_volunteers[row[3] - 1] += int(row[1])
-        #if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
-            #total_volunteers[row[3] - 1] += 1
-            #names.append(row[0])
-        if month != row[3]: #if the month of the cleanup is not the same as the cleanup before it, reset the coordinates and names list.
-            month = row[3]
-            coords = []
-            #names = []
-        if is_number(row[1]):
-            total_persons[row[3] - 1] += float(row[1]) #adds to the monthly number of total people involved in cleanups.
-            if float(row[1]) <= 1: #assigns a color to each dot on the weight vs time graph, more people involved gives the dot a redder color.
-                index = 0
-            elif float(row[1]) <= 5:
-                index = 1
-            elif float(row[1]) <= 10:
-                index = 2
-            elif float(row[1]) <= 20:
-                index = 3
-            else:
-                index = 4
-            if is_number(row[6]) and is_number(row[8]): #generates data points for the weight vs time graph.
-                if str(row[1]) in chart_data:
-                    chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+        if abs(int(data[len(data)][2].partition('/')[2].partition('/')[2])) % 100 == datetime.now().strftime('%Y'):
+            if is_number(row[6]) and is_number(row[7]) and is_number(row[1]): #adds to the number of monthly cleanups.
+                total_cleanups[row[3] - 1] += 1
+            if is_number(row[6]): #adds to the monthly pounds of trash.
+                total_trash[row[3] - 1] += float(row[6])
+            if is_number(row[7]): #adds to the monthly hours of cleanup time (uses individual time)
+                total_time[row[3] - 1] += float(row[7])
+            if is_number(row[1]):
+                total_volunteers[row[3] - 1] += int(row[1])
+            #if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
+                #total_volunteers[row[3] - 1] += 1
+                #names.append(row[0])
+            if month != row[3]: #if the month of the cleanup is not the same as the cleanup before it, reset the coordinates and names list.
+                month = row[3]
+                coords = []
+                #names = []
+            if is_number(row[1]):
+                total_persons[row[3] - 1] += float(row[1]) #adds to the monthly number of total people involved in cleanups.
+                if float(row[1]) <= 1: #assigns a color to each dot on the weight vs time graph, more people involved gives the dot a redder color.
+                    index = 0
+                elif float(row[1]) <= 5:
+                    index = 1
+                elif float(row[1]) <= 10:
+                    index = 2
+                elif float(row[1]) <= 20:
+                    index = 3
                 else:
-                    chart_data[str(row[1])] = '{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
-                if float(row[8]) > end_point:
-                    end_point = float(row[8]) #end point x-coordinate coordinate of the trend line is the same as the point with the greatest time.
-        try: #adds the the monthly number of cleanup locations.
-            x_coord = float(row[10].partition(',')[0])
-            y_coord = float(row[10].partition(',')[2])
-            similar = False
-            if coords != []: #if coordinates are within 0.00002 of eachother in the x or y direction, then they are considered as cleanups in the same location.
-                for item in coords:
-                    item_x = float(item.partition(',')[0])
-                    item_y = float(item.partition(',')[2])
-                    if item_x > x_coord - 0.002 and item_x < x_coord + 0.002 and item_y > y_coord - 0.002 and item_y < y_coord + 0.002:
-                        similar = True
-            else:
-                coords.append(row[10])
-            if similar == False:
-                total_sites[row[3] - 1] += 1
-            else:
-                coords.append(row[10])
-        except:
-            pass
+                    index = 4
+                if is_number(row[6]) and is_number(row[8]): #generates data points for the weight vs time graph.
+                    if str(row[1]) in chart_data:
+                        chart_data[str(row[1])] = chart_data.get(str(row[1])) +'{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                    else:
+                        chart_data[str(row[1])] = '{ x: ' + str(row[8]) + ', y: ' + str(row[6]) + ', color: "' + colors[index] + '" },'
+                    if float(row[8]) > end_point:
+                        end_point = float(row[8]) #end point x-coordinate coordinate of the trend line is the same as the point with the greatest time.
+            try: #adds the the monthly number of cleanup locations.
+                x_coord = float(row[10].partition(',')[0])
+                y_coord = float(row[10].partition(',')[2])
+                similar = False
+                if coords != []: #if coordinates are within 0.00002 of eachother in the x or y direction, then they are considered as cleanups in the same location.
+                    for item in coords:
+                        item_x = float(item.partition(',')[0])
+                        item_y = float(item.partition(',')[2])
+                        if item_x > x_coord - 0.002 and item_x < x_coord + 0.002 and item_y > y_coord - 0.002 and item_y < y_coord + 0.002:
+                            similar = True
+                else:
+                    coords.append(row[10])
+                if similar == False:
+                    total_sites[row[3] - 1] += 1
+                else:
+                    coords.append(row[10])
+            except:
+                pass
     counter = 1
     counter_group = 1
     chart = ''
