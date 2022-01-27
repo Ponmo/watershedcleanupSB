@@ -506,14 +506,16 @@ def render_stats_embed(): #same as render_ranks() except this renders a page wit
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     coords = []
-    names = []
+    #names = []
     month = 1
     for row in data:
         if is_number(row[6]):
             total_trash[row[3] - 1] += float(row[6])
-        if row[0] not in names:
-            total_volunteers[row[3] - 1] += 1
-            names.append(row[0])
+        if is_number(row[1]):
+            total_volunteers[row[3] - 1] += int(row[1])
+        #if row[0] not in names:
+            #total_volunteers[row[3] - 1] += 1
+            #names.append(row[0])
         if month != row[3]:
             month = row[3]
             coords = []
