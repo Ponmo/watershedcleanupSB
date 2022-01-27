@@ -375,14 +375,13 @@ def render_stats(): #renders the statistics page.
     total_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_time = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     coords = []
-    #names = []
     month = 1
     chart_data = {}
     end_point = 0.0
     colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
     for row in data: #checks every cleanup and adds them to the lists of information if they are valid.
-        if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == int(datetime.now().strftime('%Y')) % 100:
+        if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == int(datetime.now().strftime('%Y')) % 100: #only add if the year is the current year.
             if is_number(row[6]) and is_number(row[7]) and is_number(row[1]): #adds to the number of monthly cleanups.
                 total_cleanups[row[3] - 1] += 1
             if is_number(row[6]): #adds to the monthly pounds of trash.
@@ -391,13 +390,9 @@ def render_stats(): #renders the statistics page.
                 total_time[row[3] - 1] += float(row[7])
             if is_number(row[1]):
                 total_volunteers[row[3] - 1] += int(row[1])
-            #if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
-                #total_volunteers[row[3] - 1] += 1
-                #names.append(row[0])
-            if month != row[3]: #if the month of the cleanup is not the same as the cleanup before it, reset the coordinates and names list.
+            if month != row[3]: #if the month of the cleanup is not the same as the cleanup before it, reset the coordinates list.
                 month = row[3]
                 coords = []
-                #names = []
             if is_number(row[1]):
                 total_persons[row[3] - 1] += float(row[1]) #adds to the monthly number of total people involved in cleanups.
                 if float(row[1]) <= 1: #assigns a color to each dot on the weight vs time graph, more people involved gives the dot a redder color.
@@ -507,38 +502,34 @@ def render_stats_embed(): #same as render_ranks() except this renders a page wit
     total_volunteers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     total_sites = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     coords = []
-    #names = []
     month = 1
     for row in data:
-        if is_number(row[6]):
-            total_trash[row[3] - 1] += float(row[6])
-        if is_number(row[1]):
-            total_volunteers[row[3] - 1] += int(row[1])
-        #if row[0] not in names:
-            #total_volunteers[row[3] - 1] += 1
-            #names.append(row[0])
-        if month != row[3]:
-            month = row[3]
-            coords = []
-            #names = []
-        try:
-            x_coord = float(row[10].partition(',')[0])
-            y_coord = float(row[10].partition(',')[2])
-            similar = False
-            if coords != []:
-                for item in coords:
-                    item_x = float(item.partition(',')[0])
-                    item_y = float(item.partition(',')[2])
-                    if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
-                        similar = True
-            else:
-                coords.append(row[10])
-            if similar == False:
-                total_sites[row[3] - 1] += 1
-            else:
-                coords.append(row[10])
-        except:
-            pass
+        if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == int(datetime.now().strftime('%Y')) % 100:
+            if is_number(row[6]):
+                total_trash[row[3] - 1] += float(row[6])
+            if is_number(row[1]):
+                total_volunteers[row[3] - 1] += int(row[1])
+            if month != row[3]:
+                month = row[3]
+                coords = []
+            try:
+                x_coord = float(row[10].partition(',')[0])
+                y_coord = float(row[10].partition(',')[2])
+                similar = False
+                if coords != []:
+                    for item in coords:
+                        item_x = float(item.partition(',')[0])
+                        item_y = float(item.partition(',')[2])
+                        if item_x > x_coord - 0.00002 and item_x < x_coord + 0.00002 and item_y > y_coord - 0.00002 and item_y < y_coord + 0.00002:
+                            similar = True
+                else:
+                    coords.append(row[10])
+                if similar == False:
+                    total_sites[row[3] - 1] += 1
+                else:
+                    coords.append(row[10])
+            except:
+                pass
     counter = 0
     months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER']
     table = ''
