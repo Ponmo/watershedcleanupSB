@@ -382,7 +382,7 @@ def render_stats(): #renders the statistics page.
     colors = ['#ffb600', '#ff9900', '#ff7900', '#ff5200', '#ff0000']
     index = 0
     for row in data: #checks every cleanup and adds them to the lists of information if they are valid.
-        if abs(int(data[len(data)][2].partition('/')[2].partition('/')[2])) % 100 == datetime.now().strftime('%Y'):
+        if abs(int(data[len(data) - 1][2].partition('/')[2].partition('/')[2])) % 100 == datetime.now().strftime('%Y'):
             if is_number(row[6]) and is_number(row[7]) and is_number(row[1]): #adds to the number of monthly cleanups.
                 total_cleanups[row[3] - 1] += 1
             if is_number(row[6]): #adds to the monthly pounds of trash.
