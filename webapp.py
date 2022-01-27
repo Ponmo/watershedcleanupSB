@@ -389,7 +389,7 @@ def render_stats(): #renders the statistics page.
         if is_number(row[7]): #adds to the monthly hours of cleanup time (uses individual time)
             total_time[row[3] - 1] += float(row[7])
         if is_number(row[2]):
-            total_volunteers[row[3] - 1] += int(row[2])
+            total_volunteers[row[3] - 1] += int(row[1])
         #if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
             #total_volunteers[row[3] - 1] += 1
             #names.append(row[0])
