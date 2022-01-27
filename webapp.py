@@ -519,7 +519,7 @@ def render_stats_embed(): #same as render_ranks() except this renders a page wit
         if month != row[3]:
             month = row[3]
             coords = []
-            names = []
+            #names = []
         try:
             x_coord = float(row[10].partition(',')[0])
             y_coord = float(row[10].partition(',')[2])
