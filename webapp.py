@@ -375,7 +375,7 @@ def render_stats(): #renders the statistics page.
     total_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     total_time = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     coords = []
-    names = []
+    #names = []
     month = 1
     chart_data = {}
     end_point = 0.0
@@ -388,9 +388,11 @@ def render_stats(): #renders the statistics page.
             total_trash[row[3] - 1] += float(row[6])
         if is_number(row[7]): #adds to the monthly hours of cleanup time (uses individual time)
             total_time[row[3] - 1] += float(row[7])
-        if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
-            total_volunteers[row[3] - 1] += 1
-            names.append(row[0])
+        if is_number(row[2]):
+            total_volunteers[row[3] - 1] += row[2]
+        #if row[0] not in names: #if there is a new name, then add to the number of total monthly volunteers.
+            #total_volunteers[row[3] - 1] += 1
+            #names.append(row[0])
         if month != row[3]: #if the month of the cleanup is not the same as the cleanup before it, reset the coordinates and names list.
             month = row[3]
             coords = []
