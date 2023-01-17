@@ -220,7 +220,7 @@ def render_maps_embed(): #same as render_maps() except this renders a page witho
 @app.route('/ranks')
 def render_ranks(): #renders the ranks page.
     data = get_data() #gets cleanup data.
-    latest_year = 21
+    latest_year = int(datetime.now().strftime('%y'))
     for row in data:
         year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
         if year > latest_year:
@@ -294,7 +294,7 @@ def render_ranks(): #renders the ranks page.
 @app.route('/ranks-embed')
 def render_ranks_embed(): #same as render_ranks() except this renders a page without the top bar and background image.
     data = get_data()
-    latest_year = 21
+    latest_year = int(datetime.now().strftime('%y'))
     for row in data:
         year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
         if year > latest_year:
