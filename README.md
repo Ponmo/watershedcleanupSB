@@ -1,2 +1,2 @@
 # SBwatershed
-https://watershed-cleanup-sb.herokuapp.com/
+https://watershed-cleanup.herokuapp.com/
