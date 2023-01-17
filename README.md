@@ -1,2 +1,2 @@
-# SBwatershed
-https://watershed-cleanup-sb.herokuapp.com/
+# New link:
+https://watershed-brigade.herokuapp.com/
