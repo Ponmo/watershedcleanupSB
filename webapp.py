@@ -50,7 +50,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         try:
             wsheet = gsheet.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
         except:
-            wsheet = gsheet.worksheet(str(2022) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
+            wsheet = gsheet.worksheet('2021 WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
         data_new = wsheet.get_all_values() #retrieves all the raw data from Channelkeeper's Google Sheet as a list of lists.
         wsheet = gsheet.worksheet('This Year') #opens the sheet in the maps Google Sheet containing data for the cleanups map.
         data_old = wsheet.get_all_values() #retrieves all data from 'This Year' in the maps Google Sheet as a list of lists. 
