@@ -239,12 +239,12 @@ def render_ranks(): #renders the ranks page.
                 else:
                     if is_number(row[9]):
                         participants[row[0]] = float(row[9])
-            if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
-                if row[0] in participants_year:
-                    participants_year[row[0]] += float(row[9])
-                else:
-                    if is_number(row[9]):
-                        participants_year[row[0]] = float(row[9])
+#             if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
+            if row[0] in participants_year:
+                participants_year[row[0]] += float(row[9])
+            else:
+                if is_number(row[9]):
+                    participants_year[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
     participants_year = sorted(participants_year.items(), key=lambda x: x[1], reverse=True)
     first = ''
@@ -313,12 +313,12 @@ def render_ranks_embed(): #same as render_ranks() except this renders a page wit
                 else:
                     if is_number(row[9]):
                         participants[row[0]] = float(row[9])
-            if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
-                if row[0] in participants_year:
-                    participants_year[row[0]] += float(row[9])
-                else:
-                    if is_number(row[9]):
-                        participants_year[row[0]] = float(row[9])
+#             if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
+            if row[0] in participants_year:
+                participants_year[row[0]] += float(row[9])
+            else:
+                if is_number(row[9]):
+                    participants_year[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
     participants_year = sorted(participants_year.items(), key=lambda x: x[1], reverse=True)
     first = ''
