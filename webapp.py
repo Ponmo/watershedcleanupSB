@@ -50,7 +50,7 @@ def get_data(): #retrieves data from Channelkeeper's Google Sheet. Updates data 
         try:
             wsheet = gsheet.worksheet(utc_year + ' WB Tracking') #opens the sheet containing cleanups of the current year in Channelkeeper's Google Sheet.
         except:
-            wsheet = gsheet.worksheet(str(int(utc_year) - 1) + ' WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
+            wsheet = gsheet.worksheet('2021 WB Tracking') #If a sheet for the current year does not exist yet, it opens up the sheet of the past year.
         data_new = wsheet.get_all_values() #retrieves all the raw data from Channelkeeper's Google Sheet as a list of lists.
         wsheet = gsheet.worksheet('This Year') #opens the sheet in the maps Google Sheet containing data for the cleanups map.
         data_old = wsheet.get_all_values() #retrieves all data from 'This Year' in the maps Google Sheet as a list of lists. 
@@ -239,12 +239,12 @@ def render_ranks(): #renders the ranks page.
                 else:
                     if is_number(row[9]):
                         participants[row[0]] = float(row[9])
-            if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
-                if row[0] in participants_year:
-                    participants_year[row[0]] += float(row[9])
-                else:
-                    if is_number(row[9]):
-                        participants_year[row[0]] = float(row[9])
+#             if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
+            if row[0] in participants_year:
+                participants_year[row[0]] += float(row[9])
+            else:
+                if is_number(row[9]):
+                    participants_year[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
     participants_year = sorted(participants_year.items(), key=lambda x: x[1], reverse=True)
     first = ''
@@ -313,12 +313,12 @@ def render_ranks_embed(): #same as render_ranks() except this renders a page wit
                 else:
                     if is_number(row[9]):
                         participants[row[0]] = float(row[9])
-            if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
-                if row[0] in participants_year:
-                    participants_year[row[0]] += float(row[9])
-                else:
-                    if is_number(row[9]):
-                        participants_year[row[0]] = float(row[9])
+#             if abs(int(row[2].partition('/')[2].partition('/')[2])) % 100 == latest_year:
+            if row[0] in participants_year:
+                participants_year[row[0]] += float(row[9])
+            else:
+                if is_number(row[9]):
+                    participants_year[row[0]] = float(row[9])
     participants = sorted(participants.items(), key=lambda x: x[1], reverse=True) #sorts the list of participants from highest points to lowest points.
     participants_year = sorted(participants_year.items(), key=lambda x: x[1], reverse=True)
     first = ''
