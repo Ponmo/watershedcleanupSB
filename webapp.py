@@ -294,7 +294,7 @@ def render_ranks(): #renders the ranks page.
 @app.route('/ranks-embed')
 def render_ranks_embed(): #same as render_ranks() except this renders a page without the top bar and background image.
     data = get_data()
-    latest_year = latest_year = int(datetime.now().strftime('%y'))
+    latest_year = int(datetime.now().strftime('%y'))
     for row in data:
         year = abs(int(row[2].partition('/')[2].partition('/')[2])) % 100
         if year > latest_year:
