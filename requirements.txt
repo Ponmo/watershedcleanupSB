@@ -14,3 +14,4 @@ pytz
 Flask-PyMongo
 pymongo
 dnspython
+MarkupSafe

@@ -16,23 +16,11 @@ Maps
 {% endblock %}
 {% block content %}
 <div id="map-overlay">
-  <iframe id="map-cleanups" src="https://www.geosheets.com/map/s:DJj8Kv6R/cleanups/embed" class="map"></iframe>
-  <iframe id="map-reports" src="https://www.geosheets.com/map/s:DJj8Kv6R/reports/embed" class="map"></iframe>
+  <iframe id="map-cleanups" scrolling="no" src="https://gmcdonald-sfg.github.io/sbck-watershed-brigade/index.html#__hrp=eyJtdXRlciI6ZmFsc2UsIndhaXRGb3JEb2N1bWVudEJvZHkiOnRydWUsIndhaXRGb3JEb2N1bWVudFJlYWR5IjpmYWxzZSwibm9QYXRjaGVzIjp0cnVlLCJ3aWR0aCI6IjEwMCUiLCJoZWlnaHQiOiIxMDAlIiwiZW5naW5lTmFtZSI6ImVuZ2luZS0wLjEuMCIsImZyYW1lTmFtZSI6ImVuZ2luZS0wLjEuMDoxNzI4NDIwMDc2In0="></iframe>
+  <div id="map-reports">Unfortunately, we no longer display reports on this map.</div>
   <span class="switcher switcher-1 no-select">
     <input type="checkbox" id="switcher-1" class="no-select" checked>
     <label for="switcher-1" class="no-select"></label>
-  </span>
-  <div id="legend">
-    <div id="red-square"></div>
-    <p id="red-text">&nbsp;&nbsp;Unresolved</p>
-    <br>
-    <div id="blue-square"></div>
-    <p id="blue-text">&nbsp;&nbsp;Resolved</p>
-  </div>
-  <span id="legend-main">
-    <div class="inline-block">&nbsp;&nbsp;Old&nbsp;</div>
-    <div id="legend-gradient"></div>
-    <div class="inline-block">&nbsp;Recent</div>
   </span>
 </div>
 <div id="cleanups">
